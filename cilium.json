@@ -1,7 +1,7 @@
 {
   "variables": {
     "box_basename": "ubuntu-17.04",
-    "cpus": "1",
+    "cpus": "2",
     "disk_size": "40960",
     "headless": "true",
     "iso_checksum": "ca5d9a8438e2434b9a3ac2be67b5c5fa2c1f8e3e40b954519462935195464034",
@@ -93,8 +93,10 @@
   ],
   "post-processors": [[
     {
-        "output": "../builds/{{user `box_basename`}}.{{.Provider}}.box",
-        "type": "vagrant"
+        "output": "cilium-ginkgo-{{.BuildName}}.box",
+        "type": "vagrant",
+        "compression_level": 9,
+        "keep_input_artifact": true
     }
   ]]
 }
