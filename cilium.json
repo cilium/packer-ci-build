@@ -13,8 +13,7 @@
     "name": "ubuntu-17.04",
     "preseed_path": "preseed.cfg",
     "template": "ubuntu-17.04-amd64",
-    "version": "TIMESTAMP",
-    "cloud_token": "{{ env `VAGRANTCLOUD_TOKEN` }}"
+    "version": "TIMESTAMP"
   },
   "builders": [
     {
@@ -96,12 +95,6 @@
     {
         "output": "../builds/{{user `box_basename`}}.{{.Provider}}.box",
         "type": "vagrant"
-    },
-    {
-        "type": "vagrant-cloud",
-        "box_tag": "eloycoto/cilium",
-        "access_token": "{{user `cloud_token`}}",
-        "version": "{{ timestamp }}"
     }
   ]]
 }
