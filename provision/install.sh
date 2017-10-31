@@ -113,7 +113,7 @@ L                      = London
 O                      = cilium
 OU                     = experimental
 CN                     = cilium.io
-emailAddress           = eloy.coto@gmail.com
+emailAddress           = ian@cilium.io
 
 [ v3_req ]
 # Extensions to add to a certificate request
