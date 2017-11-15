@@ -23,6 +23,7 @@ sudo apt-get install -y --allow-downgrades \
     linux-image-extra-$(uname -r) \
     linux-image-extra-virtual \
     linux-headers-$(uname -r) \
+    linux-tools-common linux-tools-generic \
     ca-certificates \
     software-properties-common \
     dh-golang devscripts fakeroot \
@@ -65,7 +66,10 @@ sudo rm go.tar.gz && \
 sudo ln -s /usr/local/go/bin/* /usr/local/bin/ && \
 go version &&\
 sudo mkdir /go/ &&\
-export GOPATH=/go/
+export GOPATH=/go/ &&\
+go get -u github.com/jteeuwen/go-bindata/... && \
+go get -u github.com/google/gops && \
+sudo ln -sf /go/bin/* /usr/local/bin/
 
 #Install docker compose
 sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
