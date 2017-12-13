@@ -4,6 +4,11 @@ GOLANG_VERSION="1.8.3"
 ETCD_VERSION="v3.1.0"
 CERTS_DIR=/certs/
 
+CLANG_DIR="clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-16.04"
+CLANG_FILE="${CLANG_DIR}.tar.xz"
+CLANG_URL="http://releases.llvm.org/3.8.1/$CLANG_FILE"
+CLANGROOT=/usr/local/clang
+
 #If VBOX server
 VER="`cat /home/vagrant/.vbox_version`";
 ISO="VBoxGuestAdditions_$VER.iso";
@@ -16,21 +21,36 @@ umount /tmp/vbox;
 rm -rf /tmp/vbox;
 rm -f $HOME_DIR/*.iso;
 
+
 echo "Provision a new server"
 sudo apt-get update
 sudo apt-get install -y --allow-downgrades \
     curl jq apt-transport-https htop bmon \
-    linux-image-extra-$(uname -r) \
-    linux-image-extra-virtual \
-    linux-headers-$(uname -r) \
     linux-tools-common linux-tools-generic \
-    ca-certificates \
+    ca-certificates libelf-dev \
     software-properties-common \
     dh-golang devscripts fakeroot \
-    dh-make clang git \
+    dh-make libmnl-dev git \
     libdistro-info-perl \
     dh-systemd build-essential \
-    llvm gcc make libc6-dev.i386 git-buildpackage
+    gcc make libc6-dev.i386 git-buildpackage \
+    pkg-config bison flex
+
+#IP Route
+cd /tmp && \
+git clone -b v4.14.0 git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git && \
+cd /tmp/iproute2 && \
+./configure && \
+make -j `getconf _NPROCESSORS_ONLN` && \
+make install
+
+wget --quiet $CLANG_URL
+mkdir -p /usr/local
+tar -C /usr/local -xJf $CLANG_FILE
+ln -s /usr/local/$CLANG_DIR $CLANGROOT
+rm $CLANG_FILE
+
+ln -s $CLANGROOT/bin/* /usr/local/bin/
 
 #clean
 sudo apt-get remove docker docker-engine docker.io
