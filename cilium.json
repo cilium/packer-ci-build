@@ -84,7 +84,19 @@
         "environment_vars": [
             "HOME_DIR=/home/vagrant"
         ],
-        "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+        "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+        "expect_disconnect": true,
+        "scripts": [
+            "provision/kernel.sh"
+        ]
+    },
+    {
+        "type": "shell",
+        "environment_vars": [
+            "HOME_DIR=/home/vagrant"
+        ],
+        "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+        "expect_disconnect": true,
         "scripts": [
             "provision/vagrant.sh",
             "provision/install.sh"
