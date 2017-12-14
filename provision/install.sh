@@ -16,13 +16,11 @@ umount /tmp/vbox;
 rm -rf /tmp/vbox;
 rm -f $HOME_DIR/*.iso;
 
+
 echo "Provision a new server"
 sudo apt-get update
 sudo apt-get install -y --allow-downgrades \
     curl jq apt-transport-https htop bmon \
-    linux-image-extra-$(uname -r) \
-    linux-image-extra-virtual \
-    linux-headers-$(uname -r) \
     linux-tools-common linux-tools-generic \
     ca-certificates \
     software-properties-common \
@@ -30,7 +28,16 @@ sudo apt-get install -y --allow-downgrades \
     dh-make clang git \
     libdistro-info-perl \
     dh-systemd build-essential \
-    llvm gcc make libc6-dev.i386 git-buildpackage
+    llvm gcc make libc6-dev.i386 git-buildpackage \
+    pkg-config bison flex
+
+#IP Route
+cd /tmp && \
+git clone -b v4.10.0 git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git && \
+cd /tmp/iproute2 && \
+./configure && \
+make -j `getconf _NPROCESSORS_ONLN` && \
+make install
 
 #clean
 sudo apt-get remove docker docker-engine docker.io
