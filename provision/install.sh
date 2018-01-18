@@ -31,10 +31,15 @@ sudo apt-get install -y --allow-downgrades \
     software-properties-common \
     dh-golang devscripts fakeroot \
     dh-make libmnl-dev git \
-    libdistro-info-perl \
+    libdistro-info-perl libssl-dev \
     dh-systemd build-essential \
     gcc make libc6-dev.i386 git-buildpackage \
-    pkg-config bison flex
+    pkg-config bison flex \
+    zip g++ zlib1g-dev unzip python \
+    libtool cmake realpath m4 automake \
+    protobuf-compiler libprotobuf-dev libyaml-cpp-dev \
+    socat pv tmux bc gcc-multilib binutils-dev \
+    binutils wget rsync ifupdown
 
 #IP Route
 cd /tmp && \
@@ -89,6 +94,7 @@ sudo mkdir /go/ &&\
 export GOPATH=/go/ &&\
 go get -u github.com/jteeuwen/go-bindata/... && \
 go get -u github.com/google/gops && \
+go get -u github.com/golang/protobuf/protoc-gen-go && \
 sudo ln -sf /go/bin/* /usr/local/bin/
 
 #Install docker compose
