@@ -1,13 +1,12 @@
 #!/bin/bash
 
 export GOPATH=/go/
-export GOROOT=/usr/local/go
 export CILIUM_USE_ENVOY=1
 export HOME_DIR=/home/vagrant
 export HOME=/home/vagrant
 export BAZEL_VERSION="0.8.1"
 
-NEWPATH="$GOROOT/bin:$GOPATH/bin:$CLANGROOT/bin"
+NEWPATH="$GOPATH/bin:$CLANGROOT/bin"
 export PATH="$NEWPATH:$PATH"
 
 wget -nv https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh
