@@ -87,7 +87,7 @@
         "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
         "expect_disconnect": true,
         "scripts": [
-            "provision/kernel.sh"
+            "provision/ubuntu/kernel.sh"
         ]
     },
     {
@@ -99,7 +99,9 @@
         "expect_disconnect": true,
         "scripts": [
             "provision/vagrant.sh",
-            "provision/install.sh",
+            "provision/ubuntu/install.sh",
+            "provision/golang.sh",
+            "provision/registry.sh",
             "provision/envoy.sh",
             "provision/pull-images.sh"
         ]
