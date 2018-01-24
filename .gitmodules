@@ -1,0 +1,3 @@
+[submodule "third_party/openSUSE-vagrant"]
+	path = third_party/openSUSE-vagrant
+	url = https://github.com/openSUSE/vagrant.git
