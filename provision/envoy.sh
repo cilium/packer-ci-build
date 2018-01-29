@@ -19,6 +19,7 @@ mkdir -p $GOPATH/src/github.com/cilium/
 chmod 777 $GOPATH/src/github.com/cilium/
 
 sudo -u vagrant -E sh -c "\
+    export PATH=$PATH && \
     cd $GOPATH/src/github.com/cilium/ && \
     git clone -b master https://github.com/cilium/cilium.git && \
     cd cilium && \
