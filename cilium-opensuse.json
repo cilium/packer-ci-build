@@ -10,7 +10,9 @@
     "memory": "1024",
     "name": "opensuse-tumbleweed",
     "template": "opensuse-tumbleweed-amd64",
-    "version": "TIMESTAMP"
+    "version": "TIMESTAMP",
+	"cloud_token": "{{ env `VAGRANTCLOUD_TOKEN` }}",
+	"BUILD_ID": "{{ env `BUILD_ID` }}"
   },
   "builders": [
     {
@@ -92,6 +94,12 @@
         "type": "vagrant",
         "compression_level": 9,
         "keep_input_artifact": true
+    },
+    {
+        "type": "vagrant-cloud",
+        "box_tag": "cilium/opensuse",
+        "access_token": "{{user `cloud_token`}}",
+        "version": "{{ user `BUILD_ID` }}"
     }
   ]]
 }

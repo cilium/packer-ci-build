@@ -13,7 +13,9 @@
     "name": "ubuntu-17.10",
     "preseed_path": "preseed.cfg",
     "template": "ubuntu-17.10-amd64",
-    "version": "TIMESTAMP"
+    "version": "TIMESTAMP",
+	"cloud_token": "{{ env `VAGRANTCLOUD_TOKEN` }}",
+	"BUILD_ID": "{{ env `BUILD_ID` }}"
   },
   "builders": [
     {
@@ -109,10 +111,16 @@
   ],
   "post-processors": [[
     {
-        "output": "cilium-ginkgo-{{.BuildName}}.box",
+        "output": "cilium-ginkgo-ubuntu-{{.BuildName}}.box",
         "type": "vagrant",
         "compression_level": 9,
         "keep_input_artifact": true
+    },
+    {
+        "type": "vagrant-cloud",
+        "box_tag": "cilium/ubuntu",
+        "access_token": "{{user `cloud_token`}}",
+        "version": "{{ user `BUILD_ID` }}"
     }
   ]]
 }

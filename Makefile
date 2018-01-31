@@ -1,5 +1,6 @@
 ARGS =
 DISTRIBUTION ?= ubuntu
+JQ ?= '.["post-processors"][0] |= map(select(.type != "vagrant-cloud"))'
 
 ifeq ($(DISTRIBUTION), ubuntu)
 JSON_FILE = cilium-ubuntu.json
@@ -20,10 +21,10 @@ endif
 all: build
 
 build: clean validate
-	packer build $(ARGS) $(JSON_FILE)
+	jq $(JQ) $(JSON_FILE) | packer build $(ARGS) -
 
 validate:
-	packer validate $(JSON_FILE)
+	jq $(JQ) $(JSON_FILE) | packer validate -
 
 clean:
 	rm -Rf $(BOX_FILE) tmp packer_cache packer-*
