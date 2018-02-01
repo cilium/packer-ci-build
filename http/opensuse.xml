@@ -156,6 +156,8 @@
       <package>libtool</package>
       <package>libyaml-devel</package>
       <package>llvm</package>
+      <package>lsb</package>
+      <package>lsb-release</package>
       <package>m4</package>
       <package>make</package>
       <package>protobuf-c</package>
