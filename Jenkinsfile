@@ -3,19 +3,19 @@ pipeline {
         label 'vagrant'
     }
     environment {
-        JQ = "."
+        JQ = '.["post-processors"][0] |= map(select(.type != "vagrant-cloud"))'
     }
 
     stages {
         stage('Validate Upload'){
             when {
                 expression {
-                    return env.GIT_BRANCH != 'origin/master';
+                    return env.GIT_BRANCH == 'origin/master';
                 }
             }
             steps {
                 script {
-                    JQ = '.["post-processors"][0] |= map(select(.type != "vagrant-cloud"))'
+                    JQ = "."
                 }
             }
         }
@@ -25,7 +25,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'vagrantcloud token', variable: 'VAGRANTCLOUD_TOKEN')]) {
                     sh 'echo ${JQ}'
                     sh 'git submodule update --init --recursive'
-                    sh 'make build DISTRIBUTION=opensuse JQ=${JQ}'
+                    sh 'make build DISTRIBUTION=opensuse'
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'vagrantcloud token', variable: 'VAGRANTCLOUD_TOKEN')]) {
                     sh 'echo "${JQ}"'
-                    sh 'make build DISTRIBUTION=ubuntu JQ=${JQ}'
+                    sh 'make build DISTRIBUTION=ubuntu'
                 }
             }
         }
