@@ -1,7 +1,8 @@
 #!/bin/bash
 
-GOLANG_VERSION="1.8.3"
+GOLANG_VERSION="1.9.3"
 ETCD_VERSION="v3.1.0"
+DOCKER_COMPOSE_VERSION="1.16.1"
 
 CLANG_DIR="clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-16.04"
 CLANG_FILE="${CLANG_DIR}.tar.xz"
@@ -38,7 +39,13 @@ sudo apt-get install -y --allow-downgrades \
     libtool cmake realpath m4 automake \
     protobuf-compiler libprotobuf-dev libyaml-cpp-dev \
     socat pv tmux bc gcc-multilib binutils-dev \
-    binutils wget rsync ifupdown
+    binutils wget rsync ifupdown \
+    python-sphinx python-pip
+
+# Documentation dependencies
+sudo pip install --upgrade pip
+sudo pip install sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi
+sudo pip install yamllint
 
 #IP Route
 cd /tmp && \
@@ -91,7 +98,7 @@ sudo ln -s /usr/local/go/bin/* /usr/local/bin/ && \
 go version
 
 #Install docker compose
-sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+sudo sh -c "curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
 sudo chmod +x /usr/local/bin/docker-compose
 
 #ETCD installation
