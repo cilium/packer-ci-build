@@ -1,13 +1,13 @@
 {
   "variables": {
     "box_basename": "opensuse-tumbleweed",
-    "cpus": "2",
+    "cpus": "8",
     "disk_size": "40960",
     "headless": "true",
     "iso_checksum": "cf379c00089bda7bfab9b28f92fb3ff246e066521e1c11adf29c64074c39dacf",
     "iso_checksum_type": "sha256",
     "iso_url": "http://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Snapshot20180122-Media.iso",
-    "memory": "1024",
+    "memory": "4096",
     "name": "opensuse-tumbleweed",
     "template": "opensuse-tumbleweed-amd64",
     "version": "TIMESTAMP",
