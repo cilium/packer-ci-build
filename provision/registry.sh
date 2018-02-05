@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+source "${ENV_FILEPATH}"
 
 CERTS_DIR=/certs/
 

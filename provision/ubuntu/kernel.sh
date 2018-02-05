@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This script installs kernel 4.9.68 and when it finished sets the installed
 # kernel as default in the grub.

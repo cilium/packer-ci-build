@@ -65,27 +65,32 @@
   ],
   "provisioners": [
     {
-        "type": "shell",
-        "environment_vars": [
-            "HOME_DIR=/home/vagrant"
-        ],
-        "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-        "expect_disconnect": true,
-        "scripts": [
-            "third_party/openSUSE-vagrant/scripts/base/wait.sh",
-            "third_party/openSUSE-vagrant/scripts/base/base.sh",
-            "third_party/openSUSE-vagrant/scripts/base/vmtools.sh",
-            "third_party/openSUSE-vagrant/scripts/base/sshd.sh",
-            "third_party/openSUSE-vagrant/scripts/base/bindfs.sh",
-            "third_party/openSUSE-vagrant/scripts/base/vagrant.sh",
-            "third_party/openSUSE-vagrant/scripts/base/cleanup.sh",
-            "provision/vagrant.sh",
-            "provision/opensuse/docker.sh",
-            "provision/golang.sh",
-            "provision/registry.sh",
-            "provision/envoy.sh",
-            "provision/pull-images.sh"
-        ]
+      "type": "file",
+      "source": "provision/env.bash",
+      "destination": "/tmp/env.bash"
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "ENV_FILEPATH=/tmp/env.bash"
+      ],
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "expect_disconnect": true,
+      "scripts": [
+        "third_party/openSUSE-vagrant/scripts/base/wait.sh",
+        "third_party/openSUSE-vagrant/scripts/base/base.sh",
+        "third_party/openSUSE-vagrant/scripts/base/vmtools.sh",
+        "third_party/openSUSE-vagrant/scripts/base/sshd.sh",
+        "third_party/openSUSE-vagrant/scripts/base/bindfs.sh",
+        "third_party/openSUSE-vagrant/scripts/base/vagrant.sh",
+        "third_party/openSUSE-vagrant/scripts/base/cleanup.sh",
+        "provision/vagrant.sh",
+        "provision/opensuse/docker.sh",
+        "provision/golang.sh",
+        "provision/registry.sh",
+        "provision/envoy.sh",
+        "provision/pull-images.sh"
+      ]
     }
   ],
   "post-processors": [[

@@ -82,45 +82,47 @@
   ],
   "provisioners": [
     {
-        "type": "shell",
-        "environment_vars": [
-            "HOME_DIR=/home/vagrant"
-        ],
-        "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-        "expect_disconnect": true,
-        "scripts": [
-            "provision/ubuntu/kernel.sh"
-        ]
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "expect_disconnect": true,
+      "scripts": [
+          "provision/ubuntu/kernel.sh"
+      ]
     },
     {
-        "type": "shell",
-        "environment_vars": [
-            "HOME_DIR=/home/vagrant"
-        ],
-        "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-        "expect_disconnect": true,
-        "scripts": [
-            "provision/vagrant.sh",
-            "provision/ubuntu/install.sh",
-            "provision/golang.sh",
-            "provision/registry.sh",
-            "provision/envoy.sh",
-            "provision/pull-images.sh"
-        ]
+      "type": "file",
+      "source": "provision/env.bash",
+      "destination": "/tmp/env.bash"
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "ENV_FILEPATH=/tmp/env.bash"
+      ],
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "expect_disconnect": true,
+      "scripts": [
+          "provision/vagrant.sh",
+          "provision/ubuntu/install.sh",
+          "provision/golang.sh",
+          "provision/registry.sh",
+          "provision/envoy.sh",
+          "provision/pull-images.sh"
+      ]
     }
   ],
   "post-processors": [[
     {
-        "output": "cilium-ginkgo-ubuntu-{{.BuildName}}.box",
-        "type": "vagrant",
-        "compression_level": 9,
-        "keep_input_artifact": true
+      "output": "cilium-ginkgo-ubuntu-{{.BuildName}}.box",
+      "type": "vagrant",
+      "compression_level": 9,
+      "keep_input_artifact": true
     },
     {
-        "type": "vagrant-cloud",
-        "box_tag": "cilium/ubuntu",
-        "access_token": "{{user `cloud_token`}}",
-        "version": "{{ user `BUILD_ID` }}"
+      "type": "vagrant-cloud",
+      "box_tag": "cilium/ubuntu",
+      "access_token": "{{user `cloud_token`}}",
+      "version": "{{ user `BUILD_ID` }}"
     }
   ]]
 }
