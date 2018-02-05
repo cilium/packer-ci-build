@@ -38,7 +38,22 @@ sudo apt-get install -y --allow-downgrades \
     protobuf-compiler libprotobuf-dev libyaml-cpp-dev \
     socat pv tmux bc gcc-multilib binutils-dev \
     binutils wget rsync ifupdown \
-    python-sphinx python-pip
+    python-sphinx python-pip \
+    libncurses5-dev libslang2-dev gettext \
+    libselinux1-dev debhelper lsb-release \
+    po-debconf autoconf autopoint
+
+# Install nsenter for kubernetes
+cd /tmp
+wget -nv https://www.kernel.org/pub/linux/utils/util-linux/v2.30/util-linux-2.30.1.tar.gz
+tar -xvzf util-linux-2.30.1.tar.gz
+cd util-linux-2.30.1
+./autogen.sh
+./configure --without-python --disable-all-programs --enable-nsenter
+make nsenter
+sudo cp nsenter /usr/bin
+cd ..
+rm -fr util-linux-2.30.1/ util-linux-2.30.1.tar.gz
 
 # Documentation dependencies
 sudo pip install --upgrade pip
@@ -46,11 +61,11 @@ sudo pip install sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi
 sudo pip install yamllint
 
 #IP Route
-cd /tmp && \
-git clone -b v4.14.0 git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git && \
-cd /tmp/iproute2 && \
-./configure && \
-make -j `getconf _NPROCESSORS_ONLN` && \
+cd /tmp
+git clone -b v4.14.0 git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git
+cd /tmp/iproute2
+./configure
+make -j `getconf _NPROCESSORS_ONLN`
 make install
 
 wget --quiet "${CLANG_URL}"
@@ -89,10 +104,10 @@ sudo apt-get install -y docker-ce
 #Install Golang
 cd /tmp/
 sudo curl -Sslk -o go.tar.gz \
-    "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz" && \
-sudo tar -C /usr/local -xzf go.tar.gz && \
-sudo rm go.tar.gz && \
-sudo ln -s /usr/local/go/bin/* /usr/local/bin/ && \
+    "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz"
+sudo tar -C /usr/local -xzf go.tar.gz
+sudo rm go.tar.gz
+sudo ln -s /usr/local/go/bin/* /usr/local/bin/
 go version
 
 #Install docker compose
