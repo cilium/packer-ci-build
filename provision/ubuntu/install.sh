@@ -100,6 +100,7 @@ EOF
 #Install packages
 sudo apt-get update
 sudo apt-get install -y docker-ce
+sudo usermod -aG docker vagrant
 
 #Install Golang
 cd /tmp/
