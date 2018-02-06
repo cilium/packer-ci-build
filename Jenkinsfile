@@ -10,7 +10,7 @@ pipeline {
         stage('Validate Upload'){
             when {
                 expression {
-                    return env.GIT_BRANCH == 'origin/master';
+                    return env.GIT_BRANCH == 'master';
                 }
             }
             steps {
