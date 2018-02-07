@@ -1,13 +1,13 @@
 {
   "variables": {
     "box_basename": "ubuntu-17.10",
-    "cpus": "2",
+    "cpus": "8",
     "disk_size": "40960",
     "headless": "true",
     "iso_checksum": "8ff73f1b622276758475c3bd5190b382774626de5a82c50930519381f6c3a3f8",
     "iso_checksum_type": "sha256",
     "iso_name": "ubuntu-17.10.1-server-amd64.iso",
-    "memory": "1024",
+    "memory": "4096",
     "mirror": "http://releases.ubuntu.com",
     "mirror_directory": "17.10",
     "name": "ubuntu-17.10",
@@ -82,45 +82,47 @@
   ],
   "provisioners": [
     {
-        "type": "shell",
-        "environment_vars": [
-            "HOME_DIR=/home/vagrant"
-        ],
-        "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-        "expect_disconnect": true,
-        "scripts": [
-            "provision/ubuntu/kernel.sh"
-        ]
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "expect_disconnect": true,
+      "scripts": [
+          "provision/ubuntu/kernel.sh"
+      ]
     },
     {
-        "type": "shell",
-        "environment_vars": [
-            "HOME_DIR=/home/vagrant"
-        ],
-        "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-        "expect_disconnect": true,
-        "scripts": [
-            "provision/vagrant.sh",
-            "provision/ubuntu/install.sh",
-            "provision/golang.sh",
-            "provision/registry.sh",
-            "provision/envoy.sh",
-            "provision/pull-images.sh"
-        ]
+      "type": "file",
+      "source": "provision/env.bash",
+      "destination": "/tmp/env.bash"
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "ENV_FILEPATH=/tmp/env.bash"
+      ],
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "expect_disconnect": true,
+      "scripts": [
+          "provision/vagrant.sh",
+          "provision/ubuntu/install.sh",
+          "provision/golang.sh",
+          "provision/registry.sh",
+          "provision/envoy.sh",
+          "provision/pull-images.sh"
+      ]
     }
   ],
   "post-processors": [[
     {
-        "output": "cilium-ginkgo-ubuntu-{{.BuildName}}.box",
-        "type": "vagrant",
-        "compression_level": 9,
-        "keep_input_artifact": true
+      "output": "cilium-ginkgo-ubuntu-{{.BuildName}}.box",
+      "type": "vagrant",
+      "compression_level": 9,
+      "keep_input_artifact": true
     },
     {
-        "type": "vagrant-cloud",
-        "box_tag": "cilium/ubuntu",
-        "access_token": "{{user `cloud_token`}}",
-        "version": "{{ user `BUILD_ID` }}"
+      "type": "vagrant-cloud",
+      "box_tag": "cilium/ubuntu",
+      "access_token": "{{user `cloud_token`}}",
+      "version": "{{ user `BUILD_ID` }}"
     }
   ]]
 }

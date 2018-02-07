@@ -1,25 +1,24 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-GOLANG_VERSION="1.8.3"
-ETCD_VERSION="v3.1.0"
+set -eu
+
+source "${ENV_FILEPATH}"
 
 CLANG_DIR="clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-16.04"
 CLANG_FILE="${CLANG_DIR}.tar.xz"
-CLANG_URL="http://releases.llvm.org/3.8.1/$CLANG_FILE"
-CLANGROOT=/usr/local/clang
+CLANG_URL="http://releases.llvm.org/3.8.1/${CLANG_FILE}"
 
 #If VBOX server
 VER="`cat /home/vagrant/.vbox_version`";
 ISO="VBoxGuestAdditions_$VER.iso";
 mkdir -p /tmp/vbox;
-mount -o loop $HOME_DIR/$ISO /tmp/vbox;
+mount -o loop ${HOME_DIR}/$ISO /tmp/vbox;
 sh /tmp/vbox/VBoxLinuxAdditions.run \
     || echo "VBoxLinuxAdditions.run exited $? and is suppressed." \
     "For more read https://www.virtualbox.org/ticket/12479";
 umount /tmp/vbox;
 rm -rf /tmp/vbox;
-rm -f $HOME_DIR/*.iso;
-
+rm -f ${HOME_DIR}/*.iso;
 
 echo "Provision a new server"
 sudo apt-get update
@@ -38,23 +37,44 @@ sudo apt-get install -y --allow-downgrades \
     libtool cmake realpath m4 automake \
     protobuf-compiler libprotobuf-dev libyaml-cpp-dev \
     socat pv tmux bc gcc-multilib binutils-dev \
-    binutils wget rsync ifupdown
+    binutils wget rsync ifupdown \
+    python-sphinx python-pip \
+    libncurses5-dev libslang2-dev gettext \
+    libselinux1-dev debhelper lsb-release \
+    po-debconf autoconf autopoint
+
+# Install nsenter for kubernetes
+cd /tmp
+wget -nv https://www.kernel.org/pub/linux/utils/util-linux/v2.30/util-linux-2.30.1.tar.gz
+tar -xvzf util-linux-2.30.1.tar.gz
+cd util-linux-2.30.1
+./autogen.sh
+./configure --without-python --disable-all-programs --enable-nsenter
+make nsenter
+sudo cp nsenter /usr/bin
+cd ..
+rm -fr util-linux-2.30.1/ util-linux-2.30.1.tar.gz
+
+# Documentation dependencies
+sudo pip install --upgrade pip
+sudo pip install sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi
+sudo pip install yamllint
 
 #IP Route
-cd /tmp && \
-git clone -b v4.14.0 git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git && \
-cd /tmp/iproute2 && \
-./configure && \
-make -j `getconf _NPROCESSORS_ONLN` && \
+cd /tmp
+git clone -b v4.14.0 git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git
+cd /tmp/iproute2
+./configure
+make -j `getconf _NPROCESSORS_ONLN`
 make install
 
-wget --quiet $CLANG_URL
+wget --quiet "${CLANG_URL}"
 mkdir -p /usr/local
-tar -C /usr/local -xJf $CLANG_FILE
-ln -s /usr/local/$CLANG_DIR $CLANGROOT
-rm $CLANG_FILE
+tar -C /usr/local -xJf "${CLANG_FILE}"
+ln -s "/usr/local/${CLANG_DIR}" "${CLANG_ROOT}"
+rm ${CLANG_FILE}
 
-ln -s $CLANGROOT/bin/* /usr/local/bin/
+ln -s "${CLANG_ROOT}/bin/"* /usr/local/bin
 
 #clean
 sudo apt-get remove docker docker-engine docker.io
@@ -80,24 +100,25 @@ EOF
 #Install packages
 sudo apt-get update
 sudo apt-get install -y docker-ce
+sudo usermod -aG docker vagrant
 
 #Install Golang
 cd /tmp/
 sudo curl -Sslk -o go.tar.gz \
-    "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz" && \
-sudo tar -C /usr/local -xzf go.tar.gz && \
-sudo rm go.tar.gz && \
-sudo ln -s /usr/local/go/bin/* /usr/local/bin/ && \
+    "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz"
+sudo tar -C /usr/local -xzf go.tar.gz
+sudo rm go.tar.gz
+sudo ln -s /usr/local/go/bin/* /usr/local/bin/
 go version
 
 #Install docker compose
-sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+sudo sh -c "curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
 sudo chmod +x /usr/local/bin/docker-compose
 
 #ETCD installation
-wget -nv https://github.com/coreos/etcd/releases/download/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-amd64.tar.gz
-tar -xf etcd-${ETCD_VERSION}-linux-amd64.tar.gz
-sudo mv etcd-${ETCD_VERSION}-linux-amd64/etcd* /usr/bin/
+wget -nv "https://github.com/coreos/etcd/releases/download/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-amd64.tar.gz"
+tar -xf "etcd-${ETCD_VERSION}-linux-amd64.tar.gz"
+sudo mv "etcd-${ETCD_VERSION}-linux-amd64/etcd"* /usr/bin/
 
 sudo tee /etc/systemd/system/etcd.service <<EOF
 [Unit]
@@ -115,3 +136,6 @@ EOF
 
 sudo systemctl enable etcd
 sudo systemctl start etcd
+
+sudo -u vagrant -E sh -c 'echo "export PATH=$PATH" >> "${HOME_DIR}/.bashrc"'
+echo "export PATH=$PATH" >> "/root/.bashrc"

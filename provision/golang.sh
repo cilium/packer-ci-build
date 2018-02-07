@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-sudo mkdir /go/ &&\
-export GOPATH=/go/ &&\
+source "${ENV_FILEPATH}"
+
+sudo -E mkdir "${GOPATH}" && \
 go get -u github.com/jteeuwen/go-bindata/... && \
 go get -u github.com/google/gops && \
-go get -u github.com/golang/protobuf/protoc-gen-go && \
-sudo ln -sf /go/bin/* /usr/local/bin/
+go get -u github.com/golang/protobuf/protoc-gen-go
