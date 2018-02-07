@@ -1,24 +1,21 @@
+def vagrantUpload = { String branch ->
+  if (branch == "origin/master" || branch == "master") {
+    return '.'
+  } else {
+    return '.["post-processors"][0] |= map(select(.type != "vagrant-cloud"))'
+  }
+}
+
 pipeline {
     agent {
         label 'vagrant'
     }
+
     environment {
-        JQ = '.["post-processors"][0] |= map(select(.type != "vagrant-cloud"))'
+        JQ = vagrantUpload(env.GIT_BRANCH)
     }
 
     stages {
-        stage('Validate Upload'){
-            when {
-                expression {
-                    return env.GIT_BRANCH == 'master';
-                }
-            }
-            steps {
-                script {
-                    JQ = "."
-                }
-            }
-        }
         stage('Opensuse') {
             steps {
                 sh 'printenv'
