@@ -16,16 +16,6 @@ pipeline {
     }
 
     stages {
-        stage('Opensuse') {
-            steps {
-                sh 'printenv'
-                withCredentials([string(credentialsId: 'vagrantcloud token', variable: 'VAGRANTCLOUD_TOKEN')]) {
-                    sh 'echo ${JQ}'
-                    sh 'git submodule update --init --recursive'
-                    sh 'make build DISTRIBUTION=opensuse'
-                }
-            }
-        }
         stage('Ubuntu') {
             steps {
                 withCredentials([string(credentialsId: 'vagrantcloud token', variable: 'VAGRANTCLOUD_TOKEN')]) {
