@@ -139,3 +139,12 @@ sudo systemctl start etcd
 
 sudo -u vagrant -E sh -c 'echo "export PATH='${PATH}'" >> "${HOME_DIR}/.bashrc"'
 echo "export PATH=$PATH" >> "/root/.bashrc"
+
+# Clean all downloaded packages
+sudo apt-get -y clean
+sudo apt-get -y autoclean
+
+# Disable systemd-resolved service
+# https://github.com/cilium/cilium/issues/2750
+sudo systemctl disable systemd-resolved.service
+sudo service systemd-resolved stop
