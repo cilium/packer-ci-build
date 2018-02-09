@@ -137,5 +137,5 @@ EOF
 sudo systemctl enable etcd
 sudo systemctl start etcd
 
-sudo -u vagrant -E sh -c 'echo "export PATH=$PATH" >> "${HOME_DIR}/.bashrc"'
+sudo -u vagrant -E sh -c 'echo "export PATH='${PATH}'" >> "${HOME_DIR}/.bashrc"'
 echo "export PATH=$PATH" >> "/root/.bashrc"
