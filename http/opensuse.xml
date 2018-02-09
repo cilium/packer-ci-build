@@ -114,6 +114,7 @@
     </patterns>
 
     <packages config:type="list">
+      <package>autoconf</package>
       <package>automake</package>
       <package>bc</package>
       <package>binutils</package>
@@ -138,6 +139,8 @@
       <package>gcc-32bit</package>
       <package>gcc-c++</package>
       <package>gcc-c++-32bit</package>
+      <package>gettext-runtime</package>
+      <package>gettext-tools</package>
       <package>git</package>
       <package>glibc-devel</package>
       <package>glibc-devel-32bit</package>
@@ -150,9 +153,11 @@
       <package>less</package>
       <package>libelf-devel</package>
       <package>libmnl-devel</package>
+      <package>ncurses5-devel</package>
       <package>libopenssl-devel</package>
       <package>libprotobuf-c-devel</package>
       <package>libprotobuf-c1</package>
+      <package>libselinux-devel</package>
       <package>libtool</package>
       <package>libyaml-devel</package>
       <package>llvm</package>
@@ -167,11 +172,15 @@
       <package>python-xml</package>
       <package>python3-devel</package>
       <package>python3-pip</package>
+      <package>python3-Sphinx</package>
+      <package>python3-sphinxcontrib-httpdomain</package>
       <package>rsync</package>
+      <package>slang-devel</package>
       <package>socat</package>
       <package>sudo</package>
       <package>tmux</package>
       <package>unzip</package>
+      <package>util-linux</package>
       <package>vim</package>
       <package>wget</package>
       <package>yast2-services-manager</package>

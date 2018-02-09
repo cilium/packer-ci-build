@@ -85,6 +85,7 @@
         "third_party/openSUSE-vagrant/scripts/base/vagrant.sh",
         "third_party/openSUSE-vagrant/scripts/base/cleanup.sh",
         "provision/vagrant.sh",
+        "provision/opensuse/install.sh",
         "provision/opensuse/docker.sh",
         "provision/golang.sh",
         "provision/registry.sh",
