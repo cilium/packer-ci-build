@@ -81,35 +81,6 @@
     }
   ],
   "provisioners": [
-    {
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-      "expect_disconnect": true,
-      "scripts": [
-          "provision/ubuntu/kernel.sh"
-      ]
-    },
-    {
-      "type": "file",
-      "source": "provision/env.bash",
-      "destination": "/tmp/env.bash"
-    },
-    {
-      "type": "shell",
-      "environment_vars": [
-        "ENV_FILEPATH=/tmp/env.bash"
-      ],
-      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-      "expect_disconnect": true,
-      "scripts": [
-          "provision/vagrant.sh",
-          "provision/ubuntu/install.sh",
-          "provision/golang.sh",
-          "provision/registry.sh",
-          "provision/envoy.sh",
-          "provision/pull-images.sh"
-      ]
-    }
   ],
   "post-processors": [[
     {
@@ -120,7 +91,7 @@
     },
     {
       "type": "vagrant-cloud",
-      "box_tag": "cilium/ubuntu",
+      "box_tag": "cilium/ubuntuTest",
       "access_token": "{{user `cloud_token`}}",
       "version": "{{ user `BUILD_ID` }}"
     }
