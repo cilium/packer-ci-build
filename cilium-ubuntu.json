@@ -77,7 +77,7 @@
         ]
       ],
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "{{ user `template` }}"
+      "vm_name": "{{ user `template` }}-{{ user `BUILD_ID` }}"
     }
   ],
   "provisioners": [

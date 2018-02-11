@@ -20,6 +20,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'vagrantcloud token', variable: 'VAGRANTCLOUD_TOKEN')]) {
                     sh 'echo "${JQ}"'
+                    sh 'make clean DISTRIBUTION=ubuntu'
                     sh 'make build DISTRIBUTION=ubuntu'
                 }
             }
