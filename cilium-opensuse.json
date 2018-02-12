@@ -95,16 +95,16 @@
   ],
   "post-processors": [[
     {
-        "output": "cilium-ginkgo-opensuse-{{.BuildName}}.box",
-        "type": "vagrant",
-        "compression_level": 9,
-        "keep_input_artifact": true
+      "output": "cilium-ginkgo-opensuse-{{.BuildName}}.box",
+      "type": "vagrant",
+      "compression_level": 9,
+      "keep_input_artifact": false
     },
     {
-        "type": "vagrant-cloud",
-        "box_tag": "cilium/opensuse",
-        "access_token": "{{user `cloud_token`}}",
-        "version": "{{ user `BUILD_ID` }}"
+      "type": "vagrant-cloud",
+      "box_tag": "cilium/opensuse",
+      "access_token": "{{user `cloud_token`}}",
+      "version": "{{ user `BUILD_ID` }}"
     }
   ]]
 }

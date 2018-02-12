@@ -116,7 +116,7 @@
       "output": "cilium-ginkgo-ubuntu-{{.BuildName}}.box",
       "type": "vagrant",
       "compression_level": 9,
-      "keep_input_artifact": true
+      "keep_input_artifact": false
     },
     {
       "type": "vagrant-cloud",
