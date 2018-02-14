@@ -149,6 +149,8 @@ sudo apt-get -y autoclean
 sudo systemctl disable systemd-resolved.service
 sudo service systemd-resolved stop
 
+sudo unlink /etc/resolv.conf || true
+
 sudo tee /etc/resolv.conf <<EOF
 nameserver 8.8.8.8
 nameserver 8.8.4.4
