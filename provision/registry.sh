@@ -2,6 +2,8 @@
 
 source "${ENV_FILEPATH}"
 
+set -e
+
 CERTS_DIR=/certs/
 
 #Docker registry - certs

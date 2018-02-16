@@ -2,6 +2,8 @@
 
 source "${ENV_FILEPATH}"
 
+set -e
+
 sudo -E mkdir "${GOPATH}" && \
 go get -u github.com/cilium/go-bindata/... && \
 go get -u github.com/google/gops && \

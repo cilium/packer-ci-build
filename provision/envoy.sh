@@ -2,6 +2,8 @@
 
 source "${ENV_FILEPATH}"
 
+set -e
+
 wget -nv "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
 chmod +x "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
 sudo -E "./bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
