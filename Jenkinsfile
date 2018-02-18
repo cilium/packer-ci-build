@@ -10,6 +10,10 @@ pipeline {
     agent {
         label 'vagrant'
     }
+    options {
+        timeout(time: 400, unit: 'MINUTES')
+        timestamps()
+    }
 
     environment {
         JQ = vagrantUpload(env.GIT_BRANCH)

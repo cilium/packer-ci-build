@@ -2,6 +2,8 @@
 
 source "${ENV_FILEPATH}"
 
+set -e
+
 wget -nv "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
 chmod +x "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
 sudo -E "./bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
@@ -15,17 +17,17 @@ sudo -E chown vagrant:vagrant "${GOPATH}" -R
 # TODO delete me once https://github.com/cilium/cilium/pull/2826 is merged
 cat > ${HOME}/diff.patch <<EOF
 diff --git a/envoy/Makefile b/envoy/Makefile
-index 582f51d3b..20a8af4b6 100644
+index 2be0db3a5..c7c547eeb 100644
 --- a/envoy/Makefile
 +++ b/envoy/Makefile
-@@ -77,7 +77,7 @@ ifdef PKG_BUILD
- BAZEL_BUILD_OPTS = --spawn_strategy=standalone --genrule_strategy=standalone
+@@ -78,7 +78,7 @@ BAZEL_BUILD_OPTS = --spawn_strategy=standalone --genrule_strategy=standalone
  all: clean-bins release
  else
+ BAZEL_OPTS ?=
 -BAZEL_BUILD_OPTS =
 +BAZEL_BUILD_OPTS = --experimental_strict_action_env
 
- all: clean-bins envoy $(GO_TARGETS)
+ all: clean-bins envoy \$(GO_TARGETS)
  endif
 EOF
 

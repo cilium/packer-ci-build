@@ -2,6 +2,8 @@
 
 source "${ENV_FILEPATH}"
 
+set -e
+
 CERTS_DIR=/certs/
 
 #Docker registry - certs
@@ -57,6 +59,7 @@ openssl x509 -req -days 366 \
     -out certs/cilium.cert \
     -extensions v3_req -extfile server.conf
 
+mkdir -p /usr/local/share/ca-certificates
 
 cp -rfv certs/* /certs/
 cp certs/ca.crt /usr/local/share/ca-certificates/
