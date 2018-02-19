@@ -44,3 +44,5 @@ sudo -u vagrant -E sh -c "\
     make PKG_BUILD=1"
 
 sudo rm -fr "${GOPATH}/src/github.com/cilium"
+
+sudo rm -rf /usr/bin/cilium* /opt/cni/bin/cilium-cni "${GOPATH}/pkg/linux_amd64/github.com/cilium"
