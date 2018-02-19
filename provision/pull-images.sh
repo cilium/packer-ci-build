@@ -5,10 +5,10 @@ source "${ENV_FILEPATH}"
 set -e 
 
 for img in tgraf/netperf httpd cilium/demo-httpd \
-  cilium/demo-client tgraf/nettools borkmann/misc \
+  cilium/demo-client borkmann/misc \
   registry busybox:latest quay.io/coreos/etcd:v3.1.0 \
   digitalwonderland/zookeeper wurstmeister/kafka \
-  python:2.7.14 cilium/kafkaclient2 ; do
+  cilium/kafkaclient2 ; do
   sudo docker pull $img &
 done
 
