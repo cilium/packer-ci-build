@@ -2,7 +2,7 @@ def vagrantUpload = { String branch ->
   if (branch == "origin/master" || branch == "master") {
     return '.'
   } else {
-    return '.["post-processors"][0] |= map(select(.type != "vagrant-cloud"))'
+    return 'del(."post-processors"[])'
   }
 }
 
@@ -17,26 +17,24 @@ pipeline {
 
     environment {
         JQ = vagrantUpload(env.GIT_BRANCH)
+        VAGRANTCLOUD_TOKEN = credentials('vagrantcloud token')
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
 
     stages {
-        stage('Opensuse') {
+        stage('OpenSuse') {
             steps {
-                sh 'printenv'
-                withCredentials([string(credentialsId: 'vagrantcloud token', variable: 'VAGRANTCLOUD_TOKEN')]) {
-                    sh 'echo ${JQ}'
-                    sh 'git submodule update --init --recursive'
-                    sh 'make build DISTRIBUTION=opensuse'
-                }
+                sh 'git submodule update --init --recursive'
+                sh 'make clean DISTRIBUTION=opensuse'
+                sh 'make build DISTRIBUTION=opensuse'
             }
         }
         stage('Ubuntu') {
             steps {
-                withCredentials([string(credentialsId: 'vagrantcloud token', variable: 'VAGRANTCLOUD_TOKEN')]) {
-                    sh 'echo "${JQ}"'
-                    sh 'make clean DISTRIBUTION=ubuntu'
-                    sh 'make build DISTRIBUTION=ubuntu'
-                }
+                sh 'echo "${JQ}"'
+                sh 'make clean DISTRIBUTION=ubuntu'
+                sh 'make build DISTRIBUTION=ubuntu'
             }
         }
     }
