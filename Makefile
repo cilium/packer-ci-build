@@ -1,6 +1,6 @@
 ARGS =
 DISTRIBUTION ?= ubuntu
-JQ ?= .["post-processors"][0] |= map(select(.type != "vagrant-cloud"))
+JQ ?= del(."post-processors"[])
 
 ifeq ($(DISTRIBUTION), ubuntu)
 JSON_FILE = cilium-ubuntu.json
