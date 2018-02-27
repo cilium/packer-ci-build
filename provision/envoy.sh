@@ -4,12 +4,6 @@ source "${ENV_FILEPATH}"
 
 set -e
 
-wget -nv "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-chmod +x "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-sudo -E "./bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-sudo -E mv /usr/local/bin/bazel /usr/bin
-rm "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-
 sudo -E mkdir -p "${GOPATH}/src/github.com/cilium"
 sudo -E chmod 755 "${GOPATH}/src/github.com/cilium"
 sudo -E chown vagrant:vagrant "${GOPATH}" -R

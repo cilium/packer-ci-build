@@ -155,3 +155,10 @@ sudo tee /etc/resolv.conf <<EOF
 nameserver 8.8.8.8
 nameserver 8.8.4.4
 EOF
+
+# Install bazel
+wget -nv "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
+chmod +x "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
+sudo -E "./bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
+sudo -E mv /usr/local/bin/bazel /usr/bin
+rm "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
