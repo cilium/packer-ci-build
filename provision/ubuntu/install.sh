@@ -56,9 +56,9 @@ cd ..
 rm -fr util-linux-2.30.1/ util-linux-2.30.1.tar.gz
 
 # Documentation dependencies
-sudo pip install --upgrade pip
-sudo pip install sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi
-sudo pip install yamllint
+pip install --upgrade pip
+pip install sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi sphinx-rtd-theme sphinx-tabs recommonmark
+pip install yamllint
 
 #IP Route
 cd /tmp
