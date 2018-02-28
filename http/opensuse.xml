@@ -171,6 +171,7 @@
       <package>python-xml</package>
       <package>python3-devel</package>
       <package>python3-pip</package>
+      <package>python3-recommonmark</package>
       <package>python3-Sphinx</package>
       <package>python3-sphinxcontrib-httpdomain</package>
       <package>rsync</package>
