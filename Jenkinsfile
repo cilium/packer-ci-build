@@ -8,10 +8,10 @@ def vagrantUpload = { String branch ->
 
 pipeline {
     agent {
-        label 'vagrant'
+        label 'baremetal'
     }
     options {
-        timeout(time: 400, unit: 'MINUTES')
+        timeout(time: 120, unit: 'MINUTES')
         timestamps()
     }
 
