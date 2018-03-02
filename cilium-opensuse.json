@@ -87,6 +87,7 @@
         "provision/vagrant.sh",
         "provision/opensuse/install.sh",
         "provision/opensuse/docker.sh",
+        "provision/opensuse/etcd.sh",
         "provision/swap.sh",
         "provision/golang.sh",
         "provision/registry.sh",
