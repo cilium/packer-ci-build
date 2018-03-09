@@ -103,6 +103,7 @@
           "provision/vagrant.sh",
           "provision/ubuntu/install.sh",
           "provision/golang.sh",
+          "provision/swap.sh",
           "provision/registry.sh",
           "provision/envoy.sh",
           "provision/pull-images.sh"

@@ -156,9 +156,6 @@ nameserver 8.8.8.8
 nameserver 8.8.4.4
 EOF
 
-#Disable swap filesystem by default. Needed by kubernetes >1.7
-sudo sed -i.bak '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
-
 # Install bazel
 wget -nv "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
 chmod +x "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
