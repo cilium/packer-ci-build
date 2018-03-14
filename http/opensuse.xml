@@ -144,6 +144,7 @@
       <package>git</package>
       <package>glibc-devel</package>
       <package>glibc-devel-32bit</package>
+      <package>go1.9</package>
       <package>grub2</package>
       <package>htop</package>
       <package>iproute2</package>
