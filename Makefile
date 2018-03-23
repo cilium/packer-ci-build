@@ -14,6 +14,9 @@ BOX_FILE = cilium-ginkgo-opensuse-virtualbox-iso.box
 ISO_URL = http://widehat.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Current.iso
 ISO_CHECKSUM = $(shell $(CURDIR)/tools/opensuse-tumbleweed-checksum.sh)
 ARGS += -var iso_url=$(ISO_URL) -var iso_checksum=$(ISO_CHECKSUM)
+else ifeq ($(DISTRIBUTION), ubuntu-next)
+JSON_FILE = cilium-ubuntu-next.json
+BOX_FILE = cilium-ginkgo-virtualbox-iso-next.box
 else
 $(error "Distribution $(DISTRIBUTION) is unsupported")
 endif

@@ -3,22 +3,28 @@
 set -eu
 
 source "${ENV_FILEPATH}"
+export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"v4.14.0"}
 
 CLANG_DIR="clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-16.04"
 CLANG_FILE="${CLANG_DIR}.tar.xz"
 CLANG_URL="http://releases.llvm.org/3.8.1/${CLANG_FILE}"
 
-#If VBOX server
-VER="`cat /home/vagrant/.vbox_version`";
-ISO="VBoxGuestAdditions_$VER.iso";
-mkdir -p /tmp/vbox;
-mount -o loop ${HOME_DIR}/$ISO /tmp/vbox;
-sh /tmp/vbox/VBoxLinuxAdditions.run \
-    || echo "VBoxLinuxAdditions.run exited $? and is suppressed." \
-    "For more read https://www.virtualbox.org/ticket/12479";
-umount /tmp/vbox;
-rm -rf /tmp/vbox;
-rm -f ${HOME_DIR}/*.iso;
+# Newest kernels already have the vbox modules into that. GuestAdditions are no
+# longer needed.
+VBOXSF=$(sudo lsmod | grep vboxsf | wc -l)
+if [[ "${VBOXSF}" -eq 0 ]]; then
+    VER="`cat /home/vagrant/.vbox_version`";
+    ISO="VBoxGuestAdditions_$VER.iso";
+    mkdir -p /tmp/vbox;
+    mount -o loop ${HOME_DIR}/$ISO /tmp/vbox;
+    sh /tmp/vbox/VBoxLinuxAdditions.run \
+        || echo "VBoxLinuxAdditions.run exited $? and is suppressed." \
+        "For more read https://www.virtualbox.org/ticket/12479";
+    umount /tmp/vbox;
+    rm -rf /tmp/vbox;
+    rm -f ${HOME_DIR}/*.iso;
+fi
+
 
 echo "Provision a new server"
 sudo apt-get update
@@ -63,7 +69,7 @@ pip install yamllint
 
 #IP Route
 cd /tmp
-git clone -b v4.14.0 git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git
+git clone -b ${IPROUTE_BRANCH} git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git
 cd /tmp/iproute2
 ./configure
 make -j `getconf _NPROCESSORS_ONLN`

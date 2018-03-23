@@ -1,0 +1,38 @@
+def vagrantUpload = { String branch ->
+  if (branch == "origin/master" || branch == "master") {
+    return '.'
+  } else {
+    return 'del(."post-processors"[])'
+  }
+}
+
+pipeline {
+    agent {
+        label 'vagrant'
+    }
+    options {
+        timeout(time: 200, unit: 'MINUTES')
+        timestamps()
+    }
+
+    environment {
+        JQ = vagrantUpload(env.GIT_BRANCH)
+        VAGRANTCLOUD_TOKEN = credentials('vagrantcloud token')
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
+
+    stages {
+        stage('Ubuntu') {
+            steps {
+                sh 'make clean DISTRIBUTION=ubuntu-next'
+                sh 'make build DISTRIBUTION=ubuntu-next'
+            }
+        }
+    }
+    post {
+        always {
+           cleanWs()
+        }
+    }
+}
