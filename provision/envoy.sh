@@ -10,7 +10,7 @@ sudo -E chown vagrant:vagrant "${GOPATH}" -R
 
 sudo -u vagrant -E sh -c "\
     cd \"${GOPATH}/src/github.com/cilium\" && \
-    git clone -b master https://github.com/cilium/cilium.git && \
+    git clone -b envoy-integrate-logs https://github.com/cilium/cilium.git && \
     cd cilium && \
     git submodule update --init --recursive && \
     cd envoy && \
