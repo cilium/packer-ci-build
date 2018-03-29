@@ -15,15 +15,6 @@ sudo -u vagrant -E sh -c "\
     cd cilium && \
     git submodule update --init --recursive"
 
-export BAZEL_VERSION=`cat "${GOPATH}/src/github.com/cilium/cilium/envoy/BAZEL_VERSION"`
-
-# Install bazel
-wget -nv "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-chmod +x "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-sudo -E "./bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-sudo -E mv /usr/local/bin/bazel /usr/bin
-rm "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-
 sudo -u vagrant -E sh -c "\
     cd \"${GOPATH}/src/github.com/cilium/cilium/envoy\" && \
     grep \"ENVOY_SHA[ \t]*=\" WORKSPACE | cut -d \\\" -f 2 >SOURCE_VERSION && \

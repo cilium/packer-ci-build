@@ -167,3 +167,12 @@ sudo systemctl restart systemd-journald
 
 # Kernel parameters
 sudo sh -c 'echo "kernel.randomize_va_space=0" > /etc/sysctl.d/67-randomize_va_space.conf'
+
+export BAZEL_VERSION=`cat "${GOPATH}/src/github.com/cilium/cilium/envoy/BAZEL_VERSION"`
+
+# Install bazel
+wget -nv "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
+chmod +x "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
+sudo -E "./bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
+sudo -E mv /usr/local/bin/bazel /usr/bin
+rm "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
