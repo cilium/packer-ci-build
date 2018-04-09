@@ -41,7 +41,7 @@ sudo apt-get install -y --allow-downgrades \
     python-sphinx python-pip \
     libncurses5-dev libslang2-dev gettext \
     libselinux1-dev debhelper lsb-release \
-    po-debconf autoconf autopoint
+    po-debconf autoconf autopoint moreutils
 
 # Install nsenter for kubernetes
 cd /tmp
