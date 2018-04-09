@@ -156,6 +156,10 @@ nameserver 8.8.8.8
 nameserver 8.8.4.4
 EOF
 
+# CoreDumps https://github.com/cilium/cilium/issues/3399
+sudo systemctl disable apport.service
+sudo sysctl -w kernel.core_pattern=/tmp/core.%e.%p.%t
+
 # Install bazel
 wget -nv "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
 chmod +x "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
