@@ -166,3 +166,7 @@ chmod +x "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
 sudo -E "./bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
 sudo -E mv /usr/local/bin/bazel /usr/bin
 rm "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
+
+
+# Kernel parameters
+sudo sysctl -w kernel.randomize_va_space=0
