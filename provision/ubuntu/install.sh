@@ -56,7 +56,6 @@ cd ..
 rm -fr util-linux-2.30.1/ util-linux-2.30.1.tar.gz
 
 # Documentation dependencies
-pip install --upgrade pip
 pip install sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi sphinx-rtd-theme sphinx-tabs recommonmark
 pip install yamllint
 
