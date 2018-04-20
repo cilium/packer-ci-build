@@ -157,7 +157,7 @@ EOF
 
 # CoreDumps https://github.com/cilium/cilium/issues/3399
 sudo systemctl disable apport.service
-sudo sysctl -w kernel.core_pattern=/tmp/core.%e.%p.%t
+sudo sh -c 'echo "sysctl kernel.core_pattern=/tmp/core.%e.%p.%t" > /etc/sysctl.d/66-core-pattern.conf'
 
 # Install bazel
 wget -nv "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
@@ -168,4 +168,4 @@ rm "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
 
 
 # Kernel parameters
-sudo sysctl -w kernel.randomize_va_space=0
+sudo sh -c 'echo "kernel.randomize_va_space=0" > /etc/sysctl.d/67-randomize_va_space.conf'
