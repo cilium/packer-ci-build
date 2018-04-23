@@ -6,7 +6,7 @@ set -e
 
 CERTS_DIR=/certs/
 
-#Docker registry - certs
+# Docker registry - certs
 
 sudo mkdir -p $CERTS_DIR
 sudo chmod 777 $CERTS_DIR
