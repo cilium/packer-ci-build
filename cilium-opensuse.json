@@ -12,7 +12,8 @@
     "template": "opensuse-tumbleweed-amd64",
     "version": "TIMESTAMP",
     "cloud_token": "{{ env `VAGRANTCLOUD_TOKEN` }}",
-    "BUILD_ID": "{{ env `BUILD_ID` }}"
+    "BUILD_ID": "{{ env `BUILD_ID` }}",
+    "CILIUM_BRANCH": "{{ env `CILIUM_BRANCH` }}"
   },
   "builders": [
     {
@@ -72,7 +73,8 @@
     {
       "type": "shell",
       "environment_vars": [
-        "ENV_FILEPATH=/tmp/env.bash"
+        "ENV_FILEPATH=/tmp/env.bash",
+        "CILIUM_BRANCH={{ user `CILIUM_BRANCH` }}"
       ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
