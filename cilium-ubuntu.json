@@ -102,38 +102,21 @@
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
       "scripts": [
-          "provision/vagrant.sh",
-          "provision/ubuntu/install.sh",
-          "provision/golang.sh",
-          "provision/swap.sh",
-          "provision/registry.sh",
-          "provision/envoy.sh",
-          "provision/pull-images.sh"
+          "provision/vagrant.sh"
       ]
     }
   ],
   "post-processors": [
     [{
-      "output": "cilium-ginkgo-ubuntu-{{user `BUILD_ID`}}.box",
+      "output": "test-cilium-ginkgo-ubuntu-{{user `BUILD_ID`}}.box",
       "type": "vagrant",
       "compression_level": 9,
       "keep_input_artifact": false
     }, {
       "type": "shell-local",
       "inline": [
-        "/usr/local/bin/aws s3 cp cilium-ginkgo-ubuntu-{{user `BUILD_ID`}}.box s3://ciliumvagrantbaseboxes/"
+        "/usr/local/bin/aws s3 cp test-cilium-ginkgo-ubuntu-{{user `BUILD_ID`}}.box s3://ciliumvagrantbaseboxes/"
       ]
-    }],[{
-      "output": "cilium-ginkgo-ubuntu-{{user `BUILD_ID`}}.box",
-      "type": "vagrant",
-      "compression_level": 9,
-      "keep_input_artifact": false
-    },{
-      "type": "vagrant-cloud",
-      "box_tag": "cilium/ubuntu",
-      "access_token": "{{user `cloud_token`}}",
-      "version": "{{ user `BUILD_ID` }}",
-      "box_download_url": "https://s3-us-west-2.amazonaws.com/ciliumvagrantbaseboxes/cilium-ginkgo-ubuntu-{{user `BUILD_ID`}}.box"
     }]
   ]
 }
