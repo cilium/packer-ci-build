@@ -8,7 +8,8 @@ for img in tgraf/netperf httpd cilium/demo-httpd \
   cilium/demo-client borkmann/misc \
   registry busybox:latest quay.io/coreos/etcd:v3.1.0 \
   digitalwonderland/zookeeper wurstmeister/kafka \
-  cilium/kafkaclient2 cilium/starwars; do
+  cilium/kafkaclient2 cilium/starwars \
+  cilium/cilium:v1.0.0; do
   sudo docker pull $img &
 done
 
