@@ -20,6 +20,7 @@ pipeline {
         VAGRANTCLOUD_TOKEN = credentials('vagrantcloud token')
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_DEFAULT_REGION = credentials('AWS_DEFAULT_REGION')
         CILIUM_BRANCH = "${params.CiliumBranch}"
     }
 
@@ -34,6 +35,7 @@ pipeline {
         stage('Ubuntu') {
             steps {
                 sh 'echo "${JQ}"'
+                sh 'echo "AWS region=${AWS_DEFAULT_REGION}"'
                 sh 'make clean DISTRIBUTION=ubuntu'
                 sh 'make build DISTRIBUTION=ubuntu'
             }
