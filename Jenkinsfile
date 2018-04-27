@@ -8,11 +8,12 @@ def vagrantUpload = { String branch ->
 
 pipeline {
     agent {
-        label 'vagrant'
+        label 'baremetal'
     }
     options {
         timeout(time: 400, unit: 'MINUTES')
         timestamps()
+        ansiColor('xterm')
     }
 
     environment {
