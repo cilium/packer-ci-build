@@ -1,18 +1,18 @@
 {
   "variables": {
-    "box_basename": "ubuntu-17.10",
+    "box_basename": "ubuntu-18.10",
     "cpus": "8",
     "disk_size": "40960",
     "headless": "true",
-    "iso_checksum": "8ff73f1b622276758475c3bd5190b382774626de5a82c50930519381f6c3a3f8",
+    "iso_checksum": "a7f5c7b0cdd0e9560d78f1e47660e066353bb8a79eb78d1fc3f4ea62a07e6cbc",
     "iso_checksum_type": "sha256",
-    "iso_name": "ubuntu-17.10.1-server-amd64.iso",
+    "iso_name": "ubuntu-18.04-server-amd64.iso",
     "memory": "4096",
-    "mirror": "http://releases.ubuntu.com",
-    "mirror_directory": "17.10",
-    "name": "ubuntu-17.10",
+    "mirror": "http://cdimage.ubuntu.com/ubuntu/releases",
+    "mirror_directory": "bionic/release",
+    "name": "ubuntu-18.04",
     "preseed_path": "preseed.cfg",
-    "template": "ubuntu-17.10-amd64",
+    "template": "ubuntu-18.04-amd64",
     "version": "TIMESTAMP",
     "cloud_token": "{{ env `VAGRANTCLOUD_TOKEN` }}",
     "BUILD_ID": "{{ env `BUILD_ID` }}",
@@ -21,7 +21,7 @@
     "CILIUM_BRANCH": "{{ env `CILIUM_BRANCH` }}"
   },
   "builders": [
-    {
+  {
       "boot_command": [
         "<esc><wait>",
         "<esc><wait>",
@@ -62,7 +62,6 @@
       "ssh_password": "vagrant",
       "ssh_port": 22,
       "ssh_username": "vagrant",
-      "ssh_pty": true,
       "ssh_wait_timeout": "10000s",
       "type": "virtualbox-iso",
       "vboxmanage": [
