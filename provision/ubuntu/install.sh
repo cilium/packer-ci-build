@@ -160,13 +160,5 @@ EOF
 sudo systemctl disable apport.service
 sudo sh -c 'echo "sysctl kernel.core_pattern=/tmp/core.%e.%p.%t" > /etc/sysctl.d/66-core-pattern.conf'
 
-# Install bazel
-wget -nv "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-chmod +x "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-sudo -E "./bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-sudo -E mv /usr/local/bin/bazel /usr/bin
-rm "bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh"
-
-
 # Kernel parameters
 sudo sh -c 'echo "kernel.randomize_va_space=0" > /etc/sysctl.d/67-randomize_va_space.conf'
