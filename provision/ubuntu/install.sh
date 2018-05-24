@@ -160,5 +160,10 @@ EOF
 sudo systemctl disable apport.service
 sudo sh -c 'echo "sysctl kernel.core_pattern=/tmp/core.%e.%p.%t" > /etc/sysctl.d/66-core-pattern.conf'
 
+# journald configuration
+sudo bash -c "echo RateLimitIntervalSec=1s >> /etc/systemd/journald.conf"
+sudo bash -c "echo RateLimitBurst=1000 >> /etc/systemd/journald.conf"
+sudo systemctl restart systemd-journald
+
 # Kernel parameters
 sudo sh -c 'echo "kernel.randomize_va_space=0" > /etc/sysctl.d/67-randomize_va_space.conf'

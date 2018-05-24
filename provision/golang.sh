@@ -8,7 +8,9 @@ sudo -E mkdir "${GOPATH}" && \
 go get -u github.com/cilium/go-bindata/... && \
 go get -u github.com/google/gops && \
 go get -u github.com/golang/protobuf/protoc-gen-go && \
-go get -u github.com/lyft/protoc-gen-validate
+go get -u github.com/lyft/protoc-gen-validate && \
+go get github.com/subfuzion/envtpl && \
+go get github.com/ksonnet/kubecfg
 
 #Protoc-gen-validate installation
 cd $GOPATH/src/github.com/lyft/protoc-gen-validate
