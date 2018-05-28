@@ -6,13 +6,11 @@
 mkdir /tmp/deb
 cd /tmp/deb
 
-wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.13/linux-image-4.9.13-040913-generic_4.9.13-040913.201702260631_amd64.deb
-wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.13/linux-headers-4.9.13-040913-generic_4.9.13-040913.201702260631_amd64.deb
-wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.13/linux-headers-4.9.13-040913_4.9.13-040913.201702260631_all.deb
+wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.17/linux-headers-4.9.17-040917-generic_4.9.17-040917.201703220831_amd64.deb
+wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.17/linux-headers-4.9.17-040917_4.9.17-040917.201703220831_all.deb
+wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.17/linux-image-4.9.17-040917-generic_4.9.17-040917.201703220831_amd64.deb
 
 dpkg -i *.deb
-
-
 
 KERNEL="4.9"
 
