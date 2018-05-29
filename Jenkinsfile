@@ -39,6 +39,8 @@ pipeline {
                 sh 'echo "AWS region=${AWS_DEFAULT_REGION}"'
                 sh 'make clean DISTRIBUTION=ubuntu'
                 sh 'make build DISTRIBUTION=ubuntu'
+                sh 'make clean NAME_PREFIX="dev-" NAME_SUFFIX="-dev" DISTRIBUTION=ubuntu'
+                sh 'make build NAME_PREFIX="dev-" NAME_SUFFIX="-dev" DISTRIBUTION=ubuntu'
             }
         }
     }
