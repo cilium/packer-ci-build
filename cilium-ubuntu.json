@@ -16,6 +16,8 @@
     "version": "TIMESTAMP",
     "cloud_token": "{{ env `VAGRANTCLOUD_TOKEN` }}",
     "BUILD_ID": "{{ env `BUILD_ID` }}",
+    "NAME_PREFIX": "{{ env `NAME_PREFIX` }}",
+    "NAME_SUFFIX": "{{ env `NAME_SUFFIX` }}",
     "CILIUM_BRANCH": "{{ env `CILIUM_BRANCH` }}"
   },
   "builders": [
@@ -78,7 +80,7 @@
         ]
       ],
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "{{ user `template` }}-{{ user `BUILD_ID` }}"
+      "vm_name": "{{ user `template` }}-{{ user `NAME_PREFIX` }}{{ user `BUILD_ID` }}"
     }
   ],
   "provisioners": [
@@ -97,7 +99,8 @@
       "type": "shell",
       "environment_vars": [
         "ENV_FILEPATH=/tmp/env.bash",
-        "CILIUM_BRANCH={{ user `CILIUM_BRANCH` }}"
+        "CILIUM_BRANCH={{ user `CILIUM_BRANCH` }}",
+        "NAME_PREFIX={{ user `NAME_PREFIX` }}"
       ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
@@ -116,26 +119,26 @@
   ],
   "post-processors": [
     [{
-      "output": "cilium-ginkgo-ubuntu-{{user `BUILD_ID`}}.box",
+      "output": "cilium-ginkgo-ubuntu-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box",
       "type": "vagrant",
       "compression_level": 9,
       "keep_input_artifact": false
     }, {
       "type": "shell-local",
       "inline": [
-        "/usr/local/bin/aws s3 cp cilium-ginkgo-ubuntu-{{user `BUILD_ID`}}.box s3://ciliumvagrantbaseboxes/ --debug"
+        "/usr/local/bin/aws s3 cp cilium-ginkgo-ubuntu-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box s3://ciliumvagrantbaseboxes/ --debug"
       ]
     }],[{
-      "output": "cilium-ginkgo-ubuntu-{{user `BUILD_ID`}}.box",
+      "output": "cilium-ginkgo-ubuntu-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box",
       "type": "vagrant",
       "compression_level": 9,
       "keep_input_artifact": false
     },{
       "type": "vagrant-cloud",
-      "box_tag": "cilium/ubuntu",
+      "box_tag": "cilium/ubuntu{{ env `NAME_SUFFIX` }}",
       "access_token": "{{user `cloud_token`}}",
       "version": "{{ user `BUILD_ID` }}",
-      "box_download_url": "https://s3-us-west-2.amazonaws.com/ciliumvagrantbaseboxes/cilium-ginkgo-ubuntu-{{user `BUILD_ID`}}.box"
+      "box_download_url": "https://s3-us-west-2.amazonaws.com/ciliumvagrantbaseboxes/cilium-ginkgo-ubuntu-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box"
     }]
   ]
 }
