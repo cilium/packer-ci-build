@@ -135,7 +135,7 @@
       "keep_input_artifact": false
     },{
       "type": "vagrant-cloud",
-      "box_tag": "cilium/ubuntu{{ env `NAME_SUFFIX` }}",
+      "box_tag": "cilium/ubuntu{{ user `NAME_SUFFIX` }}",
       "access_token": "{{user `cloud_token`}}",
       "version": "{{ user `BUILD_ID` }}",
       "box_download_url": "https://s3-us-west-2.amazonaws.com/ciliumvagrantbaseboxes/cilium-ginkgo-ubuntu-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box"
