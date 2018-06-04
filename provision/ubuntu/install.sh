@@ -34,7 +34,7 @@ sudo apt-get install -y --allow-downgrades \
     gcc make libc6-dev.i386 git-buildpackage \
     pkg-config bison flex \
     zip g++ zlib1g-dev unzip python \
-    libtool cmake realpath m4 automake \
+    libtool cmake coreutils m4 automake \
     protobuf-compiler libprotobuf-dev libyaml-cpp-dev \
     socat pv tmux bc gcc-multilib binutils-dev \
     binutils wget rsync ifupdown \
