@@ -162,7 +162,7 @@ sudo sh -c 'echo "sysctl kernel.core_pattern=/tmp/core.%e.%p.%t" > /etc/sysctl.d
 
 # journald configuration
 sudo bash -c "echo RateLimitIntervalSec=1s >> /etc/systemd/journald.conf"
-sudo bash -c "echo RateLimitBurst=1000 >> /etc/systemd/journald.conf"
+sudo bash -c "echo RateLimitBurst=10000 >> /etc/systemd/journald.conf"
 sudo systemctl restart systemd-journald
 
 # Kernel parameters
