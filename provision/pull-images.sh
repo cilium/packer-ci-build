@@ -16,7 +16,9 @@ if [ -z "${NAME_PREFIX}" ]; then
       digitalwonderland/zookeeper wurstmeister/kafka \
       cilium/kafkaclient2 cilium/starwars \
       istio/examples-bookinfo-ratings-v1:1.6.0 istio/examples-bookinfo-reviews-v2:1.6.0 \
-      istio/examples-bookinfo-details-v1:1.6.0 istio/examples-bookinfo-reviews-v1:1.6.0; do
+      istio/examples-bookinfo-details-v1:1.6.0 istio/examples-bookinfo-reviews-v1:1.6.0 \
+      quay.io/cilium/cilium-runtime:2018-06-21 \
+      quay.io/cilium/cilium-builder:2018-06-21; do
       sudo docker pull $img &
     done
 fi
