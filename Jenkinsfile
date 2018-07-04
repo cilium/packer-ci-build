@@ -23,6 +23,8 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION = credentials('AWS_DEFAULT_REGION')
         CILIUM_BRANCH = "${params.CiliumBranch}"
+        NIGHTLY_LOGIN = "ciliumbot"
+        NIGHTLY_PASSWORD = credentials('DOCKER_NIGHTLY_PASSWORD')
     }
 
     stages {
