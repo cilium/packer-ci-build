@@ -23,7 +23,7 @@ if [ -z "${NAME_PREFIX}" ]; then
       istio/examples-bookinfo-ratings-v1:1.6.0 istio/examples-bookinfo-reviews-v2:1.6.0 \
       istio/examples-bookinfo-details-v1:1.6.0 istio/examples-bookinfo-reviews-v1:1.6.0 \
       quay.io/cilium/cilium-runtime:2018-06-21 \
-      quay.io/cilium/cilium-builder:2018-06-21; do
+      quay.io/cilium/cilium-builder:2018-06-29; do
       sudo docker pull $img &
     done
 fi
