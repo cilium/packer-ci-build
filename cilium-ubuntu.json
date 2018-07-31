@@ -111,7 +111,6 @@
           "provision/registry.sh",
           "provision/envoy.sh",
           "provision/ubuntu/crio.sh",
-          "provision/containerd.sh",
           "provision/pull-images.sh"
       ]
     }
