@@ -42,7 +42,7 @@ sudo apt-get install -y --allow-downgrades \
     libncurses5-dev libslang2-dev gettext \
     libselinux1-dev debhelper lsb-release \
     po-debconf autoconf autopoint moreutils \
-    libseccomp2 libenchant1c2a
+    libseccomp2 libenchant1c2a ninja-build
 
 # Install nsenter for kubernetes
 cd /tmp
