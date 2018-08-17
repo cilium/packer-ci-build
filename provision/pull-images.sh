@@ -24,7 +24,7 @@ if [ -z "${NAME_PREFIX}" ]; then
       istio/examples-bookinfo-ratings-v1:1.6.0 istio/examples-bookinfo-reviews-v2:1.6.0 \
       istio/examples-bookinfo-details-v1:1.6.0 istio/examples-bookinfo-reviews-v1:1.6.0 \
       quay.io/cilium/cilium-runtime:2018-08-06 \
-      quay.io/cilium/cilium-builder:2018-07-31 \
+      quay.io/cilium/cilium-builder:2018-08-17 \
       gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.10 \
       gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64:1.14.10 \
       gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.10 \
