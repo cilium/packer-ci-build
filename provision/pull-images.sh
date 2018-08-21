@@ -11,36 +11,36 @@ done
 # Install all of these images in VM for the CI
 if [ -z "${NAME_PREFIX}" ]; then
     for img in \
-        borkmann/misc \
-        busybox:latest \
-        byrnedo/alpine-curl \
-        cilium/connectivity-container:v1.0 \
-        cilium/demo-client \
-        cilium/demo-httpd \
-        cilium/kafkaclient \
-        cilium/kafkaclient2 \
-        cilium/microscope:1.1.0-ci \
-        cilium/starwars \
-        coredns/coredns:1.0.6 \
-        digitalwonderland/zookeeper \
+        docker.io/byrnedo/alpine-curl:0.1.7 \
+        docker.io/cilium/cc-grpc-demo:v2.0 \
+        docker.io/cilium/connectivity-container:v1.0 \
+        docker.io/cilium/demo-client:latest \
+        docker.io/cilium/demo-httpd:latest \
+        docker.io/cilium/kafkaclient2:latest \
+        docker.io/cilium/kafkaclient:latest \
+        docker.io/cilium/microscope:1.1.0-ci \
+        docker.io/cilium/starwars:v1.0 \
+        docker.io/coredns/coredns:1.0.6 \
+        docker.io/digitalwonderland/zookeeper:latest \
+        docker.io/istio/examples-bookinfo-details-v1:1.6.0 \
+        docker.io/istio/examples-bookinfo-productpage-v1:0.2.3 \
+        docker.io/istio/examples-bookinfo-ratings-v1:1.6.0 \
+        docker.io/istio/examples-bookinfo-reviews-v1:1.6.0 \
+        docker.io/istio/examples-bookinfo-reviews-v2:1.6.0 \
+        docker.io/kubernetes/guestbook:v2 \
+        docker.io/library/busybox:1.28.0 \
+        docker.io/library/httpd:2.4.34 \
+        docker.io/library/redis:4.0.11 \
+        docker.io/library/registry:2.6.2 \
+        docker.io/tgraf/netperf:v1.0 \
         docker.io/wurstmeister/kafka:1.1.0 \
         gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.10 \
         gcr.io/google_samples/gb-redisslave:v1 \
-        httpd \
-        istio/examples-bookinfo-details-v1:1.6.0 \
-        istio/examples-bookinfo-productpage-v1:0.2.3 \
-        istio/examples-bookinfo-ratings-v1:1.6.0 \
-        istio/examples-bookinfo-reviews-v1:1.6.0 \
-        istio/examples-bookinfo-reviews-v2:1.6.0 \
-        kubernetes/guestbook:v2 \
         quay.io/cilium/cilium-builder:2018-08-17 \
         quay.io/cilium/cilium-runtime:2018-08-06 \
-        quay.io/coreos/etcd:v3.2.17 \
-        redis \
-        registry \
-        tgraf/netperf; \
+        quay.io/coreos/etcd:v3.2.17; \
         do
           echo "pulling image: $img"
           sudo docker pull "${img}" &
