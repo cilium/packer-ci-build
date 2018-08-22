@@ -13,6 +13,8 @@ if [ -z "${NAME_PREFIX}" ]; then
     for img in \
         docker.io/byrnedo/alpine-curl:0.1.7 \
         docker.io/cilium/cc-grpc-demo:v2.0 \
+        docker.io/cilium/cilium:v1.0.5 \
+        docker.io/cilium/cilium:v1.1.4 \
         docker.io/cilium/connectivity-container:v1.0 \
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
