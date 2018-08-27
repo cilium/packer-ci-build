@@ -69,4 +69,4 @@ docker run -d -p 5000:5000 --name registry -v ${CERTS_DIR}:/certs \
         -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/cilium.cert \
         -e REGISTRY_HTTP_TLS_KEY=/certs/cilium.key \
         --restart=always \
-        registry:2
+        docker.io/library/registry:2.6.2
