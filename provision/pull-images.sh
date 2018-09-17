@@ -15,6 +15,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/cc-grpc-demo:v2.0 \
         docker.io/cilium/cilium:v1.0.5 \
         docker.io/cilium/cilium:v1.1.4 \
+        docker.io/cilium/cilium:v1.2.2 \
         docker.io/cilium/connectivity-container:v1.0 \
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
@@ -40,8 +41,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.10 \
         gcr.io/google_samples/gb-redisslave:v1 \
-        quay.io/cilium/cilium-builder:2018-08-17 \
-        quay.io/cilium/cilium-runtime:2018-08-06 \
+        quay.io/cilium/cilium-builder:2018-09-11 \
+        quay.io/cilium/cilium-runtime:2018-09-13 \
         quay.io/coreos/etcd:v3.2.17; \
         do
           echo "pulling image: $img"
