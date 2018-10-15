@@ -16,6 +16,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/cilium:v1.0.6 \
         docker.io/cilium/cilium:v1.1.5 \
         docker.io/cilium/cilium:v1.2.4 \
+        docker.io/cilium/cilium-init:2018-10-10 \
         docker.io/cilium/connectivity-container:v1.0 \
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
