@@ -124,7 +124,7 @@
     }, {
       "type": "shell-local",
       "inline": [
-        "/usr/local/bin/aws s3 cp cilium-ginkgo-ubuntu-next-{{user `BUILD_ID`}}.box s3://ciliumvagrantbaseboxes/"
+        "/usr/bin/aws s3 cp cilium-ginkgo-ubuntu-next-{{user `BUILD_ID`}}.box s3://ciliumvagrantbaseboxes/"
       ]
     }],[{
       "output": "cilium-ginkgo-ubuntu-next-{{user `BUILD_ID`}}.box",
