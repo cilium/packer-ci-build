@@ -4,15 +4,13 @@ set -eu
 
 source "${ENV_FILEPATH}"
 export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"v4.14.0"}
+export GUESTADDITIONS=${GUESTADDITIONS:-"true"}
 
 CLANG_DIR="clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-16.04"
 CLANG_FILE="${CLANG_DIR}.tar.xz"
 CLANG_URL="http://releases.llvm.org/3.8.1/${CLANG_FILE}"
 
-# Newest kernels already have the vbox modules into that. GuestAdditions are no
-# longer needed.
-VBOXSF=$(sudo lsmod | grep vboxsf | wc -l)
-if [[ "${VBOXSF}" -eq 0 ]]; then
+if [[ "${GUESTADDITIONS}" == "true" ]]; then
     VER="`cat /home/vagrant/.vbox_version`";
     ISO="VBoxGuestAdditions_$VER.iso";
     mkdir -p /tmp/vbox;
