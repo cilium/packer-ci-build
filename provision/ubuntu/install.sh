@@ -4,24 +4,33 @@ set -eu
 
 source "${ENV_FILEPATH}"
 export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"v4.14.0"}
-export GUESTADDITIONS=${GUESTADDITIONS:-"true"}
+export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 
 CLANG_DIR="clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-16.04"
 CLANG_FILE="${CLANG_DIR}.tar.xz"
 CLANG_URL="http://releases.llvm.org/3.8.1/${CLANG_FILE}"
 
-if [[ "${GUESTADDITIONS}" == "true" ]]; then
-    VER="`cat /home/vagrant/.vbox_version`";
-    ISO="VBoxGuestAdditions_$VER.iso";
-    mkdir -p /tmp/vbox;
-    mount -o loop ${HOME_DIR}/$ISO /tmp/vbox;
-    sh /tmp/vbox/VBoxLinuxAdditions.run \
-        || echo "VBoxLinuxAdditions.run exited $? and is suppressed." \
-        "For more read https://www.virtualbox.org/ticket/12479";
-    umount /tmp/vbox;
-    rm -rf /tmp/vbox;
-    rm -f ${HOME_DIR}/*.iso;
+# VBoxguestAdditions installation
+
+VER="`cat /home/vagrant/.vbox_version`";
+ISO="VBoxGuestAdditions_$VER.iso";
+
+# Validate that custom GuestAdditions are needed
+if [[ -n "${GUESTADDITIONS}" ]]; then
+    cd $HOME_DIR
+    ISO="VBoxGuestAdditions.iso"
+    wget $GUESTADDITIONS  -O $ISO
 fi
+
+mkdir -p /tmp/vbox;
+mount -o loop ${HOME_DIR}/$ISO /tmp/vbox;
+sh /tmp/vbox/VBoxLinuxAdditions.run \
+    || echo "VBoxLinuxAdditions.run exited $? and is suppressed." \
+    "For more read https://www.virtualbox.org/ticket/12479";
+umount /tmp/vbox;
+rm -rf /tmp/vbox;
+rm -f ${HOME_DIR}/*.iso;
+
 
 
 echo "Provision a new server"
