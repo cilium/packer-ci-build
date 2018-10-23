@@ -52,3 +52,5 @@ make oldconfig && make prepare
 sudo make deb-pkg
 cd ..
 sudo dpkg -i linux-*.deb
+
+sudo reboot
