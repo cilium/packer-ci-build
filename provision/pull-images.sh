@@ -13,9 +13,9 @@ if [ -z "${NAME_PREFIX}" ]; then
     for img in \
         docker.io/byrnedo/alpine-curl:0.1.7 \
         docker.io/cilium/cc-grpc-demo:v2.0 \
-        docker.io/cilium/cilium:v1.0.6 \
-        docker.io/cilium/cilium:v1.1.5 \
-        docker.io/cilium/cilium:v1.2.4 \
+        docker.io/cilium/cilium:v1.0.7 \
+        docker.io/cilium/cilium:v1.1.6 \
+        docker.io/cilium/cilium:v1.2.5 \
         docker.io/cilium/cilium-init:2018-10-16 \
         docker.io/cilium/connectivity-container:v1.0 \
         docker.io/cilium/demo-client:latest \
@@ -43,8 +43,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.10 \
         gcr.io/google_samples/gb-redisslave:v1 \
-        quay.io/cilium/cilium-builder:2018-09-17 \
-        quay.io/cilium/cilium-runtime:2018-09-13 \
+        quay.io/cilium/cilium-builder:2018-10-29 \
+        quay.io/cilium/cilium-runtime:2018-10-29 \
         quay.io/coreos/etcd:v3.2.17 \
         quay.io/coreos/etcd:v3.3.9; \
         do
