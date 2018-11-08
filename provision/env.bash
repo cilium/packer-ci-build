@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export GOLANG_VERSION="1.11.1"
+export GOLANG_VERSION_MINOR="1.11"
 export ETCD_VERSION="v3.1.0"
 export DOCKER_COMPOSE_VERSION="1.16.1"
 export CONTAINERD_VERSION="1.1.0"

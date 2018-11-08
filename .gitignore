@@ -2,3 +2,4 @@
 packer_cache/
 packer-*/
 output*/
+opensuse_base_box/
