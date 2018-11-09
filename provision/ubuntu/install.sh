@@ -56,7 +56,7 @@ sudo apt-get install -y --allow-downgrades \
     libselinux1-dev debhelper lsb-release \
     po-debconf autoconf autopoint moreutils \
     libseccomp2 libenchant1c2a ninja-build \
-    golang-cfssl
+    golang-cfssl ntp
 
 # Install nsenter for kubernetes
 cd /tmp
