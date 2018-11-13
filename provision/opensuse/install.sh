@@ -18,11 +18,15 @@ zypper -n --gpg-auto-import-key in --no-recommends \
         clang \
         coreutils \
         cri-o \
+        curl \
         docker \
         docker-compose \
         etcd \
         git \
+        glibc-devel-32bit \
         "go${GOLANG_VERSION_MINOR}" \
         jq \
+        libelf-devel \
         llvm \
+        python3-pip \
     && zypper clean
