@@ -47,6 +47,7 @@ make oldconfig && make prepare
 ./scripts/config --enable CONFIG_LWTUNNEL_BPF
 ./scripts/config --enable CONFIG_HAVE_EBPF_JIT
 ./scripts/config --module CONFIG_NETDEVSIM
+./scripts/config --module CONFIG_TLS
 
 
 sudo make deb-pkg
