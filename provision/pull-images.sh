@@ -42,6 +42,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/wurstmeister/kafka:1.1.0 \
         docker.io/nebril/python-binary-memcached \
         docker.io/memcached:1.5.11 \
+        docker.io/spotify/kafkaproxy:latest \
         gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.10 \
