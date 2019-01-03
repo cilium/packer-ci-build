@@ -51,7 +51,7 @@ sudo apt-get install -y --allow-downgrades \
     protobuf-compiler libprotobuf-dev libyaml-cpp-dev \
     socat pv tmux bc gcc-multilib binutils-dev \
     binutils wget rsync ifupdown \
-    python-sphinx python-pip \
+    python3-sphinx python3-pip \
     libncurses5-dev libslang2-dev gettext \
     libselinux1-dev debhelper lsb-release \
     po-debconf autoconf autopoint moreutils \
@@ -71,8 +71,8 @@ cd ..
 rm -fr util-linux-2.30.1/ util-linux-2.30.1.tar.gz
 
 # Documentation dependencies
-pip install sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi sphinx-rtd-theme sphinx-tabs recommonmark
-pip install yamllint
+pip3 install --user sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi sphinx-rtd-theme sphinx-tabs recommonmark
+pip3 install --user yamllint
 
 #IP Route
 cd /tmp
@@ -151,8 +151,8 @@ EOF
 sudo systemctl enable etcd
 sudo systemctl start etcd
 
-sudo -u vagrant -E sh -c 'echo "export PATH='${PATH}'" >> "${HOME_DIR}/.bashrc"'
-echo "export PATH=$PATH" >> "/root/.bashrc"
+sudo -u vagrant -E sh -c 'echo "export PATH='${PATH}':${HOME_DIR}/.local/bin" >> "${HOME_DIR}/.bashrc"'
+echo "export PATH=${PATH}:/root/.local/bin" >> "/root/.bashrc"
 
 # Clean all downloaded packages
 sudo apt-get -y clean
