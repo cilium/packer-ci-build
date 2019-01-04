@@ -43,6 +43,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/nebril/python-binary-memcached \
         docker.io/memcached:1.5.11 \
         docker.io/spotify/kafkaproxy:latest \
+        docker.io/cilium/dnssec-client:v0.1 \
+        docker.io/cilium/docker-bind:v0.3 \
         gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.10 \
