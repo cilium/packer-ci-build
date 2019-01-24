@@ -11,6 +11,7 @@ done
 # Install all of these images in VM for the CI
 if [ -z "${NAME_PREFIX}" ]; then
     for img in \
+        busybox:1.28.4 \
         docker.io/byrnedo/alpine-curl:0.1.7 \
         docker.io/cilium/cc-grpc-demo:v2.0 \
         docker.io/cilium/cilium:v1.0.7 \
@@ -21,6 +22,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/connectivity-container:v1.0 \
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
+        docker.io/cilium/istio_pilot:1.0.2 \
         docker.io/cilium/kafkaclient2:latest \
         docker.io/cilium/kafkaclient:latest \
         docker.io/cilium/microscope:1.1.2-ci \
@@ -28,16 +30,23 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/coredns/coredns:1.2.2 \
         docker.io/coredns/coredns:1.0.6 \
         docker.io/digitalwonderland/zookeeper:latest \
+        docker.io/istio/citadel:1.0.2 \
+        docker.io/istio/galley:1.0.2 \
+        docker.io/istio/proxyv2:1.0.2 \
+        docker.io/istio/mixer:1.0.2 \
         docker.io/istio/examples-bookinfo-details-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-productpage-v1:0.2.3 \
         docker.io/istio/examples-bookinfo-ratings-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-reviews-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-reviews-v2:1.6.0 \
+        docker.io/istio/proxy_init:1.0.2 \
         docker.io/kubernetes/guestbook:v2 \
         docker.io/library/busybox:1.28.0 \
         docker.io/library/httpd:2.4.34 \
         docker.io/library/redis:4.0.11 \
         docker.io/library/registry:2.6.2 \
+        docker.io/prom/prometheus:v2.3.1 \
+        docker.io/prom/statsd-exporter:v0.6.0 \
         docker.io/tgraf/netperf:v1.0 \
         docker.io/wurstmeister/kafka:1.1.0 \
         docker.io/nebril/python-binary-memcached \
@@ -52,8 +61,9 @@ if [ -z "${NAME_PREFIX}" ]; then
         quay.io/cilium/cilium-builder:2018-10-29 \
         quay.io/cilium/cilium-runtime:2018-10-29 \
         quay.io/coreos/etcd:v3.2.17 \
-        quay.io/coreos/etcd:v3.3.9; \
-        do
+        quay.io/coreos/etcd:v3.3.9 \
+        quay.io/coreos/hyperkube:v1.7.6_coreos.0; \
+    do
           echo "pulling image: $img"
           sudo docker pull "${img}" &
     done
