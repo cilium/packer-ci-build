@@ -152,7 +152,12 @@ sudo systemctl enable etcd
 sudo systemctl start etcd
 
 sudo -u vagrant -E sh -c 'echo "export PATH='${PATH}':${HOME_DIR}/.local/bin" >> "${HOME_DIR}/.bashrc"'
-echo "export PATH=${PATH}:/root/.local/bin" >> "/root/.bashrc"
+
+# Packages installed by vagrant user via pip3 are installed in its home directory.
+echo "export PATH=${PATH}:/home/vagrant/.local/bin" >> "/root/.bashrc"
+
+# Allow vagrant user to access newly installed Python packages.
+chown -R "vagrant:vagrant" ${HOME_DIR}/.local
 
 # Clean all downloaded packages
 sudo apt-get -y clean
