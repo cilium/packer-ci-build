@@ -15,8 +15,8 @@ cd $HOME/k
 
 # This patches fixes some issues with Vboxguest/VboxSF. Need to be removed when are merged.
 # curl https://patchwork.kernel.org/patch/10216607/raw/ -o vboxfs_patch
-curl https://lore.kernel.org/patchwork/patch/883084/raw/ -o vboxfs_patch
-git apply  vboxfs_patch
+#curl https://lore.kernel.org/patchwork/patch/883084/raw/ -o vboxfs_patch
+#git apply  vboxfs_patch
 
 # curl https://patchwork.kernel.org/patch/10315021/raw/ -o vguest_patch_1
 # curl https://patchwork.kernel.org/patch/10315017/raw/ -o vguest_patch_2
