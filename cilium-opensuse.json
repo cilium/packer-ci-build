@@ -1,6 +1,5 @@
 {
   "variables": {
-    "box_basename": "opensuse-tumbleweed",
     "cpus": "8",
     "disk_size": "40960",
     "headless": "true",

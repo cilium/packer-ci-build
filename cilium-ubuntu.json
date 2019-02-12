@@ -1,6 +1,5 @@
 {
   "variables": {
-    "box_basename": "ubuntu-18.10",
     "cpus": "8",
     "disk_size": "40960",
     "headless": "true",
