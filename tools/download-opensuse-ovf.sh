@@ -7,10 +7,10 @@ set -eux
 # in their content. This script downloads openSUSE Vagrant box and extracts
 # OVF/OVA from it.
 
-OPENSUSE_VERSION="15.0"
+OPENSUSE_VERSION="Tumbleweed"
 ARCH="x86_64"
 BOX_VERSION="1.0.6.20181025"
-SHA256SUM="3f460c590c514d95a7ad3f83ea288374a214d3102674abaa2027dfe21af368c9"
+SHA256SUM="a60567af6e12e203e14d5882e14347e262b14dea2cc276bafefd7cb955033fec"
 
 BOX_FILENAME="virtualbox-${BOX_VERSION}.box"
 BOX_CONTENT_DIR="opensuse_base_box"
