@@ -71,8 +71,8 @@ cd ..
 rm -fr util-linux-2.30.1/ util-linux-2.30.1.tar.gz
 
 # Documentation dependencies
-pip3 install --user sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi sphinx-rtd-theme sphinx-tabs recommonmark
-pip3 install --user yamllint
+sudo -H pip3 install sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi sphinx-rtd-theme sphinx-tabs recommonmark
+sudo -H pip3 install yamllint
 
 #IP Route
 cd /tmp
@@ -150,14 +150,6 @@ EOF
 
 sudo systemctl enable etcd
 sudo systemctl start etcd
-
-sudo -u vagrant -E sh -c 'echo "export PATH='${PATH}':${HOME_DIR}/.local/bin" >> "${HOME_DIR}/.bashrc"'
-
-# Packages installed by vagrant user via pip3 are installed in its home directory.
-echo "export PATH=${PATH}:/home/vagrant/.local/bin" >> "/root/.bashrc"
-
-# Allow vagrant user to access newly installed Python packages.
-chown -R "vagrant:vagrant" ${HOME_DIR}/.local
 
 # Clean all downloaded packages
 sudo apt-get -y clean
