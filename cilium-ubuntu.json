@@ -109,6 +109,7 @@
           "provision/swap.sh",
           "provision/registry.sh",
           "provision/ubuntu/crio.sh",
+          "provision/ubuntu/containerd.sh",
           "provision/pull-images.sh"
       ]
     }
