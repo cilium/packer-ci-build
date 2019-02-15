@@ -13,20 +13,9 @@ sudo apt-get install -y --allow-downgrades \
 git clone --depth 1 git://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git $HOME/k
 cd $HOME/k
 
-# This patches fixes some issues with Vboxguest/VboxSF. Need to be removed when are merged.
-# curl https://patchwork.kernel.org/patch/10216607/raw/ -o vboxfs_patch
-# git apply  vboxfs_patch
-
-# curl https://patchwork.kernel.org/patch/10315021/raw/ -o vguest_patch_1
-# curl https://patchwork.kernel.org/patch/10315017/raw/ -o vguest_patch_2
-
-# git apply vguest_patch_1
-# git apply vguest_patch_2
-
 cp /boot/config-`uname -r` .config
 make oldconfig && make prepare
 
-./scripts/config --module CONFIG_VBOXSF_FS
 ./scripts/config --module CONFIG_VBOXGUEST
 ./scripts/config --disable CONFIG_DEBUG_INFO
 ./scripts/config --disable CONFIG_DEBUG_KERNEL
