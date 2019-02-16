@@ -3,7 +3,8 @@
 set -eu
 
 source "${ENV_FILEPATH}"
-export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"v4.14.0"}
+export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"4.20.0-1ubuntu0bjn2"}
+export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/joestringer/iproute2}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 
 CLANG_DIR="clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-16.04"
@@ -76,7 +77,7 @@ sudo -H pip3 install yamllint
 
 #IP Route
 cd /tmp
-git clone -b ${IPROUTE_BRANCH} git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git
+git clone -b ${IPROUTE_BRANCH} ${IPROUTE_GIT}
 cd /tmp/iproute2
 ./configure
 make -j `getconf _NPROCESSORS_ONLN`
