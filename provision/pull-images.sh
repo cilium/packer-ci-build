@@ -60,7 +60,6 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google_samples/gb-redisslave:v1 \
         quay.io/cilium/cilium-builder:2018-10-29 \
         quay.io/cilium/cilium-runtime:2018-10-29 \
-        quay.io/coreos/etcd:v3.2.17 \
         quay.io/coreos/etcd:v3.3.9 \
         quay.io/coreos/hyperkube:v1.7.6_coreos.0; \
     do
