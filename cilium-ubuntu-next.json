@@ -105,9 +105,9 @@
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
       "scripts": [
-          "provision/ubuntu/vboxsf-next.sh",
           "provision/vagrant.sh",
           "provision/ubuntu/install.sh",
+          "provision/ubuntu/vboxsf-next.sh",
           "provision/golang.sh",
           "provision/swap.sh",
           "provision/registry.sh",
