@@ -2,34 +2,13 @@
 
 set -xe
 
-# Very ugly way to compile and install vboxsf with the latest net-next ;-(
-
-# Should go away after vboxsf has been merged upstream. Ping @brb for
-# maintaining this hack.
+# vboxsf from the mainline is broken ("vboxsf: Unknown symbol VBoxGuestIDC (err -2)")
+# on 18.04.2 and >= 5.0 kernels, thus we install from the vboxsf cleanup repo.
 
 sudo apt-get install -y kbuild module-assistant debhelper
-wget https://launchpad.net/ubuntu/+archive/primary/+files/virtualbox-guest-source_6.0.4-dfsg-5_all.deb
-sudo dpkg -i virtualbox-guest-source_6.0.4-dfsg-5_all.deb
-cd /usr/src
-sudo tar xfv virtualbox-guest.tar.bz2
-cd modules/virtualbox-guest/vboxsf
-sudo patch -p0 <<EOF
-*** vfsmod.h
---- vfsmod.h
-***************
-*** 45,50 ****
---- 45,55 ----
-  #include <VBox/VBoxGuestLibSharedFolders.h>
-  #include "vbsfmount.h"
-
-+ #ifndef MS_REMOUNT
-+ // taken from <sys/mount.h>; including the header adds many redefinitions
-+ #define MS_REMOUNT 32
-+ #endif
-+
-  #define DIR_BUFFER_SIZE (16*_1K)
-
-  /* per-shared folder information */
-EOF
+git clone https://github.com/jwrdegoede/vboxsf/
+cd vboxsf
+git checkout fb360320b7d5c2dc74cb958c9b27e8708c1c9bc2
+make
 sudo make modules_install
-sudo depmod $(uname -r)
+sudo depmod -a
