@@ -5,7 +5,6 @@ set -xe
 export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"net-next"}
 export 'KCONFIG'=${KCONFIG:-"config-`uname -r`"}
 
-
 sudo apt-get install -y --allow-downgrades \
     pkg-config bison flex build-essential gcc libssl-dev \
     libelf-dev bc
@@ -39,7 +38,7 @@ make oldconfig && make prepare
 ./scripts/config --module CONFIG_TLS
 
 
-sudo make deb-pkg
+sudo make -j$(nproc) deb-pkg
 cd ..
 sudo dpkg -i linux-*.deb
 sudo ln -sf /boot/System.map-$(uname -r) /boot/System.map
