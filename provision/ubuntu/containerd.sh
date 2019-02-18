@@ -34,3 +34,6 @@ sudo systemctl enable containerd
 sudo systemctl restart containerd
 
 sudo crictl -r unix:///run/containerd/containerd.sock ps
+
+sudo systemctl restart docker
+sudo docker ps
