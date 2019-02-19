@@ -99,7 +99,6 @@
       "type": "shell",
       "environment_vars": [
         "ENV_FILEPATH=/tmp/env.bash",
-        "IPROUTE_BRANCH=net-next",
         "GUESTADDITIONS=https://download.virtualbox.org/virtualbox/5.2.20/VBoxGuestAdditions_5.2.20.iso"
       ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
