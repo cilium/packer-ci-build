@@ -2,7 +2,6 @@
 
 set -xe
 
-export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"net-next"}
 export 'KCONFIG'=${KCONFIG:-"config-`uname -r`"}
 
 sudo apt-get install -y --allow-downgrades \
