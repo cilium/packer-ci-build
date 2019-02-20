@@ -4,12 +4,8 @@ set -eu
 
 source "${ENV_FILEPATH}"
 export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"4.20.0-1ubuntu0bjn2"}
-export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/joestringer/iproute2}
+export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
-
-CLANG_DIR="clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-16.04"
-CLANG_FILE="${CLANG_DIR}.tar.xz"
-CLANG_URL="http://releases.llvm.org/3.8.1/${CLANG_FILE}"
 
 # VBoxguestAdditions installation
 
@@ -45,6 +41,7 @@ sudo apt-get install -y --allow-downgrades \
     dh-make libmnl-dev git \
     libdistro-info-perl libssl-dev \
     dh-systemd build-essential \
+    clang-7 llvm-7 \
     gcc make libc6-dev.i386 git-buildpackage \
     pkg-config bison flex \
     zip g++ zlib1g-dev unzip python \
@@ -83,13 +80,9 @@ cd /tmp/iproute2
 make -j `getconf _NPROCESSORS_ONLN`
 make install
 
-wget --quiet "${CLANG_URL}"
-mkdir -p /usr/local
-tar -C /usr/local -xJf "${CLANG_FILE}"
-ln -s "/usr/local/${CLANG_DIR}" "${CLANG_ROOT}"
-rm ${CLANG_FILE}
-
-ln -s "${CLANG_ROOT}/bin/"* /usr/local/bin
+#LLVM
+update-alternatives --install /usr/bin/clang clang /usr/lib/llvm-7/bin/clang 1000
+update-alternatives --install /usr/bin/llc llc /usr/lib/llvm-7/bin/llc 1000
 
 #clean
 sudo apt-get remove docker docker-engine docker.io
