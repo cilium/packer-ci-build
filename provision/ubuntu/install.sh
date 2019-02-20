@@ -3,7 +3,7 @@
 set -eu
 
 source "${ENV_FILEPATH}"
-export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"4.20.0-1ubuntu0bjn2"}
+export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"static-data"}
 export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 
