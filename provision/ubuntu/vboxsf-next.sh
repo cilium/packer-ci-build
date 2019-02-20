@@ -12,3 +12,4 @@ git checkout fb360320b7d5c2dc74cb958c9b27e8708c1c9bc2
 make
 sudo make modules_install
 sudo depmod -a
+sudo rm $(which mount.vboxsf)
