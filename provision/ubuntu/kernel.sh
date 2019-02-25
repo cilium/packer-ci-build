@@ -6,9 +6,9 @@
 mkdir /tmp/deb
 cd /tmp/deb
 
-wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.17/linux-headers-4.9.17-040917-generic_4.9.17-040917.201703220831_amd64.deb
-wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.17/linux-headers-4.9.17-040917_4.9.17-040917.201703220831_all.deb
-wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.17/linux-image-4.9.17-040917-generic_4.9.17-040917.201703220831_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.160/linux-headers-4.9.160-0409160-generic_4.9.160-0409160.201902230931_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.160/linux-headers-4.9.160-0409160_4.9.160-0409160.201902230931_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.160/linux-image-4.9.160-0409160-generic_4.9.160-0409160.201902230931_amd64.deb
 
 dpkg -i *.deb
 
