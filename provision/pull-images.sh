@@ -49,7 +49,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/prom/statsd-exporter:v0.6.0 \
         docker.io/tgraf/netperf:v1.0 \
         docker.io/wurstmeister/kafka:1.1.0 \
-        docker.io/nebril/python-binary-memcached \
+        docker.io/cilium/python-bmemcached:v0.0.1 \
         docker.io/memcached:1.5.11 \
         docker.io/spotify/kafkaproxy:latest \
         docker.io/cilium/dnssec-client:v0.1 \
