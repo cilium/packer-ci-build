@@ -1,6 +1,7 @@
 DISTRIBUTION ?= ubuntu
 JQ ?= del(."post-processors"[])
 PACKER ?= packer
+BRANCH ?= master
 
 ifeq ($(DISTRIBUTION), ubuntu)
 JSON_FILE = cilium-ubuntu.json
@@ -18,7 +19,9 @@ endif
 all: build
 
 build: clean fetch-opensuse-ovf validate
+	git checkout $(BRANCH)
 	jq '$(JQ)' $(JSON_FILE) | $(PACKER) build $(ARGS) -
+	git checkout -
 
 validate:
 	jq '$(JQ)' $(JSON_FILE) | $(PACKER) validate -
