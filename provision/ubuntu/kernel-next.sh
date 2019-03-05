@@ -42,4 +42,8 @@ cd ..
 sudo dpkg -i linux-*.deb
 sudo ln -sf /boot/System.map-$(uname -r) /boot/System.map
 
+cd $HOME/k/tools/bpf/bpftool
+make
+sudo make install
+
 sudo reboot
