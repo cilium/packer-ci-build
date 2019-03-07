@@ -5,10 +5,8 @@ set -eux
 source "${ENV_FILEPATH}"
 
 RELEASE="openSUSE_Tumbleweed"
-IPROUTE2_REPO="home:joestringer:branches:security:netfilter"
 
 zypper ar -r https://download.opensuse.org/repositories/devel:/kubic/${RELEASE}/devel:kubic.repo
-zypper ar -r https://download.opensuse.org/repositories/${IPROUTE2_REPO}/${RELEASE}/${IPROUTE2_REPO}.repo
 zypper -n --gpg-auto-import-key in --no-recommends \
         autoconf \
         automake \
@@ -25,7 +23,7 @@ zypper -n --gpg-auto-import-key in --no-recommends \
         etcd \
         git \
         "go${GOLANG_VERSION_MINOR}" \
-        iproute2-cilium -iproute2 \
+        iproute2 \
         jq \
         llvm \
     && zypper clean
