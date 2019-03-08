@@ -14,9 +14,6 @@ if [ -z "${NAME_PREFIX}" ]; then
         busybox:1.28.4 \
         docker.io/byrnedo/alpine-curl:0.1.7 \
         docker.io/cilium/cc-grpc-demo:v2.0 \
-        docker.io/cilium/cilium:v1.0.7 \
-        docker.io/cilium/cilium:v1.1.6 \
-        docker.io/cilium/cilium:v1.2.5 \
         docker.io/cilium/cilium:v1.3.0 \
         docker.io/cilium/cilium-init:2018-10-16 \
         docker.io/cilium/connectivity-container:v1.0 \
@@ -39,6 +36,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/istio/examples-bookinfo-ratings-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-reviews-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-reviews-v2:1.6.0 \
+        docker.io/istio/proxy_init:1.0.0 \
         docker.io/istio/proxy_init:1.0.2 \
         docker.io/kubernetes/guestbook:v2 \
         docker.io/library/busybox:1.28.0 \
@@ -61,7 +59,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         k8s.gcr.io/coredns:1.2.6 \
         quay.io/cilium/cilium-builder:2019-03-16 \
         quay.io/cilium/cilium-runtime:2019-03-16 \
-        quay.io/coreos/etcd:v3.3.9 \
+        quay.io/coreos/etcd:v3.3.11 \
         quay.io/coreos/hyperkube:v1.7.6_coreos.0; \
     do
           echo "pulling image: $img"
