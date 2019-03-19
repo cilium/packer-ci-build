@@ -59,8 +59,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.10 \
         gcr.io/google_samples/gb-redisslave:v1 \
         k8s.gcr.io/coredns:1.2.6 \
-        quay.io/cilium/cilium-builder:2019-02-26 \
-        quay.io/cilium/cilium-runtime:2019-02-26 \
+        quay.io/cilium/cilium-builder:2019-03-16 \
+        quay.io/cilium/cilium-runtime:2019-03-16 \
         quay.io/coreos/etcd:v3.3.9 \
         quay.io/coreos/hyperkube:v1.7.6_coreos.0; \
     do
