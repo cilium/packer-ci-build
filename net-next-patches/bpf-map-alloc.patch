@@ -1,0 +1,84 @@
+From 66dd42f9e038c42384d552932f2669f29e74c30f Mon Sep 17 00:00:00 2001
+From: Martynas Pumputis <m@lambda.lt>
+Date: Mon, 11 Mar 2019 20:00:06 +0100
+Subject: [PATCH v3 bpf] bpf: Try harder when allocating memory for large maps
+
+It has been observed that sometimes a higher order memory allocation
+for BPF maps fails when there is no obvious memory pressure in a system.
+
+E.g. the map (BPF_MAP_TYPE_LRU_HASH, key=38, value=56, max_elems=524288)
+could not be created due to vmalloc unable to allocate 75497472B,
+when the system's memory consumption (in MB) was the following:
+
+    Total: 3942 Used: 837 (21.24%) Free: 138 Buffers: 239 Cached: 2727
+
+Later analysis [1] by Michal Hocko showed that the vmalloc was not trying
+to reclaim memory from the page cache and was failing prematurely due to
+__GFP_NORETRY.
+
+Considering dcda9b0471 ("mm, tree wide: replace __GFP_REPEAT by
+__GFP_RETRY_MAYFAIL with more useful semantic") and [1], we can replace
+__GFP_NORETRY with __GFP_RETRY_MAYFAIL, as it won't invoke OOM killer
+and will try harder to fulfil allocation requests.
+
+Unfortunately, replacing the body of the BPF map memory allocation
+function with the kvmalloc_node helper function is not an option at this
+point in time, given 1) kmalloc is non-optional for higher order
+allocations, and 2) passing __GFP_RETRY_MAYFAIL to the kmalloc would stress
+the slab allocator too much for large requests.
+
+The change has been tested with the workloads mentioned above and by
+observing oom_kill value from /proc/vmstat.
+
+[1]: https://lore.kernel.org/bpf/20190310071318.GW5232@dhcp22.suse.cz/
+
+Acked-by: Yonghong Song <yhs@fb.com>
+Signed-off-by: Martynas Pumputis <m@lambda.lt>
+---
+ kernel/bpf/syscall.c | 22 +++++++++++++++-------
+ 1 file changed, 15 insertions(+), 7 deletions(-)
+
+diff --git a/kernel/bpf/syscall.c b/kernel/bpf/syscall.c
+index 62f6bced3a3c..afca36f53c49 100644
+--- a/kernel/bpf/syscall.c
++++ b/kernel/bpf/syscall.c
+@@ -136,21 +136,29 @@ static struct bpf_map *find_and_alloc_map(union bpf_attr *attr)
+ 
+ void *bpf_map_area_alloc(size_t size, int numa_node)
+ {
+-	/* We definitely need __GFP_NORETRY, so OOM killer doesn't
+-	 * trigger under memory pressure as we really just want to
+-	 * fail instead.
++	/* We really just want to fail instead of triggering OOM killer
++	 * under memory pressure, therefore we set __GFP_NORETRY to kmalloc,
++	 * which is used for lower order allocation requests.
++	 *
++	 * It has been observed that higher order allocation requests done by
++	 * vmalloc with __GFP_NORETRY being set might fail due to not trying
++	 * to reclaim memory from the page cache, thus we set
++	 * __GFP_RETRY_MAYFAIL to avoid such situations.
+ 	 */
+-	const gfp_t flags = __GFP_NOWARN | __GFP_NORETRY | __GFP_ZERO;
++
++	const gfp_t flags = __GFP_NOWARN | __GFP_ZERO;
+ 	void *area;
+ 
+ 	if (size <= (PAGE_SIZE << PAGE_ALLOC_COSTLY_ORDER)) {
+-		area = kmalloc_node(size, GFP_USER | flags, numa_node);
++		area = kmalloc_node(size, GFP_USER | __GFP_NORETRY | flags,
++				    numa_node);
+ 		if (area != NULL)
+ 			return area;
+ 	}
+ 
+-	return __vmalloc_node_flags_caller(size, numa_node, GFP_KERNEL | flags,
+-					   __builtin_return_address(0));
++	return __vmalloc_node_flags_caller(size, numa_node,
++					   GFP_KERNEL | __GFP_RETRY_MAYFAIL |
++					   flags, __builtin_return_address(0));
+ }
+ 
+ void bpf_map_area_free(void *area)
+-- 
+2.21.0
+
