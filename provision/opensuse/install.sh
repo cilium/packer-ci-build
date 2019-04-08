@@ -14,7 +14,9 @@ zypper -n --gpg-auto-import-key in --no-recommends \
         binutils \
         binutils-devel \
         bmon \
+        boringssl-devel \
         ca-certificates-mozilla \
+        cilium-proxy \
         clang \
         coreutils \
         cri-o \
@@ -27,3 +29,7 @@ zypper -n --gpg-auto-import-key in --no-recommends \
         jq \
         llvm \
     && zypper clean
+
+# Disable Envoy installation from Docker image. It's linked agains a different
+# version of glibc. For openSUSE we install Envoy from packages.
+echo "export DISABLE_ENVOY_INSTALLATION=1" >> /home/vagrant/.bashrc
