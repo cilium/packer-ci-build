@@ -10,7 +10,6 @@ go get -u github.com/google/gops && \
 go get -u github.com/golang/protobuf/protoc-gen-go && \
 go get -d github.com/lyft/protoc-gen-validate && \
 go get github.com/subfuzion/envtpl/... && \
-go get github.com/ksonnet/kubecfg && \
 go get -u github.com/gordonklaus/ineffassign"
 
 #Protoc-gen-validate installation
