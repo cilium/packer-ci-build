@@ -20,6 +20,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
         docker.io/cilium/istio_pilot:1.0.2 \
+        docker.io/cilium/istio_proxy_debug:1.0.0 \
         docker.io/cilium/kafkaclient2:latest \
         docker.io/cilium/kafkaclient:latest \
         docker.io/cilium/microscope:1.1.2-ci \
