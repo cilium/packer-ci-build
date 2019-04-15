@@ -12,6 +12,7 @@ done
 if [ -z "${NAME_PREFIX}" ]; then
     for img in \
         busybox:1.28.4 \
+        busybox:1.30.1 \
         docker.io/byrnedo/alpine-curl:0.1.7 \
         docker.io/cilium/cc-grpc-demo:v2.0 \
         docker.io/cilium/cilium:v1.3.0 \
@@ -19,8 +20,9 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/connectivity-container:v1.0 \
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
-        docker.io/cilium/istio_pilot:1.0.2 \
-        docker.io/cilium/istio_proxy_debug:1.0.0 \
+        docker.io/cilium/docker-bind:v0.1 \
+        docker.io/cilium/istio_pilot:1.1.2 \
+        docker.io/cilium/istio_proxy:1.1.3 \
         docker.io/cilium/kafkaclient2:latest \
         docker.io/cilium/kafkaclient:latest \
         docker.io/cilium/microscope:1.1.2-ci \
@@ -28,10 +30,11 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/coredns/coredns:1.2.2 \
         docker.io/coredns/coredns:1.0.6 \
         docker.io/digitalwonderland/zookeeper:latest \
-        docker.io/istio/citadel:1.0.2 \
-        docker.io/istio/galley:1.0.2 \
-        docker.io/istio/proxyv2:1.0.2 \
-        docker.io/istio/mixer:1.0.2 \
+        docker.io/istio/citadel:1.1.2 \
+        docker.io/istio/galley:1.1.2 \
+        docker.io/istio/kubectl:1.1.2 \
+        docker.io/istio/mixer:1.1.2 \
+        docker.io/istio/proxy_init:1.1.2 \
         docker.io/istio/examples-bookinfo-details-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-productpage-v1:0.2.3 \
         docker.io/istio/examples-bookinfo-ratings-v1:1.6.0 \
