@@ -11,9 +11,6 @@ sudo apt-get install -y --allow-downgrades \
 git clone --depth 1 git://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git $HOME/k
 cd $HOME/k
 
-git apply < /tmp/bpf-map-alloc.patch
-git apply < /tmp/bpf-gso.patch
-
 cp /boot/config-`uname -r` .config
 make oldconfig && make prepare
 
