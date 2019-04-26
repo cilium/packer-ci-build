@@ -63,7 +63,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         quay.io/cilium/cilium-runtime:2019-04-25 \
         quay.io/coreos/etcd:v3.3.11 \
         quay.io/coreos/hyperkube:v1.7.6_coreos.0 \
-        quay.io/coreos/etcd-operator:v0.9.4; \
+        quay.io/coreos/etcd-operator:v0.9.4 \
+        docker.io/cilium/migrate-svc-test:v0.0.1; \
     do
           echo "pulling image: $img"
           sudo docker pull "${img}" &
