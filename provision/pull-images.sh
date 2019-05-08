@@ -40,7 +40,6 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/istio/examples-bookinfo-ratings-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-reviews-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-reviews-v2:1.6.0 \
-        docker.io/kubernetes/guestbook:v2 \
         docker.io/library/busybox:1.28.0 \
         docker.io/library/httpd:2.4.34 \
         docker.io/library/redis:4.0.11 \
@@ -57,6 +56,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.10 \
+        gcr.io/google-samples/gb-frontend:v4 \
         gcr.io/google_samples/gb-redisslave:v1 \
         k8s.gcr.io/coredns:1.2.6 \
         quay.io/cilium/cilium-builder:2019-05-08 \
