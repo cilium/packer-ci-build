@@ -4,11 +4,6 @@ set -xe
 
 export 'KCONFIG'=${KCONFIG:-"config-`uname -r`"}
 
-sudo apt-get install -y --allow-downgrades \
-    pkg-config bison flex build-essential gcc libssl-dev \
-    libelf-dev bc
-
-git clone --depth 1 git://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git $HOME/k
 cd $HOME/k
 
 cp /boot/config-`uname -r` .config
@@ -42,9 +37,5 @@ sudo make -j$(nproc) deb-pkg
 cd ..
 sudo dpkg -i linux-*.deb
 sudo ln -sf /boot/System.map-$(uname -r) /boot/System.map
-
-cd $HOME/k/tools/bpf/bpftool
-make
-sudo make install
 
 sudo reboot

@@ -14,6 +14,7 @@ zypper -n --gpg-auto-import-key in --no-recommends \
         binutils \
         binutils-devel \
         bmon \
+        bpftool \
         ca-certificates-mozilla \
         clang \
         coreutils \
