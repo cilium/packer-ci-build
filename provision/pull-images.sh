@@ -2,7 +2,7 @@
 
 source "${ENV_FILEPATH}"
 
-set -e
+# set -e
 
 for img in consul:1.1.0; do
   sudo docker pull $img &
@@ -74,3 +74,7 @@ fi
 for p in `jobs -p`; do
   wait $p
 done
+
+sudo dmesg
+
+exit 1
