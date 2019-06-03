@@ -27,4 +27,5 @@ zypper -n --gpg-auto-import-key in --no-recommends \
         iproute2 \
         jq \
         llvm \
+        sonobuoy \
     && zypper clean
