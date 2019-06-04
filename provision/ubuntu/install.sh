@@ -145,6 +145,12 @@ EOF
 sudo systemctl enable etcd
 sudo systemctl start etcd
 
+# Install sonobuoy
+cd /tmp
+wget "https://github.com/heptio/sonobuoy/releases/download/v${SONOBUOY_VERSION}/sonobuoy_${SONOBUOY_VERSION}_linux_amd64.tar.gz"
+tar -xf "sonobuoy_${SONOBUOY_VERSION}_linux_amd64.tar.gz"
+sudo mv sonobuoy /usr/bin
+
 # Clean all downloaded packages
 sudo apt-get -y clean
 sudo apt-get -y autoclean
