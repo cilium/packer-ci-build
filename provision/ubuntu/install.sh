@@ -3,7 +3,7 @@
 set -eu
 
 source "${ENV_FILEPATH}"
-export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"static-data"}
+export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"cgroup-recvmsg4"}
 export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 

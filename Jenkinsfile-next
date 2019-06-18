@@ -2,7 +2,7 @@ def vagrantUpload = { String branch ->
   if (branch == "origin/master" || branch == "master") {
     return '.'
   } else {
-    return 'del(."post-processors"[])'
+    return '.'
   }
 }
 
