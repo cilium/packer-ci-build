@@ -5,7 +5,7 @@ source "${ENV_FILEPATH}"
 set -e
 
 for img in consul:1.1.0; do
-  sudo docker pull $img &
+  sudo docker pull $img
 done
 
 # Install all of these images in VM for the CI
@@ -67,7 +67,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/migrate-svc-test:v0.0.1; \
     do
           echo "pulling image: $img"
-          sudo docker pull "${img}" &
+          sudo docker pull "${img}"
     done
 fi
 
