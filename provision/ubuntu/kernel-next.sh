@@ -30,7 +30,6 @@ make oldconfig && make prepare
 ./scripts/config --enable CONFIG_HAVE_EBPF_JIT
 ./scripts/config --module CONFIG_NETDEVSIM
 ./scripts/config --module CONFIG_TLS
-./scripts/config --disable CONFIG_OVERLAY_FS_INDEX
 
 sudo make -j$(nproc) deb-pkg
 cd ..
