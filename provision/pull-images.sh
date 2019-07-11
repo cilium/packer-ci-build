@@ -17,6 +17,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/cc-grpc-demo:v2.0 \
         docker.io/cilium/cilium:v1.3.0 \
         docker.io/cilium/cilium-init:2018-10-16 \
+        docker.io/cilium/cilium-init:2019-04-05 \
         docker.io/cilium/connectivity-container:v1.0 \
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
