@@ -3,7 +3,7 @@
 set -xe
 
 # vboxsf from the mainline is broken ("vboxsf: Unknown symbol VBoxGuestIDC (err -2)")
-# on 18.04.2 and >= 5.0 kernels, thus we install from the vboxsf cleanup repo.
+# on 18.04.3 and >= 5.0 kernels, thus we install from the vboxsf cleanup repo.
 
 sudo apt-get install -y kbuild module-assistant debhelper
 git clone https://github.com/jwrdegoede/vboxsf/
