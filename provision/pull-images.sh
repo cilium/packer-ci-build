@@ -21,8 +21,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
         docker.io/cilium/docker-bind:v0.1 \
-        docker.io/cilium/istio_pilot:1.2.2 \
-        docker.io/cilium/istio_proxy:1.2.2 \
+        docker.io/cilium/istio_pilot:1.2.4 \
+        docker.io/cilium/istio_proxy:1.2.4 \
         docker.io/cilium/kafkaclient2:latest \
         docker.io/cilium/kafkaclient:latest \
         docker.io/cilium/microscope:1.1.2-ci \
@@ -30,11 +30,11 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/coredns/coredns:1.2.2 \
         docker.io/coredns/coredns:1.0.6 \
         docker.io/digitalwonderland/zookeeper:latest \
-        docker.io/istio/citadel:1.2.2 \
-        docker.io/istio/galley:1.2.2 \
-        docker.io/istio/kubectl:1.2.2 \
-        docker.io/istio/mixer:1.2.2 \
-        docker.io/istio/proxy_init:1.2.2 \
+        docker.io/istio/citadel:1.2.4 \
+        docker.io/istio/galley:1.2.4 \
+        docker.io/istio/kubectl:1.2.4 \
+        docker.io/istio/mixer:1.2.4 \
+        docker.io/istio/proxy_init:1.2.4 \
         docker.io/istio/examples-bookinfo-details-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-productpage-v1:0.2.3 \
         docker.io/istio/examples-bookinfo-ratings-v1:1.6.0 \
