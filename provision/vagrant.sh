@@ -6,7 +6,7 @@ set -eux
 
 source "${ENV_FILEPATH}"
 
-pubkey_url="https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub";
+pubkey_url="https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub";
 mkdir -p "${HOME_DIR}/.ssh";
 if command -v wget >/dev/null 2>&1; then
     wget --no-check-certificate "${pubkey_url}" -O "${HOME_DIR}/.ssh/authorized_keys";
