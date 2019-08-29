@@ -28,7 +28,6 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/istio_proxy:1.2.4 \
         docker.io/cilium/kafkaclient2:latest \
         docker.io/cilium/kafkaclient:latest \
-        docker.io/cilium/microscope:1.1.2-ci \
         docker.io/cilium/migrate-svc-test:v0.0.1 \
         docker.io/cilium/starwars:v1.0 \
         docker.io/cilium/python-bmemcached:v0.0.1 \
