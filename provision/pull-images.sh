@@ -26,6 +26,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/docker-bind:v0.1 \
         docker.io/cilium/istio_pilot:1.2.4 \
         docker.io/cilium/istio_proxy:1.2.4 \
+        docker.io/cilium/json-mock:1.1 \
         docker.io/cilium/kafkaclient2:latest \
         docker.io/cilium/kafkaclient:latest \
         docker.io/cilium/migrate-svc-test:v0.0.1 \
