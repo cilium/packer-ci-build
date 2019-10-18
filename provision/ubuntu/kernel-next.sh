@@ -6,8 +6,6 @@ export 'KCONFIG'=${KCONFIG:-"config-`uname -r`"}
 
 cd $HOME/k
 
-git apply < /tmp/disable-lowerdir-is-in-use-check.patch
-
 cp /boot/config-`uname -r` .config
 make oldconfig && make prepare
 
