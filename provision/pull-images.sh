@@ -68,8 +68,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google_samples/gb-redisslave:v1 \
         k8s.gcr.io/coredns:1.2.6 \
         quay.io/cilium/cilium-envoy:d68c2561fae4c83960969a7aaa2a186c3b30e17a \
-        quay.io/cilium/cilium-builder:2019-09-26 \
-        quay.io/cilium/cilium-runtime:2019-09-26 \
+        quay.io/cilium/cilium-builder:2019-11-06 \
+        quay.io/cilium/cilium-runtime:2019-11-06 \
         quay.io/coreos/etcd:v3.3.11 \
         quay.io/coreos/etcd-operator:v0.9.4; \
 
