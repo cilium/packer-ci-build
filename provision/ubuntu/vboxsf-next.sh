@@ -8,7 +8,7 @@ set -xe
 sudo apt-get install -y kbuild module-assistant debhelper
 git clone https://github.com/jwrdegoede/vboxsf/
 cd vboxsf
-git checkout 87b9015c57dd7f226c768131bf8b4c0249de9835
+git checkout 5aba938bcabd978e4615186ad7d8617d633e6f30
 make
 sudo make modules_install
 sudo depmod -a
