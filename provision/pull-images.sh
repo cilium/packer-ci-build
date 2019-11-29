@@ -61,6 +61,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/spotify/kafkaproxy:latest \
         docker.io/tgraf/netperf:v1.0 \
         docker.io/wurstmeister/kafka:1.1.0 \
+        docker.io/metallb/controller:v0.8.2 \
+        docker.io/metallb/speaker:v0.8.2 \
         gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.10 \
         gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.10 \
