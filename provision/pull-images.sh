@@ -25,8 +25,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/demo-httpd:latest \
         docker.io/cilium/docker-bind:v0.1 \
         docker.io/cilium/echoserver:1.10 \
-        docker.io/cilium/istio_pilot:1.2.4 \
-        docker.io/cilium/istio_proxy:1.2.4 \
+        docker.io/cilium/istio_pilot:1.2.5 \
+        docker.io/cilium/istio_proxy:1.2.5 \
         docker.io/cilium/json-mock:1.1 \
         docker.io/cilium/kafkaclient2:latest \
         docker.io/cilium/kafkaclient:latest \
@@ -39,10 +39,10 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/coredns/coredns:1.2.2 \
         docker.io/coredns/coredns:1.0.6 \
         docker.io/digitalwonderland/zookeeper:latest \
-        docker.io/istio/citadel:1.2.4 \
-        docker.io/istio/galley:1.2.4 \
-        docker.io/istio/kubectl:1.2.4 \
-        docker.io/istio/mixer:1.2.4 \
+        docker.io/istio/citadel:1.2.5 \
+        docker.io/istio/galley:1.2.5 \
+        docker.io/istio/kubectl:1.2.5 \
+        docker.io/istio/mixer:1.2.5 \
         docker.io/istio/proxy_init:1.2.4 \
         docker.io/istio/examples-bookinfo-details-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-productpage-v1:0.2.3 \
@@ -61,7 +61,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/prom/statsd-exporter:v0.6.0 \
         docker.io/spotify/kafkaproxy:latest \
         docker.io/tgraf/netperf:v1.0 \
-        docker.io/wurstmeister/kafka:1.1.0 \
+        docker.io/wurstmeister/kafka:2.11-0.11.0.3 \
         docker.io/metallb/controller:v0.8.2 \
         docker.io/metallb/speaker:v0.8.2 \
         gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64:1.14.10 \
@@ -70,10 +70,10 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google-samples/gb-frontend:v4 \
         gcr.io/google_samples/gb-redisslave:v1 \
         k8s.gcr.io/coredns:1.2.6 \
-        quay.io/cilium/cilium-envoy:d68c2561fae4c83960969a7aaa2a186c3b30e17a \
-        quay.io/cilium/cilium-builder:2019-11-06 \
-        quay.io/cilium/cilium-runtime:2019-11-06 \
-        quay.io/coreos/etcd:v3.3.11 \
+        quay.io/cilium/cilium-envoy:c16d0f195d4fa5e26c3a7cff9a27fc69a13437c5 \
+        quay.io/cilium/cilium-builder:2019-12-11 \
+        quay.io/cilium/cilium-runtime:2020-01-14 \
+        quay.io/coreos/etcd:v3.2.17 \
         quay.io/coreos/etcd-operator:v0.9.4; \
 
     do
