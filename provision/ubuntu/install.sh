@@ -6,6 +6,7 @@ source "${ENV_FILEPATH}"
 export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"static-data"}
 export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
+NETNEXT="${NETNEXT:-false}"
 
 # VBoxguestAdditions installation
 
@@ -28,7 +29,11 @@ umount /tmp/vbox;
 rm -rf /tmp/vbox;
 rm -f ${HOME_DIR}/*.iso;
 
-
+if [ "${NETNEXT}" == "true" ]; then
+    # Remove the binary from GuestAdditions to avoid clashing with the vboxsf
+    # kernel module
+    sudo rm $(which mount.vboxsf)
+fi
 
 echo "Provision a new server"
 sudo apt-get update
