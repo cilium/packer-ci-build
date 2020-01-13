@@ -85,6 +85,11 @@
   ],
   "provisioners": [
     {
+      "type": "file",
+      "source": "bpf-next-patch/",
+      "destination": "/tmp"
+    },
+    {
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
@@ -106,14 +111,14 @@
       "type": "shell",
       "environment_vars": [
         "ENV_FILEPATH=/tmp/env.bash",
-        "GUESTADDITIONS=https://download.virtualbox.org/virtualbox/5.2.20/VBoxGuestAdditions_5.2.20.iso"
+        "GUESTADDITIONS=https://download.virtualbox.org/virtualbox/5.2.20/VBoxGuestAdditions_5.2.20.iso",
+        "NETNEXT=true"
       ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
       "scripts": [
           "provision/vagrant.sh",
           "provision/ubuntu/install.sh",
-          "provision/ubuntu/vboxsf-next.sh",
           "provision/golang.sh",
           "provision/swap.sh",
           "provision/registry.sh",
@@ -144,6 +149,5 @@
       "version": "{{ user `BUILD_ID` }}",
       "box_download_url": "https://s3-us-west-2.amazonaws.com/ciliumvagrantbaseboxes/cilium-ginkgo-ubuntu-next-{{user `BUILD_ID`}}.box"
     }]
-
   ]
 }

@@ -6,6 +6,8 @@ export 'KCONFIG'=${KCONFIG:-"config-`uname -r`"}
 
 cd $HOME/k
 
+git apply < /tmp/v19-fs-Add-VirtualBox-guest-shared-folder-vboxsf-support.patch
+
 cp /boot/config-`uname -r` .config
 make oldconfig && make prepare
 
@@ -30,6 +32,7 @@ make oldconfig && make prepare
 ./scripts/config --enable CONFIG_HAVE_EBPF_JIT
 ./scripts/config --module CONFIG_NETDEVSIM
 ./scripts/config --module CONFIG_TLS
+./scripts/config --enable CONFIG_VBOXSF_FS
 
 sudo make -j$(nproc) deb-pkg
 cd ..
