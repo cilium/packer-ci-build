@@ -71,8 +71,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google_samples/gb-redisslave:v1 \
         k8s.gcr.io/coredns:1.2.6 \
         quay.io/cilium/cilium-envoy:c16d0f195d4fa5e26c3a7cff9a27fc69a13437c5 \
-        quay.io/cilium/cilium-builder:2019-12-11 \
-        quay.io/cilium/cilium-runtime:2020-01-14 \
+        quay.io/cilium/cilium-builder:2020-01-14 \
+        quay.io/cilium/cilium-runtime:2020-01-21 \
         quay.io/coreos/etcd:v3.2.17 \
         quay.io/coreos/etcd-operator:v0.9.4; \
 
