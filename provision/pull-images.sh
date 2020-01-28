@@ -15,18 +15,19 @@ if [ -z "${NAME_PREFIX}" ]; then
         busybox:1.28.4 \
         busybox:1.30.1 \
         docker.io/byrnedo/alpine-curl:0.1.7 \
-        docker.io/coredns/coredns:1.2.2 \
-        docker.io/coredns/coredns:1.0.6 \
+        k8s.gcr.io/coredns:1.2.2 \
+        k8s.gcr.io/coredns:1.2.6 \
+        k8s.gcr.io/coredns:1.3.1 \
+        k8s.gcr.io/coredns:1.6.2 \
+        k8s.gcr.io/coredns:1.6.5 \
         docker.io/cilium/cc-grpc-demo:v2.0 \
-        docker.io/cilium/cilium:v1.3.0 \
-        docker.io/cilium/cilium-init:2018-10-16 \
-        docker.io/cilium/connectivity-container:v1.0 \
+        docker.io/cilium/cilium:v1.6 \
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
         docker.io/cilium/docker-bind:v0.1 \
         docker.io/cilium/echoserver:1.10 \
-        docker.io/cilium/istio_pilot:1.2.5 \
-        docker.io/cilium/istio_proxy:1.2.5 \
+        docker.io/cilium/istio_pilot:1.4.3 \
+        docker.io/cilium/istio_proxy:1.4.3 \
         docker.io/cilium/json-mock:1.1 \
         docker.io/cilium/kafkaclient2:latest \
         docker.io/cilium/kafkaclient:latest \
@@ -36,13 +37,11 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/dnssec-client:v0.1 \
 	docker.io/cilium/docker-bind:v0.1 \
         docker.io/cilium/docker-bind:v0.3 \
-        docker.io/coredns/coredns:1.2.2 \
-        docker.io/coredns/coredns:1.0.6 \
         docker.io/digitalwonderland/zookeeper:latest \
-        docker.io/istio/citadel:1.2.5 \
-        docker.io/istio/galley:1.2.5 \
-        docker.io/istio/kubectl:1.2.5 \
-        docker.io/istio/mixer:1.2.5 \
+        docker.io/istio/citadel:1.4.3 \
+        docker.io/istio/galley:1.4.3 \
+        docker.io/istio/kubectl:1.4.3 \
+        docker.io/istio/mixer:1.4.3 \
         docker.io/istio/proxy_init:1.2.4 \
         docker.io/istio/examples-bookinfo-details-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-productpage-v1:0.2.3 \
@@ -54,25 +53,20 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/library/cassandra:3.11.3 \
         docker.io/library/httpd:2.4.34 \
         docker.io/library/memcached:1.5.11 \
-        docker.io/library/python:3.6.7-alpine3.8 \
         docker.io/library/redis:4.0.11 \
         docker.io/library/registry:2.6.2 \
-        docker.io/prom/prometheus:v2.8.0 \
+        docker.io/prom/prometheus:v2.12.0 \
         docker.io/prom/statsd-exporter:v0.6.0 \
         docker.io/spotify/kafkaproxy:latest \
         docker.io/tgraf/netperf:v1.0 \
         docker.io/wurstmeister/kafka:2.11-0.11.0.3 \
         docker.io/metallb/controller:v0.8.2 \
         docker.io/metallb/speaker:v0.8.2 \
-        gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64:1.14.10 \
-        gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.10 \
-        gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.10 \
         gcr.io/google-samples/gb-frontend:v4 \
         gcr.io/google_samples/gb-redisslave:v1 \
-        k8s.gcr.io/coredns:1.2.6 \
         quay.io/cilium/cilium-envoy:c16d0f195d4fa5e26c3a7cff9a27fc69a13437c5 \
-        quay.io/cilium/cilium-builder:2020-01-14 \
-        quay.io/cilium/cilium-runtime:2020-01-21 \
+        quay.io/cilium/cilium-builder:2020-01-29 \
+        quay.io/cilium/cilium-runtime:2020-01-29 \
         quay.io/coreos/etcd:v3.2.17 \
         quay.io/coreos/etcd-operator:v0.9.4; \
 
