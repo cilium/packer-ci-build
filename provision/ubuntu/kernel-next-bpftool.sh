@@ -8,7 +8,7 @@ sudo apt-get install -y --allow-downgrades \
     pkg-config bison flex build-essential gcc libssl-dev \
     libelf-dev bc
 
-git clone --branch v5.4 --depth 1 git://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git $HOME/k
+git clone --branch v5.5 --depth 1 git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git $HOME/k
 
 cd $HOME/k/tools/bpf/bpftool
 make
