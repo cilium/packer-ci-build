@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-# This script installs kernel 4.9.13 and when it finished sets the installed
+# This script installs kernel 4.9.212 and when it finished sets the installed
 # kernel as default in the grub.
 
 mkdir /tmp/deb
 cd /tmp/deb
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.160/linux-headers-4.9.160-0409160-generic_4.9.160-0409160.201902230931_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.160/linux-headers-4.9.160-0409160_4.9.160-0409160.201902230931_all.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.160/linux-image-4.9.160-0409160-generic_4.9.160-0409160.201902230931_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.212/linux-headers-4.9.212-0409212-generic_4.9.212-0409212.202001300045_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.212/linux-headers-4.9.212-0409212_4.9.212-0409212.202001300045_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.212/linux-image-4.9.212-0409212-generic_4.9.212-0409212.202001300045_amd64.deb
 
 dpkg -i *.deb
 
