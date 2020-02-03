@@ -26,6 +26,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/demo-httpd:latest \
         docker.io/cilium/docker-bind:v0.1 \
         docker.io/cilium/echoserver:1.10 \
+        docker.io/cilium/echoserver-udp:v2020.01.30 \
         docker.io/cilium/istio_pilot:1.4.3 \
         docker.io/cilium/istio_proxy:1.4.3 \
         docker.io/cilium/json-mock:1.1 \
