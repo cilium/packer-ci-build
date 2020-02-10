@@ -4,8 +4,11 @@ source "${ENV_FILEPATH}"
 
 set -e
 
-wget https://storage.googleapis.com/cri-containerd-release/cri-containerd-${CONTAINERD_VERSION}.linux-amd64.tar.gz
-sudo tar -C / -xzf cri-containerd-${CONTAINERD_VERSION}.linux-amd64.tar.gz
+CONTAINERD_TARGZ=cri-containerd-${CONTAINERD_VERSION}.linux-amd64.tar.gz
+
+wget https://storage.googleapis.com/cri-containerd-release/${CONTAINERD_TARGZ}
+sudo tar -C / -xzf ${CONTAINERD_TARGZ}
+rm ${CONTAINERD_TARGZ}
 
 cat <<EOF > /etc/containerd/config.toml
 root = "/tmp/containers"
