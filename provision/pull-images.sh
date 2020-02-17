@@ -32,11 +32,12 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/json-mock:1.1 \
         docker.io/cilium/kafkaclient2:latest \
         docker.io/cilium/kafkaclient:latest \
+        docker.io/cilium/log-gatherer:v1.0 \
         docker.io/cilium/migrate-svc-test:v0.0.1 \
         docker.io/cilium/starwars:v1.0 \
         docker.io/cilium/python-bmemcached:v0.0.1 \
         docker.io/cilium/dnssec-client:v0.1 \
-	docker.io/cilium/docker-bind:v0.1 \
+        docker.io/cilium/docker-bind:v0.1 \
         docker.io/cilium/docker-bind:v0.3 \
         docker.io/digitalwonderland/zookeeper:latest \
         docker.io/istio/citadel:1.4.3 \
