@@ -47,7 +47,7 @@ sudo apt-get install -y --allow-downgrades \
     libdistro-info-perl libssl-dev \
     dh-systemd build-essential \
     clang-7 llvm-7 \
-    gcc make libc6-dev.i386 git-buildpackage \
+    gcc make git-buildpackage \
     pkg-config bison flex \
     zip g++ zlib1g-dev unzip python \
     libtool cmake coreutils m4 automake \
