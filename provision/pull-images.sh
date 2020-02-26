@@ -66,8 +66,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google-samples/gb-frontend:v4 \
         gcr.io/google_samples/gb-redisslave:v1 \
         quay.io/cilium/cilium-envoy:c16d0f195d4fa5e26c3a7cff9a27fc69a13437c5 \
-        quay.io/cilium/cilium-builder:2020-01-29 \
-        quay.io/cilium/cilium-runtime:2020-01-29 \
+        quay.io/cilium/cilium-builder:2020-02-26 \
+        quay.io/cilium/cilium-runtime:2020-02-26 \
         quay.io/coreos/etcd:v3.2.17 \
         quay.io/coreos/etcd-operator:v0.9.4; \
 
