@@ -85,11 +85,6 @@
   ],
   "provisioners": [
     {
-      "type": "file",
-      "source": "bpf-next-patch/",
-      "destination": "/tmp"
-    },
-    {
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
