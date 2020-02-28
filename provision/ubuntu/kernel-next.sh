@@ -6,8 +6,6 @@ export 'KCONFIG'=${KCONFIG:-"config-`uname -r`"}
 
 cd $HOME/k
 
-git apply < /tmp/v19-fs-Add-VirtualBox-guest-shared-folder-vboxsf-support.patch
-
 cp /boot/config-`uname -r` .config
 make oldconfig && make prepare
 
