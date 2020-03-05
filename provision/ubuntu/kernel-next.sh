@@ -32,7 +32,7 @@ make oldconfig && make prepare
 ./scripts/config --module CONFIG_TLS
 ./scripts/config --enable CONFIG_VBOXSF_FS
 
-sudo make -j$(nproc) deb-pkg
+make -j$(nproc) deb-pkg
 cd ..
 sudo dpkg -i linux-*.deb
 sudo ln -sf /boot/System.map-$(uname -r) /boot/System.map
