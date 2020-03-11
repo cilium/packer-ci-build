@@ -87,13 +87,6 @@
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
       "scripts": [
-          "provision/ubuntu/kernel-next-bpftool.sh"
-      ]
-    },{
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-      "expect_disconnect": true,
-      "scripts": [
           "provision/ubuntu/kernel.sh"
       ]
     },{
@@ -112,6 +105,7 @@
       "scripts": [
           "provision/vagrant.sh",
           "provision/ubuntu/install.sh",
+          "provision/ubuntu/kernel-next-bpftool.sh",
           "provision/golang.sh",
           "provision/swap.sh",
           "provision/registry.sh",

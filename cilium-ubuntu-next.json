@@ -85,27 +85,6 @@
   ],
   "provisioners": [
     {
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-      "expect_disconnect": true,
-      "scripts": [
-          "provision/ubuntu/kernel-next-bpftool.sh"
-      ]
-    },{
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-      "expect_disconnect": true,
-      "scripts": [
-          "provision/ubuntu/kernel-next-tools.sh"
-      ]
-    },{
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-      "expect_disconnect": true,
-      "scripts": [
-          "provision/ubuntu/kernel-next.sh"
-      ]
-    },{
       "type": "file",
       "source": "provision/env.bash",
       "destination": "/tmp/env.bash"
@@ -121,6 +100,9 @@
       "scripts": [
           "provision/vagrant.sh",
           "provision/ubuntu/install.sh",
+          "provision/ubuntu/kernel-next-bpftool.sh",
+          "provision/ubuntu/kernel-next-tools.sh",
+          "provision/ubuntu/kernel-next.sh",
           "provision/golang.sh",
           "provision/swap.sh",
           "provision/registry.sh",
