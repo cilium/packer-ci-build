@@ -26,13 +26,6 @@ pipeline {
     }
 
     stages {
-        //stage('OpenSuse') {
-        //    steps {
-        //        sh 'git submodule update --init --recursive'
-        //        sh 'make clean DISTRIBUTION=opensuse'
-        //        sh 'make build DISTRIBUTION=opensuse'
-        //    }
-        //}
         stage('Ubuntu') {
             steps {
                 sh 'echo "${JQ}"'
