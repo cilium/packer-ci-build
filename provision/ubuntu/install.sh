@@ -89,8 +89,7 @@ cd ../../..
 rm -fr llvm/
 
 # Documentation dependencies
-sudo -H pip3 install sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi sphinx-rtd-theme sphinx-tabs recommonmark
-sudo -H pip3 install yamllint
+sudo -H pip3 install -r https://raw.githubusercontent.com/cilium/cilium/master/Documentation/requirements.txt
 
 #IP Route
 cd /tmp
