@@ -1,0 +1,148 @@
+{
+  "variables": {
+    "cpus": "8",
+    "disk_size": "40960",
+    "headless": "true",
+    "iso_checksum": "e2ecdace33c939527cbc9e8d23576381c493b071107207d2040af72595f8990b",
+    "iso_checksum_type": "sha256",
+    "iso_name": "ubuntu-18.04.4-server-amd64.iso",
+    "memory": "4096",
+    "mirror": "http://cdimage.ubuntu.com",
+    "mirror_directory": "ubuntu/releases/18.04/release",
+    "name": "ubuntu-18.04.4",
+    "preseed_path": "preseed.cfg",
+    "template": "ubuntu-18.04.4-amd64",
+    "version": "TIMESTAMP",
+    "cloud_token": "{{ env `VAGRANTCLOUD_TOKEN` }}",
+    "BUILD_ID": "{{ env `BUILD_ID` }}",
+    "NAME_PREFIX": "{{ env `NAME_PREFIX` }}",
+    "NAME_SUFFIX": "{{ env `NAME_SUFFIX` }}",
+    "CILIUM_BRANCH": "{{ env `CILIUM_BRANCH` }}"
+  },
+  "builders": [
+  {
+      "boot_command": [
+        "<esc><wait>",
+        "<esc><wait>",
+        "<enter><wait>",
+        "/install/vmlinuz<wait>",
+        " auto<wait>",
+        " console-setup/ask_detect=false<wait>",
+        " console-setup/layoutcode=us<wait>",
+        " console-setup/modelcode=pc105<wait>",
+        " debconf/frontend=noninteractive<wait>",
+        " debian-installer=en_US<wait>",
+        " fb=false<wait>",
+        " initrd=/install/initrd.gz<wait>",
+        " kbd-chooser/method=us<wait>",
+        " keyboard-configuration/layout=USA<wait>",
+        " keyboard-configuration/variant=USA<wait>",
+        " locale=en_US<wait>",
+        " netcfg/get_domain=vm<wait>",
+        " netcfg/get_hostname=vagrant<wait>",
+        " grub-installer/bootdev=/dev/sda<wait>",
+        " noapic<wait>",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `preseed_path`}}<wait>",
+        " -- <wait>",
+        "<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "guest_os_type": "Ubuntu_64",
+      "hard_drive_interface": "sata",
+      "headless": "{{ user `headless` }}",
+      "http_directory": "http",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_url": "{{user `mirror`}}/{{user `mirror_directory`}}/{{user `iso_name`}}",
+      "output_directory": "packer-{{user `template`}}-virtualbox",
+      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_username": "vagrant",
+      "ssh_wait_timeout": "10000s",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "{{ user `memory` }}"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "{{ user `cpus` }}"
+        ]
+      ],
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{ user `template` }}-{{ user `NAME_PREFIX` }}{{ user `BUILD_ID` }}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "expect_disconnect": true,
+      "scripts": [
+          "provision/ubuntu/kernel-next-bpftool.sh"
+      ]
+    },{
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}' 041957 201907031234",
+      "expect_disconnect": true,
+      "scripts": [
+          "provision/ubuntu/kernel.sh"
+      ]
+    },{
+      "type": "file",
+      "source": "provision/env.bash",
+      "destination": "/tmp/env.bash"
+    },{
+      "type": "shell",
+      "environment_vars": [
+        "ENV_FILEPATH=/tmp/env.bash",
+        "CILIUM_BRANCH={{ user `CILIUM_BRANCH` }}",
+        "NAME_PREFIX={{ user `NAME_PREFIX` }}"
+      ],
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "expect_disconnect": true,
+      "scripts": [
+          "provision/vagrant.sh",
+          "provision/ubuntu/install.sh",
+          "provision/golang.sh",
+          "provision/swap.sh",
+          "provision/registry.sh",
+          "provision/ubuntu/crio.sh",
+          "provision/ubuntu/containerd.sh",
+          "provision/pull-images.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    [{
+      "output": "cilium-ginkgo-ubuntu-4.19-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box",
+      "type": "vagrant",
+      "compression_level": 9,
+      "keep_input_artifact": false
+    }, {
+      "type": "shell-local",
+      "inline": [
+        "/usr/bin/aws s3 cp cilium-ginkgo-ubuntu-4.19-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box s3://ciliumvagrantbaseboxes/ --debug"
+      ]
+    }],[{
+      "output": "cilium-ginkgo-ubuntu-4.19-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box",
+      "type": "vagrant",
+      "compression_level": 9,
+      "keep_input_artifact": false
+    },{
+      "type": "vagrant-cloud",
+      "box_tag": "cilium/ubuntu-4.19-{{ user `NAME_SUFFIX` }}",
+      "access_token": "{{user `cloud_token`}}",
+      "version": "{{ user `BUILD_ID` }}",
+      "box_download_url": "https://s3-us-west-2.amazonaws.com/ciliumvagrantbaseboxes/cilium-ginkgo-ubuntu-4.19-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box"
+    }]
+  ]
+}

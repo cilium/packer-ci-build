@@ -6,13 +6,22 @@
 mkdir /tmp/deb
 cd /tmp/deb
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.212/linux-headers-4.9.212-0409212-generic_4.9.212-0409212.202001300045_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.212/linux-headers-4.9.212-0409212_4.9.212-0409212.202001300045_all.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.212/linux-image-4.9.212-0409212-generic_4.9.212-0409212.202001300045_amd64.deb
+canonicalString=${1:-0409212}
+timestamp=${2:-202001300045}
+
+major=$(echo ${canonicalString:0:2} | sed 's/^0*//')
+minor=$(echo ${canonicalString:2:2} | sed 's/^0*//')
+micro=$(echo ${canonicalString:4} | sed 's/^0*//')
+
+echo $major.$minor.$micro
+
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-headers-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-headers-$major.$minor.$micro-${canonicalString}_$major.$minor.$micro-${canonicalString}.${timestamp}_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-image-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
 
 dpkg -i *.deb
 
-KERNEL="4.9"
+KERNEL="$major.$minor"
 
 function get_grub_config {
 	gawk  'BEGIN {
