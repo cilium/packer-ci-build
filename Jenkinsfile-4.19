@@ -25,8 +25,8 @@ pipeline {
     stages {
         stage('Ubuntu') {
             steps {
-                sh 'make clean DISTRIBUTION=ubuntu-4.19'
-                sh 'make build DISTRIBUTION=ubuntu-4.19'
+                sh 'make clean DISTRIBUTION=ubuntu-4-19'
+                sh 'make build DISTRIBUTION=ubuntu-4-19'
             }
         }
     }

@@ -11,9 +11,9 @@ BOX_FILE = cilium-ginkgo-opensuse-virtualbox-iso.box
 else ifeq ($(DISTRIBUTION), ubuntu-next)
 JSON_FILE = cilium-ubuntu-next.json
 BOX_FILE = cilium-ginkgo-virtualbox-iso-next.box
-else ifeq ($(DISTRIBUTION), ubuntu-4.19)
+else ifeq ($(DISTRIBUTION), ubuntu-4-19)
 JSON_FILE = cilium-ubuntu-4.19.json
-BOX_FILE = cilium-ginkgo-virtualbox-iso-4.19.box
+BOX_FILE = cilium-ginkgo-virtualbox-iso-4-19.box
 else
 $(error "Distribution $(DISTRIBUTION) is unsupported")
 endif
