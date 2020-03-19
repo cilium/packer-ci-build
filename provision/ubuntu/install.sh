@@ -46,7 +46,6 @@ sudo apt-get install -y --allow-downgrades \
     dh-make libmnl-dev git \
     libdistro-info-perl libssl-dev \
     dh-systemd build-essential \
-    clang-7 llvm-7 \
     gcc make git-buildpackage \
     pkg-config bison flex \
     zip g++ zlib1g-dev unzip python \
@@ -73,6 +72,22 @@ sudo cp nsenter /usr/bin
 cd ..
 rm -fr util-linux-2.30.1/ util-linux-2.30.1.tar.gz
 
+# Install clang/llvm
+cd /tmp
+git clone -b master https://github.com/llvm/llvm-project.git llvm
+mkdir -p llvm/llvm/build/install
+cd llvm
+git checkout -b d941df363d1cb621a3836b909c37d79f2a3e27e2 d941df363d1cb621a3836b909c37d79f2a3e27e2
+cd llvm/build
+cmake .. -G "Ninja" -DLLVM_TARGETS_TO_BUILD="BPF" -DLLVM_ENABLE_PROJECTS="clang" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DLLVM_BUILD_RUNTIME=OFF
+ninja
+strip bin/clang
+strip bin/llc
+cp bin/clang /usr/bin/clang
+cp bin/llc /usr/bin/llc
+cd ../../..
+rm -fr llvm/
+
 # Documentation dependencies
 sudo -H pip3 install sphinx sphinxcontrib-httpdomain sphinxcontrib-openapi sphinx-rtd-theme sphinx-tabs recommonmark
 sudo -H pip3 install yamllint
@@ -84,10 +99,6 @@ cd /tmp/iproute2
 ./configure
 make -j `getconf _NPROCESSORS_ONLN`
 make install
-
-#LLVM
-update-alternatives --install /usr/bin/clang clang /usr/lib/llvm-7/bin/clang 1000
-update-alternatives --install /usr/bin/llc llc /usr/lib/llvm-7/bin/llc 1000
 
 #clean
 sudo apt-get remove docker docker-engine docker.io
@@ -108,7 +119,6 @@ EOF
 
 # wget https://packages.cloud.google.com/apt/doc/apt-key.gpg
 # apt-key add apt-key.gpg
-
 
 #Install packages
 sudo apt-get update
