@@ -72,6 +72,10 @@ sudo cp nsenter /usr/bin
 cd ..
 rm -fr util-linux-2.30.1/ util-linux-2.30.1.tar.gz
 
+# Install conntrack for kubeadm >= 1.18
+
+sudo apt-get install -y conntrack
+
 # Install clang/llvm
 cd /tmp
 git clone -b master https://github.com/llvm/llvm-project.git llvm
