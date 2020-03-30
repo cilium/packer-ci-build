@@ -18,7 +18,10 @@ echo $major.$minor.$micro
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-headers-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-headers-$major.$minor.$micro-${canonicalString}_$major.$minor.$micro-${canonicalString}.${timestamp}_all.deb
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-image-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-image-unsigned-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-modules-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
 
+dpkg -i *modules*.deb
 dpkg -i *.deb
 
 KERNEL="$major.$minor"
