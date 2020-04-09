@@ -66,9 +66,9 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/metallb/speaker:v0.8.2 \
         gcr.io/google-samples/gb-frontend:v4 \
         gcr.io/google_samples/gb-redisslave:v1 \
-        quay.io/cilium/cilium-envoy:c16d0f195d4fa5e26c3a7cff9a27fc69a13437c5 \
-        quay.io/cilium/cilium-builder:2020-03-21 \
-        quay.io/cilium/cilium-runtime:2020-03-21 \
+        quay.io/cilium/cilium-envoy:a3385205ad620550b35d3b0b651e40898386e6e3 \
+        quay.io/cilium/cilium-builder:2020-04-02 \
+        quay.io/cilium/cilium-runtime:2020-03-25 \
         quay.io/coreos/etcd:v3.2.17 \
         quay.io/coreos/etcd-operator:v0.9.4; \
 
