@@ -12,8 +12,8 @@ done
 
 if [ -z "${NAME_PREFIX}" ]; then
     for img in \
-        busybox:1.28.4 \
         busybox:1.30.1 \
+        busybox:1.31.1 \
         docker.io/byrnedo/alpine-curl:0.1.7 \
         k8s.gcr.io/coredns:1.2.2 \
         k8s.gcr.io/coredns:1.2.6 \
@@ -27,8 +27,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/docker-bind:v0.1 \
         docker.io/cilium/echoserver:1.10 \
         docker.io/cilium/echoserver-udp:v2020.01.30 \
-        docker.io/cilium/istio_pilot:1.4.3 \
-        docker.io/cilium/istio_proxy:1.4.3 \
+        docker.io/cilium/istio_pilot:1.5.1-1 \
+        docker.io/cilium/istio_proxy:1.5.1 \
         docker.io/cilium/json-mock:1.1 \
         docker.io/cilium/kafkaclient2:latest \
         docker.io/cilium/kafkaclient:latest \
@@ -40,11 +40,6 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/docker-bind:v0.1 \
         docker.io/cilium/docker-bind:v0.3 \
         docker.io/digitalwonderland/zookeeper:latest \
-        docker.io/istio/citadel:1.4.3 \
-        docker.io/istio/galley:1.4.3 \
-        docker.io/istio/kubectl:1.4.3 \
-        docker.io/istio/mixer:1.4.3 \
-        docker.io/istio/proxy_init:1.2.4 \
         docker.io/istio/examples-bookinfo-details-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-productpage-v1:0.2.3 \
         docker.io/istio/examples-bookinfo-ratings-v1:1.6.0 \
