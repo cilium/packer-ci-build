@@ -5,6 +5,8 @@ set -eu
 source "${ENV_FILEPATH}"
 export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"static-data"}
 export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
+export 'HUBBLE_BRANCH'=${HUBBLE_BRANCH:-"v0.5.1"}
+export 'HUBBLE_GIT'=${HUBBLE_GIT:-https://github.com/cilium/hubble}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 NETNEXT="${NETNEXT:-false}"
 
@@ -168,6 +170,13 @@ cd /tmp
 wget "https://github.com/heptio/sonobuoy/releases/download/v${SONOBUOY_VERSION}/sonobuoy_${SONOBUOY_VERSION}_linux_amd64.tar.gz"
 tar -xf "sonobuoy_${SONOBUOY_VERSION}_linux_amd64.tar.gz"
 sudo mv sonobuoy /usr/bin
+
+# Install hubble
+cd /tmp
+git clone -b ${HUBBLE_BRANCH} ${HUBBLE_GIT}
+cd /tmp/hubble
+make
+sudo make BINDIR=/usr/bin install
 
 # Clean all downloaded packages
 sudo apt-get -y clean
