@@ -52,7 +52,7 @@ sudo apt-get install -y --allow-downgrades \
     pkg-config bison flex \
     zip g++ zlib1g-dev unzip python \
     libtool cmake coreutils m4 automake \
-    protobuf-compiler libprotobuf-dev libyaml-cpp-dev \
+    libprotobuf-dev libyaml-cpp-dev \
     socat pv tmux bc gcc-multilib binutils-dev \
     binutils wget rsync ifupdown \
     python3-sphinx python3-pip \
@@ -61,6 +61,14 @@ sudo apt-get install -y --allow-downgrades \
     po-debconf autoconf autopoint moreutils \
     libseccomp2 libenchant1c2a ninja-build \
     golang-cfssl ntp
+
+# Install protoc from github release, as protobuf-compiler version in apt is quite old (e.g 3.0.0-9.1ubuntu1)
+cd /tmp
+wget -nv https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protoc-3.11.4-linux-x86_64.zip
+unzip -p protoc-3.11.4-linux-x86_64.zip bin/protoc > protoc
+sudo chmod +x protoc
+sudo cp protoc /usr/bin
+rm -rf protoc-3.11.4-linux-x86_64.zip protoc
 
 # Install nsenter for kubernetes
 cd /tmp
