@@ -27,8 +27,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/docker-bind:v0.1 \
         docker.io/cilium/echoserver:1.10 \
         docker.io/cilium/echoserver-udp:v2020.01.30 \
-        docker.io/cilium/istio_pilot:1.5.1-1 \
-        docker.io/cilium/istio_proxy:1.5.1 \
+        docker.io/cilium/istio_pilot:1.5.4 \
+        docker.io/cilium/istio_proxy:1.5.4 \
         docker.io/cilium/json-mock:1.1 \
         docker.io/cilium/kafkaclient2:latest \
         docker.io/cilium/kafkaclient:latest \
@@ -62,10 +62,11 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google-samples/gb-frontend:v4 \
         gcr.io/google_samples/gb-redisslave:v1 \
         quay.io/cilium/cilium-envoy:a3385205ad620550b35d3b0b651e40898386e6e3 \
-        quay.io/cilium/cilium-builder:2020-05-06 \
-        quay.io/cilium/cilium-runtime:2020-05-05 \
+        quay.io/cilium/cilium-builder:2020-05-18 \
+        quay.io/cilium/cilium-runtime:2020-05-18 \
         quay.io/cilium/hubble:v0.5.1 \
         quay.io/coreos/etcd:v3.2.17 \
+        quay.io/coreos/etcd:v3.4.7 \
         quay.io/coreos/etcd-operator:v0.9.4; \
 
     do
