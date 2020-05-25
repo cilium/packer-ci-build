@@ -24,7 +24,6 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/cilium:v1.6 \
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
-        docker.io/cilium/docker-bind:v0.1 \
         docker.io/cilium/echoserver:1.10 \
         docker.io/cilium/echoserver-udp:v2020.01.30 \
         docker.io/cilium/istio_pilot:1.5.4 \
@@ -37,7 +36,6 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/starwars:v1.0 \
         docker.io/cilium/python-bmemcached:v0.0.1 \
         docker.io/cilium/dnssec-client:v0.1 \
-        docker.io/cilium/docker-bind:v0.1 \
         docker.io/cilium/docker-bind:v0.3 \
         docker.io/digitalwonderland/zookeeper:latest \
         docker.io/istio/examples-bookinfo-details-v1:1.6.0 \
