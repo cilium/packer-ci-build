@@ -5,7 +5,7 @@ set -eu
 source "${ENV_FILEPATH}"
 export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"static-data"}
 export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
-export 'HUBBLE_BRANCH'=${HUBBLE_BRANCH:-"v0.5.1"}
+export 'HUBBLE_BRANCH'=${HUBBLE_BRANCH:-"v0.6.0"}
 export 'HUBBLE_GIT'=${HUBBLE_GIT:-https://github.com/cilium/hubble}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 NETNEXT="${NETNEXT:-false}"
