@@ -66,6 +66,15 @@ sudo apt-get install -y --allow-downgrades \
     libseccomp2 libenchant1c2a ninja-build \
     golang-cfssl ntp
 
+# Install nodejs and npm, needed for the cilium rtd sphinx theme
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://deb.nodesource.com/node_12.x \
+   $(lsb_release -cs) \
+   main"
+sudo apt-get update
+sudo apt-get install -y nodejs
+
 # Install protoc from github release, as protobuf-compiler version in apt is quite old (e.g 3.0.0-9.1ubuntu1)
 cd /tmp
 wget -nv https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protoc-3.11.4-linux-x86_64.zip
