@@ -20,7 +20,6 @@ if [ -z "${NAME_PREFIX}" ]; then
         k8s.gcr.io/coredns:1.6.2 \
         k8s.gcr.io/coredns:1.6.5 \
         docker.io/cilium/cc-grpc-demo:v2.0 \
-        docker.io/cilium/cilium:v1.6 \
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
         docker.io/cilium/echoserver:1.10 \
@@ -55,10 +54,10 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/metallb/speaker:v0.8.2 \
         gcr.io/google-samples/gb-frontend:v4 \
         gcr.io/google_samples/gb-redisslave:v1 \
-        quay.io/cilium/cilium-envoy:a3385205ad620550b35d3b0b651e40898386e6e3 \
-        quay.io/cilium/cilium-builder:2020-05-20 \
-        quay.io/cilium/cilium-runtime:2020-05-20 \
-        quay.io/cilium/hubble:v0.5.1 \
+        quay.io/cilium/cilium-envoy:a8f292139e923b205525feb2c8a4377005904776 \
+        quay.io/cilium/cilium-builder:2020-06-08 \
+        quay.io/cilium/cilium-runtime:2020-06-08 \
+        quay.io/cilium/hubble:v0.6.0 \
         quay.io/coreos/etcd:v3.2.17 \
         quay.io/coreos/etcd:v3.4.7 \
 
