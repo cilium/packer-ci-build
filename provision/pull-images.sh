@@ -57,7 +57,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         quay.io/cilium/cilium-envoy:a8f292139e923b205525feb2c8a4377005904776 \
         quay.io/cilium/cilium-builder:2020-06-08 \
         quay.io/cilium/cilium-runtime:2020-06-08 \
-        quay.io/cilium/hubble:v0.6.0 \
+        quay.io/cilium/hubble:v0.6.1 \
         quay.io/coreos/etcd:v3.2.17 \
         quay.io/coreos/etcd:v3.4.7 \
 
