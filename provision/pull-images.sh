@@ -22,7 +22,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/cc-grpc-demo:v2.0 \
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
-        docker.io/cilium/echoserver:1.10 \
+        docker.io/cilium/echoserver:1.10.1 \
         docker.io/cilium/echoserver-udp:v2020.01.30 \
         docker.io/cilium/istio_pilot:1.5.4 \
         docker.io/cilium/istio_proxy:1.5.4 \
