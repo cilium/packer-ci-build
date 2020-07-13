@@ -31,6 +31,7 @@ make oldconfig && make prepare
 ./scripts/config --module CONFIG_NETDEVSIM
 ./scripts/config --module CONFIG_TLS
 ./scripts/config --enable CONFIG_VBOXSF_FS
+./scripts/config --module CONFIG_WIREGUARD
 
 make -j$(nproc) deb-pkg
 cd ..
