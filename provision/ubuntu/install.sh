@@ -6,6 +6,8 @@ source "${ENV_FILEPATH}"
 export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"static-data"}
 export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
+export 'HUBBLE_SHA'=${HUBBLE_SHA:-"186fa10"}
+export 'HUBBLE_GIT'=${HUBBLE_GIT:-https://github.com/cilium/hubble}
 NETNEXT="${NETNEXT:-false}"
 
 # VBoxguestAdditions installation
@@ -191,11 +193,11 @@ tar -xf "sonobuoy_${SONOBUOY_VERSION}_linux_amd64.tar.gz"
 sudo mv sonobuoy /usr/bin
 
 # Install hubble
-cd /tmp
-wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz"
-wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz.sha256sum"
-sha256sum --check hubble-linux-amd64.tar.gz.sha256sum || exit 1
-sudo tar -xf "hubble-linux-amd64.tar.gz" -C /usr/bin hubble
+git clone ${HUBBLE_GIT}
+cd /tmp/hubble
+git reset --hard ${HUBBLE_SHA}
+make
+sudo make BINDIR=/usr/bin install
 
 # Clean all downloaded packages
 sudo apt-get -y clean
