@@ -110,6 +110,7 @@ strip bin/clang
 strip bin/llc
 cp bin/clang /usr/bin/clang
 cp bin/llc /usr/bin/llc
+cp -n lib/clang/11.0.0/include/*.h /usr/include/
 cd ../../..
 rm -fr llvm/
 
