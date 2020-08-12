@@ -22,6 +22,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/cc-grpc-demo:v3.0 \
         docker.io/cilium/demo-client:latest \
         docker.io/cilium/demo-httpd:latest \
+        docker.io/cilium/dummylb:0.0.1 \
         docker.io/cilium/echoserver:1.10.1 \
         docker.io/cilium/echoserver-udp:v2020.01.30 \
         docker.io/cilium/istio_pilot:1.5.7 \
@@ -49,8 +50,6 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/spotify/kafkaproxy:latest \
         docker.io/tgraf/netperf:v1.0 \
         docker.io/wurstmeister/kafka:2.11-0.11.0.3 \
-        docker.io/metallb/controller:v0.8.2 \
-        docker.io/metallb/speaker:v0.8.2 \
         gcr.io/google-samples/gb-frontend:v6 \
         gcr.io/google_samples/gb-redisslave:v1 \
         quay.io/cilium/cilium-envoy:ccad480c59aa8b946d98aaf79f8e9e38d6731fdc \
