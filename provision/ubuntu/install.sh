@@ -77,11 +77,11 @@ sudo apt-get install -y nodejs
 
 # Install protoc from github release, as protobuf-compiler version in apt is quite old (e.g 3.0.0-9.1ubuntu1)
 cd /tmp
-wget -nv https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protoc-3.11.4-linux-x86_64.zip
-unzip -p protoc-3.11.4-linux-x86_64.zip bin/protoc > protoc
+wget -nv https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip
+unzip -p protoc-${PROTOC_VERSION}-linux-x86_64.zip bin/protoc > protoc
 sudo chmod +x protoc
 sudo cp protoc /usr/bin
-rm -rf protoc-3.11.4-linux-x86_64.zip protoc
+rm -rf protoc-${PROTOC_VERSION}-linux-x86_64.zip protoc
 
 # Install nsenter for kubernetes
 cd /tmp
