@@ -32,6 +32,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/kafkaclient:latest \
         docker.io/cilium/log-gatherer:v1.0 \
         docker.io/cilium/migrate-svc-test:v0.0.1 \
+        docker.io/cilium/netperf:0.0.2 \
         docker.io/cilium/starwars:v1.0 \
         docker.io/cilium/python-bmemcached:v0.0.2 \
         docker.io/cilium/dnssec-client:v0.2 \
