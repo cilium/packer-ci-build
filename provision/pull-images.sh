@@ -46,13 +46,13 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/library/alpine:3.9 \
         docker.io/library/cassandra:3.11.3 \
         docker.io/library/memcached:1.6.6-alpine \
-        docker.io/library/redis:4.0.11 \
+        docker.io/library/redis:6.0.5 \
         docker.io/library/registry:2.6.2 \
         docker.io/spotify/kafkaproxy:latest \
         docker.io/tgraf/netperf:v1.0 \
         docker.io/wurstmeister/kafka:2.11-0.11.0.3 \
         gcr.io/google-samples/gb-frontend:v6 \
-        gcr.io/google_samples/gb-redisslave:v1 \
+        gcr.io/google_samples/gb-redis-follower:v2 \
         quay.io/cilium/cilium-envoy:ccad480c59aa8b946d98aaf79f8e9e38d6731fdc \
         quay.io/cilium/cilium-builder:2020-07-20 \
         quay.io/cilium/cilium-runtime:2020-07-20 \
