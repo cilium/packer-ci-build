@@ -51,7 +51,7 @@ openssl req -new -nodes \
     -key certs/cilium.key \
     -out certs/cilium.request -config server.conf
 
-openssl x509 -req -days 366 \
+openssl x509 -req -days 3650 \
     -in certs/cilium.request \
     -CA certs/ca.crt \
     -CAkey certs/ca.key \
