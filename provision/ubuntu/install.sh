@@ -59,6 +59,7 @@ sudo apt-get install -y --allow-downgrades \
     libprotobuf-dev libyaml-cpp-dev \
     socat pv tmux bc gcc-multilib binutils-dev \
     binutils wget rsync ifupdown \
+    python-scapy \
     python3-sphinx python3-pip \
     libncurses5-dev libslang2-dev gettext \
     libselinux1-dev debhelper lsb-release \
