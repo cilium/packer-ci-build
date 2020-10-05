@@ -32,6 +32,7 @@ make oldconfig && make prepare
 ./scripts/config --module CONFIG_TLS
 ./scripts/config --enable CONFIG_VBOXSF_FS
 ./scripts/config --module CONFIG_WIREGUARD
+./scripts/config --enable CONFIG_DEBUG_INFO_BTF
 
 make -j$(nproc) deb-pkg
 cd ..
