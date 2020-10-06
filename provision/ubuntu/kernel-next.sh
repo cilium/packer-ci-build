@@ -6,11 +6,33 @@ export 'KCONFIG'=${KCONFIG:-"config-`uname -r`"}
 
 cd $HOME/k
 
+sudo apt-get update
+sudo apt-get install -y --allow-downgrades \
+	cmake libdw-dev git
+
+# Build pahole
+PaholeVer="1.18"
+git clone git://git.kernel.org/pub/scm/devel/pahole/pahole.git
+pushd pahole
+git checkout -b v${PaholeVer} v${PaholeVer}
+
+mkdir build
+pushd build
+cmake -D__LIB=lib ..
+sudo make install
+popd
+popd
+# must remove pahole to avoid dpkg errors
+rm -rf pahole
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
+
+# Build kernel
 cp /boot/config-`uname -r` .config
 make oldconfig && make prepare
 
 ./scripts/config --module CONFIG_VBOXGUEST
-./scripts/config --disable CONFIG_DEBUG_INFO
+./scripts/config --enable CONFIG_DEBUG_INFO
 ./scripts/config --disable CONFIG_DEBUG_KERNEL
 ./scripts/config --enable CONFIG_BPF
 ./scripts/config --enable CONFIG_BPF_SYSCALL
