@@ -100,11 +100,16 @@ rm -fr util-linux-2.30.1/ util-linux-2.30.1.tar.gz
 sudo apt-get install -y conntrack
 
 # Install clang/llvm
+# This should always converge to use the same LLVM version as in
+# https://github.com/cilium/image-tools/blob/master/images/llvm/checkout-llvm.sh.
 cd /tmp
-git clone -b master https://github.com/llvm/llvm-project.git llvm
-mkdir -p llvm/llvm/build/install
+git clone -b llvmorg-10.0.0 https://github.com/llvm/llvm-project.git llvm
 cd llvm
-git checkout -b d941df363d1cb621a3836b909c37d79f2a3e27e2 d941df363d1cb621a3836b909c37d79f2a3e27e2
+git config --global user.email "maintainer@cilium.io"
+git config --global user.name  "Cilium Maintainers"
+git cherry-pick 29bc5dd19407c4d7cad1c059dea26ee216ddc7ca
+git cherry-pick 13f6c81c5d9a7a34a684363bcaad8eb7c65356fd
+mkdir -p llvm/build/install
 cd llvm/build
 cmake .. -G "Ninja" -DLLVM_TARGETS_TO_BUILD="BPF;X86" -DLLVM_ENABLE_PROJECTS="clang" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DLLVM_BUILD_RUNTIME=OFF
 ninja clang llc
@@ -112,7 +117,7 @@ strip bin/clang
 strip bin/llc
 cp bin/clang /usr/bin/clang
 cp bin/llc /usr/bin/llc
-cp -n lib/clang/11.0.0/include/*.h /usr/include/
+cp -n lib/clang/10.0.0/include/*.h /usr/include/
 cd ../../..
 rm -fr llvm/
 
