@@ -10,7 +10,7 @@ sudo apt-get install -y --allow-downgrades \
 
 git clone --depth 1 git://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git $HOME/k
 cd $HOME/k
-git log -n1
+git --no-pager log -n1
 
 cd $HOME/k/tools/bpf/bpftool
 make
