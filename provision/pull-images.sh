@@ -14,12 +14,11 @@ if [ -z "${NAME_PREFIX}" ]; then
     for img in \
         busybox:1.31.1 \
         docker.io/byrnedo/alpine-curl:0.1.8 \
-        k8s.gcr.io/coredns:1.2.2 \
         k8s.gcr.io/coredns:1.2.6 \
         k8s.gcr.io/coredns:1.3.1 \
         k8s.gcr.io/coredns:1.6.2 \
         k8s.gcr.io/coredns:1.6.5 \
-        docker.io/cilium/cc-grpc-demo:v3.0 \
+        k8s.gcr.io/coredns:1.7.0 \
         docker.io/cilium/demo-client:1.0 \
         docker.io/cilium/demo-httpd:1.0 \
         docker.io/cilium/dummylb:0.0.1 \
@@ -45,6 +44,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/istio/examples-bookinfo-reviews-v2:1.6.0 \
         docker.io/library/alpine:3.9 \
         docker.io/library/cassandra:3.11.3 \
+        docker.io/library/golang:${GOLANG_VERSION} \
         docker.io/library/memcached:1.6.6-alpine \
         docker.io/library/redis:6.0.5 \
         docker.io/library/registry:2.6.2 \
@@ -53,10 +53,10 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/wurstmeister/kafka:2.11-0.11.0.3 \
         gcr.io/google-samples/gb-frontend:v6 \
         gcr.io/google_samples/gb-redis-follower:v2 \
-        quay.io/cilium/cilium-envoy:ccad480c59aa8b946d98aaf79f8e9e38d6731fdc \
-        quay.io/cilium/cilium-builder:2021-01-14 \
-        quay.io/cilium/cilium-runtime:2021-01-14 \
-        quay.io/cilium/hubble:v0.7.1 \
+        quay.io/cilium/cilium-envoy:63de0bd958d05d82e2396125dcf6286d92464c56 \
+        quay.io/cilium/cilium-builder:2021-01-20 \
+        quay.io/cilium/cilium-runtime:2021-01-20 \
+        quay.io/cilium/hubble:v${HUBBLE_VERSION} \
         quay.io/cilium/net-test:v1.0.0 \
         quay.io/coreos/etcd:v3.4.7 \
 
