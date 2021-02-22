@@ -24,8 +24,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/dummylb:0.0.1 \
         docker.io/cilium/echoserver:1.10.1 \
         docker.io/cilium/echoserver-udp:v2020.01.30 \
-        docker.io/cilium/istio_pilot:1.6.14 \
-        docker.io/cilium/istio_proxy:1.6.14 \
+        docker.io/cilium/istio_pilot:1.8.2 \
+        docker.io/cilium/istio_proxy:1.8.2 \
         docker.io/cilium/json-mock:1.2 \
         docker.io/cilium/kafkaclient2:1.0 \
         docker.io/cilium/kafkaclient:1.0 \
