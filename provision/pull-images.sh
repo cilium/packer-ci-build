@@ -47,7 +47,6 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/library/golang:1.16.0 \
         docker.io/library/memcached:1.6.6-alpine \
         docker.io/library/redis:6.0.5 \
-        docker.io/library/registry:2.6.2 \
         docker.io/cilium/kafkaproxy:1.0 \
         docker.io/tgraf/netperf:v1.0 \
         docker.io/wurstmeister/kafka:2.11-0.11.0.3 \
