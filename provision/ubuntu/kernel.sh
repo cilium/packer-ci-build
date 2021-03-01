@@ -15,11 +15,16 @@ micro=$(echo ${canonicalString:4} | sed 's/^0*//')
 
 echo $major.$minor.$micro
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-headers-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-headers-$major.$minor.$micro-${canonicalString}_$major.$minor.$micro-${canonicalString}.${timestamp}_all.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-image-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-image-unsigned-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/linux-modules-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+sub=""
+if [ "$minor" == "19" ] ; then
+	# kernel 4.19 debs are stored in an arch-specific sub-directory
+	subdir="amd64/"
+fi
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-headers-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-headers-$major.$minor.$micro-${canonicalString}_$major.$minor.$micro-${canonicalString}.${timestamp}_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-image-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-image-unsigned-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-modules-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
 
 dpkg -i *modules*.deb
 dpkg -i *.deb
