@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-# This script installs kernel 4.9.212 and when it finished sets the installed
+set -e
+
+# This script installs kernel 4.9.258 and when it finished sets the installed
 # kernel as default in the grub.
 
 mkdir /tmp/deb
 cd /tmp/deb
 
-canonicalString=${1:-0409212}
-timestamp=${2:-202001300045}
+canonicalString=${1:-0409258}
+timestamp=${2:-202102231505}
 
 major=$(echo ${canonicalString:0:2} | sed 's/^0*//')
 minor=$(echo ${canonicalString:2:2} | sed 's/^0*//')
@@ -15,18 +17,19 @@ micro=$(echo ${canonicalString:4} | sed 's/^0*//')
 
 echo $major.$minor.$micro
 
-sub=""
 if [ "$minor" == "19" ] ; then
-	# kernel 4.19 debs are stored in an arch-specific sub-directory
-	subdir="amd64/"
-fi
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-headers-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-headers-$major.$minor.$micro-${canonicalString}_$major.$minor.$micro-${canonicalString}.${timestamp}_all.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-image-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-image-unsigned-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-modules-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+	# kernel 4.19 debs have the -unsigned suffix
+	imgsuffix="-unsigned"
 
-dpkg -i *modules*.deb
+	# module deb is only provided for 4.19 kernels
+	wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/amd64/linux-modules-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+	dpkg -i *modules*.deb
+fi
+
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/amd64/linux-headers-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/amd64/linux-headers-$major.$minor.$micro-${canonicalString}_$major.$minor.$micro-${canonicalString}.${timestamp}_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/amd64/linux-image${imgsuffix}-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+
 dpkg -i *.deb
 
 KERNEL="$major.$minor"
