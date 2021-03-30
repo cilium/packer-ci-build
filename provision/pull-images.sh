@@ -14,11 +14,10 @@ if [ -z "${NAME_PREFIX}" ]; then
     for img in \
         busybox:1.31.1 \
         docker.io/byrnedo/alpine-curl:0.1.8 \
-        k8s.gcr.io/coredns:1.2.6 \
-        k8s.gcr.io/coredns:1.3.1 \
         k8s.gcr.io/coredns:1.6.2 \
         k8s.gcr.io/coredns:1.6.5 \
         k8s.gcr.io/coredns:1.7.0 \
+        k8s.gcr.io/coredns/coredns:v1.8.0 \
         docker.io/cilium/demo-client:1.0 \
         docker.io/cilium/demo-httpd:1.0 \
         docker.io/cilium/dummylb:0.0.1 \
