@@ -11,7 +11,7 @@ sudo apt-get install -y --allow-downgrades \
 	cmake libdw-dev git
 
 # Build pahole
-PaholeVer="1.18"
+PaholeVer="1.20"
 git clone git://git.kernel.org/pub/scm/devel/pahole/pahole.git
 pushd pahole
 git checkout -b v${PaholeVer} v${PaholeVer}
