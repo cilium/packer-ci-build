@@ -16,7 +16,6 @@ else
     echo "Cannot download vagrant public key";
     exit 1;
 fi
-chown -R vagrant "${HOME_DIR}/.ssh";
 chmod -R go-rwsx "${HOME_DIR}/.ssh";
 
 echo 'vagrant ALL=(ALL) NOPASSWD:ALL' >/etc/sudoers.d/99_vagrant
