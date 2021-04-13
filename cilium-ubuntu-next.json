@@ -104,8 +104,7 @@
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
       "scripts": [
-          "provision/ubuntu/kernel-next.sh",
-          "provision/ubuntu/kernel-next-clean.sh"
+          "provision/ubuntu/kernel-next.sh"
       ]
     },{
       "type": "file",
