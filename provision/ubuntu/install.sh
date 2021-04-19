@@ -62,7 +62,8 @@ sudo apt-get install -y --allow-downgrades \
     libselinux1-dev debhelper lsb-release \
     po-debconf autoconf autopoint moreutils \
     libseccomp2 libenchant1c2a ninja-build \
-    golang-cfssl ntp
+    golang-cfssl ntp \
+    wireguard
 
 # Install nodejs and npm, needed for the cilium rtd sphinx theme
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
