@@ -37,6 +37,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/dnssec-client:v0.2 \
         docker.io/cilium/docker-bind:v0.3 \
         docker.io/cilium/zookeeper:1.0 \
+        docker.io/frrouting/frr:v7.5.1 \
         docker.io/istio/examples-bookinfo-details-v1:1.16.2 \
         docker.io/istio/examples-bookinfo-productpage-v1:0.2.3 \
         docker.io/istio/examples-bookinfo-ratings-v1:1.16.2 \
