@@ -19,6 +19,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         k8s.gcr.io/coredns:1.6.2 \
         k8s.gcr.io/coredns:1.6.5 \
         k8s.gcr.io/coredns:1.7.0 \
+        docker.io/frrouting/frr:v7.5.1 \
         docker.io/cilium/demo-client:1.0 \
         docker.io/cilium/demo-httpd:1.0 \
         docker.io/cilium/dummylb:0.0.1 \
