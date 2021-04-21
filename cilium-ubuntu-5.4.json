@@ -119,7 +119,8 @@
           "provision/registry.sh",
           "provision/ubuntu/crio.sh",
           "provision/ubuntu/containerd.sh",
-          "provision/pull-images.sh"
+          "provision/pull-images.sh",
+          "provision/fix-home-ownership.sh"
       ]
     }
   ],
