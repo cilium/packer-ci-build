@@ -1,0 +1,12 @@
+# Code owners groups used in this repository and a brief description of their areas:
+# @cilium/bpf                BPF Data Path
+# @cilium/ci-structure       Continuous integration, testing
+# @cilium/contributing       Developer documentation & tools
+# @cilium/loader             All related to LLVM, bpftool, Cilium loader, templating, etc.
+
+# The following filepaths should be sorted so that more specific paths occur
+# after the less specific paths, otherwise the ownership for the specific paths
+# is not properly picked up in Github.
+* @cilium/ci-structure
+/CODEOWNERS @cilium/contributing
+/provision/ubuntu/kernel-next* @cilium/bpf @cilium/loader
