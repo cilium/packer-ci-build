@@ -8,6 +8,8 @@ export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 NETNEXT="${NETNEXT:-false}"
 
+ARCH="amd64"
+
 # VBoxguestAdditions installation
 
 VER="`cat /home/vagrant/.vbox_version`";
@@ -68,7 +70,7 @@ sudo apt-get install -y --allow-downgrades \
 # Install nodejs and npm, needed for the cilium rtd sphinx theme
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
 sudo add-apt-repository \
-   "deb [arch=amd64] https://deb.nodesource.com/node_12.x \
+   "deb [arch=${ARCH}] https://deb.nodesource.com/node_12.x \
    $(lsb_release -cs) \
    main"
 sudo apt-get update
@@ -140,7 +142,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
 sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   "deb [arch=${ARCH}] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
 
@@ -159,16 +161,16 @@ sudo usermod -aG docker vagrant
 #Install Golang
 cd /tmp/
 sudo curl -Sslk -o go.tar.gz \
-    "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz"
+    "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
 sudo tar -C /usr/local -xzf go.tar.gz
 sudo rm go.tar.gz
 sudo ln -s /usr/local/go/bin/* /usr/local/bin/
 go version
 
 #ETCD installation
-wget -nv "https://github.com/coreos/etcd/releases/download/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-amd64.tar.gz"
-tar -xf "etcd-${ETCD_VERSION}-linux-amd64.tar.gz"
-sudo mv "etcd-${ETCD_VERSION}-linux-amd64/etcd"* /usr/bin/
+wget -nv "https://github.com/coreos/etcd/releases/download/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-${ARCH}.tar.gz"
+tar -xf "etcd-${ETCD_VERSION}-linux-${ARCH}.tar.gz"
+sudo mv "etcd-${ETCD_VERSION}-linux-${ARCH}/etcd"* /usr/bin/
 
 sudo tee /etc/systemd/system/etcd.service <<EOF
 [Unit]
