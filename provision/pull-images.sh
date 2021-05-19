@@ -53,7 +53,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google-samples/gb-frontend:v6 \
         gcr.io/google_samples/gb-redis-follower:v2 \
         quay.io/cilium/cilium-envoy:63de0bd958d05d82e2396125dcf6286d92464c56 \
-        quay.io/cilium/cilium-builder:3203db544891bf8360d97085ecce89282f04c78d \
+        quay.io/cilium/cilium-builder:3e04d507e2f7a0b569490060ddc8b9423c9fc8f0 \
         quay.io/cilium/kube-wireguarder:0.0.4 \
         quay.io/cilium/net-test:v1.0.0 \
         quay.io/coreos/etcd:v3.4.7 \
