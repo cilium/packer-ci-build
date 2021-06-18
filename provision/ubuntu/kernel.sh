@@ -8,8 +8,8 @@ set -e
 mkdir /tmp/deb
 cd /tmp/deb
 
-canonicalString=${1:-0409258}
-timestamp=${2:-202102231505}
+canonicalString=${1:-0409270}
+timestamp=${2:-202105261032}
 subdir="amd64/"
 
 major=$(echo ${canonicalString:0:2} | sed 's/^0*//')
