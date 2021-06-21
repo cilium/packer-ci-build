@@ -203,13 +203,6 @@ git checkout "${HUBBLE_VERSION}"
 make
 sudo make install BINDIR=/usr/bin
 
-# Install Cilium CLI
-cd /tmp/
-curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-${ARCH}.tar.gz{,.sha256sum}
-sha256sum --check --strict cilium-linux-${ARCH}.tar.gz.sha256sum
-sudo tar xzfC cilium-linux-${ARCH}.tar.gz /usr/local/bin
-rm cilium-linux-${ARCH}.tar.gz{,.sha256sum}
-
 # Clean all downloaded packages
 sudo apt-get -y clean
 sudo apt-get -y autoclean
