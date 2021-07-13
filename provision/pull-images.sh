@@ -54,6 +54,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         k8s.gcr.io/coredns/coredns:v1.8.0 \
         quay.io/cilium/cilium-builder:3e04d507e2f7a0b569490060ddc8b9423c9fc8f0 \
         quay.io/cilium/cilium-envoy:63de0bd958d05d82e2396125dcf6286d92464c56 \
+        quay.io/cilium/test-verifier:0f6647c542b71e89f310e437570b6d05dd9351bb \
         quay.io/cilium/kube-wireguarder:0.0.4 \
         quay.io/cilium/net-test:v1.0.0 \
         quay.io/coreos/etcd:v3.4.7 \
