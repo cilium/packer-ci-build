@@ -197,11 +197,10 @@ sudo mv sonobuoy /usr/bin
 
 # Install hubble
 cd /tmp
-git clone https://github.com/cilium/hubble
-cd hubble
-git checkout "${HUBBLE_VERSION}"
-make
-sudo make install BINDIR=/usr/bin
+wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz"
+wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz.sha256sum"
+sha256sum --check hubble-linux-amd64.tar.gz.sha256sum || exit 1
+sudo tar -xf "hubble-linux-amd64.tar.gz" -C /usr/bin hubble
 
 # Clean all downloaded packages
 sudo apt-get -y clean
