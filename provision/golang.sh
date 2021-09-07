@@ -4,7 +4,7 @@ source "${ENV_FILEPATH}"
 
 set -e
 
-sudo -u vagrant -E bash -c "mkdir ${GOPATH} && \
+sudo -u vagrant -E bash -c "mkdir -p ${GOPATH} && \
 go get -u github.com/google/gops && \
 go get github.com/subfuzion/envtpl/... "
 
