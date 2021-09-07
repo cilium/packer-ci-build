@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export GOLANG_VERSION="1.16.5"
+export GOLANG_VERSION="1.17"
 export ETCD_VERSION="v3.1.0"
 export CONTAINERD_VERSION="1.3.4"
 export HUBBLE_VERSION="181982c0"
