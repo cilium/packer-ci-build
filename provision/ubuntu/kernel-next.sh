@@ -59,9 +59,11 @@ make oldconfig && make prepare
 
 make -j$(nproc) deb-pkg
 cd ..
+# remove repo before installationto avoid "no space left on device" errors
+rm -r $HOME/k
+
 sudo dpkg -i linux-*.deb
 rm linux-*.deb
-rm -r $HOME/k
 rm $HOME/linux-*
 sudo ln -sf /boot/System.map-$(uname -r) /boot/System.map
 
