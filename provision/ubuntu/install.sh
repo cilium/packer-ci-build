@@ -3,8 +3,9 @@
 set -eu
 
 source "${ENV_FILEPATH}"
-export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"static-data"}
+export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"libbpf-static-data"}
 export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
+export 'LIBBPF_GIT'=${LIBBPF_GIT:-https://github.com/cilium/libbpf}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 NETNEXT="${NETNEXT:-false}"
 
@@ -125,10 +126,19 @@ rm -fr llvm/
 # Documentation dependencies
 sudo -H pip3 install -r https://raw.githubusercontent.com/cilium/cilium/master/Documentation/requirements.txt
 
-#IP Route
+# libbpf and iproute2
+cd /tmp
+git clone --depth=1 ${LIBBPF_GIT}
+cd /tmp/libbpf/src
+make -j "$(getconf _NPROCESSORS_ONLN)"
+PREFIX="/usr" sudo make install
+
 cd /tmp
 git clone -b ${IPROUTE_BRANCH} ${IPROUTE_GIT}
 cd /tmp/iproute2
+LIBBPF_FORCE="on" \
+PKG_CONFIG_PATH="/usr/lib64/pkgconfig"  \
+PKG_CONFIG="pkg-config --define-prefix" \
 ./configure
 make -j `getconf _NPROCESSORS_ONLN`
 make install
