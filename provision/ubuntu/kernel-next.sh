@@ -31,6 +31,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 cp /boot/config-`uname -r` .config
 make oldconfig && make prepare
 
+./scripts/config --enable CONFIG_LOCALVERSION_AUTO
 ./scripts/config --disable CONFIG_WERROR
 ./scripts/config --module CONFIG_VBOXGUEST
 ./scripts/config --enable CONFIG_DEBUG_INFO
