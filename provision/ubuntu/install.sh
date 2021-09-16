@@ -132,6 +132,7 @@ cd /tmp/iproute2
 ./configure
 make -j `getconf _NPROCESSORS_ONLN`
 make install
+rm -rf /tmp/iproute2
 
 #clean
 sudo apt-get remove docker docker-engine docker.io
