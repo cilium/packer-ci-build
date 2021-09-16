@@ -13,7 +13,6 @@ done
 if [ -z "${NAME_PREFIX}" ]; then
     for img in \
         busybox:1.31.1 \
-        docker.io/byrnedo/alpine-curl:0.1.8 \
         docker.io/cilium/demo-client:1.0 \
         docker.io/cilium/demo-httpd:1.0 \
         docker.io/cilium/dnssec-client:v0.2 \
@@ -21,15 +20,13 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/dummylb:0.0.1 \
         docker.io/cilium/echoserver:1.10.1 \
         docker.io/cilium/echoserver-udp:v2020.01.30 \
-        docker.io/cilium/istio_pilot:1.8.2 \
-        docker.io/cilium/istio_proxy:1.8.2 \
         docker.io/cilium/json-mock:1.2 \
         docker.io/cilium/kafkaclient2:1.0 \
         docker.io/cilium/kafkaclient:1.0 \
         docker.io/cilium/kafkaproxy:1.0 \
         docker.io/cilium/log-gatherer:v1.1 \
-        docker.io/cilium/migrate-svc-test:v0.0.1 \
-        docker.io/cilium/netperf:0.0.2 \
+        docker.io/cilium/migrate-svc-test:v0.0.2 \
+        docker.io/cilium/netperf:2.0 \
         docker.io/cilium/python-bmemcached:v0.0.2 \
         docker.io/cilium/starwars:v1.0 \
         docker.io/cilium/zookeeper:1.0 \
@@ -52,8 +49,11 @@ if [ -z "${NAME_PREFIX}" ]; then
         k8s.gcr.io/coredns:1.6.5 \
         k8s.gcr.io/coredns:1.7.0 \
         k8s.gcr.io/coredns/coredns:v1.8.0 \
-        quay.io/cilium/cilium-builder:3e04d507e2f7a0b569490060ddc8b9423c9fc8f0 \
-        quay.io/cilium/cilium-envoy:63de0bd958d05d82e2396125dcf6286d92464c56 \
+        quay.io/cilium/alpine-curl:v1.3.0 \
+        quay.io/cilium/cilium-builder:e1d9538b22cafeec22068e1483bd5ff51276fadc \
+        quay.io/cilium/cilium-envoy:9b1701da9cc035a1696f3e492ee2526101262e56 \
+        quay.io/cilium/istio_pilot:1.10.4 \
+        quay.io/cilium/istio_proxy:1.10.4 \
         quay.io/cilium/test-verifier:0f6647c542b71e89f310e437570b6d05dd9351bb \
         quay.io/cilium/kube-wireguarder:0.0.4 \
         quay.io/cilium/net-test:v1.0.0 \
