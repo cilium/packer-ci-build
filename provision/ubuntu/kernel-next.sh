@@ -29,7 +29,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
 # Build kernel
 cp /boot/config-`uname -r` .config
-make oldconfig && make prepare
+make olddefconfig && make prepare
 
 ./scripts/config --enable CONFIG_LOCALVERSION_AUTO
 ./scripts/config --disable CONFIG_WERROR
@@ -57,6 +57,8 @@ make oldconfig && make prepare
 ./scripts/config --enable CONFIG_VBOXSF_FS
 ./scripts/config --module CONFIG_WIREGUARD
 ./scripts/config --enable CONFIG_DEBUG_INFO_BTF
+./scripts/config --disable CONFIG_SYSTEM_TRUSTED_KEYS
+./scripts/config --disable CONFIG_SYSTEM_REVOCATION_KEYS
 
 make -j$(nproc) deb-pkg
 cd ..
