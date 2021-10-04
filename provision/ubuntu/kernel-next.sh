@@ -27,6 +27,9 @@ rm -rf pahole
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
+# Apply local patches
+git apply < /tmp/*.patch
+
 # Build kernel
 cp /boot/config-`uname -r` .config
 make olddefconfig && make prepare
