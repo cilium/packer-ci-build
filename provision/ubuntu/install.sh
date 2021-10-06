@@ -131,7 +131,11 @@ cd /tmp
 git clone --depth=1 ${LIBBPF_GIT}
 cd /tmp/libbpf/src
 make -j "$(getconf _NPROCESSORS_ONLN)"
-PREFIX="/usr" sudo make install
+# By default, libbpf.so is installed to /usr/lib64 which isn't in LD_LIBRARY_PATH on Ubuntu.
+# Overriding LIBDIR in addition to setting PREFIX seems to be needed due to the structure of
+# libbpf's Makefile.
+PREFIX="/usr" LIBDIR=/usr/lib/x86_64-linux-gnu sudo make install
+sudo ldconfig
 
 cd /tmp
 git clone -b ${IPROUTE_BRANCH} ${IPROUTE_GIT}
