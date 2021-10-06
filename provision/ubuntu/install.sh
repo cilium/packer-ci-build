@@ -134,7 +134,7 @@ make -j "$(getconf _NPROCESSORS_ONLN)"
 # By default, libbpf.so is installed to /usr/lib64 which isn't in LD_LIBRARY_PATH on Ubuntu.
 # Overriding LIBDIR in addition to setting PREFIX seems to be needed due to the structure of
 # libbpf's Makefile.
-PREFIX="/usr" LIBDIR=/usr/lib/x86_64-linux-gnu sudo make install
+sudo PREFIX="/usr" LIBDIR="/usr/lib/x86_64-linux-gnu" make install
 sudo ldconfig
 
 cd /tmp
