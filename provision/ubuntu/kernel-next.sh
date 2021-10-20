@@ -60,6 +60,7 @@ make olddefconfig && make prepare
 ./scripts/config --enable CONFIG_VBOXSF_FS
 ./scripts/config --module CONFIG_WIREGUARD
 ./scripts/config --enable CONFIG_DEBUG_INFO_BTF
+./scripts/config --enable CONFIG_DEBUG_INFO_BTF_MODULES
 ./scripts/config --disable CONFIG_SYSTEM_TRUSTED_KEYS
 ./scripts/config --disable CONFIG_SYSTEM_REVOCATION_KEYS
 
