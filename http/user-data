@@ -1,0 +1,13 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: en_US
+  keyboard:
+    layout: en
+    variant: us
+  identity:
+    hostname: vagrant
+    username: vagrant
+    password: '$2y$12$zfS.Dpm682guriw6fJ5PXu4Kv7GSs7VYHUPGphQdSnT0wb4Rt1tVS'
+  ssh:
+    install-server: yes
