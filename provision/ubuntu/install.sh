@@ -149,7 +149,7 @@ make install
 rm -rf /tmp/iproute2
 
 #clean
-sudo apt-get remove docker docker-engine docker.io
+sudo apt-get remove docker docker.io
 
 #Add repos
 
