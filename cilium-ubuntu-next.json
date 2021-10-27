@@ -83,6 +83,12 @@
   ],
   "provisioners": [
     {
+      "type": "shell",
+      "inline": [
+        "echo 'vagrant' | sudo -S lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv",
+        "echo 'vagrant' | sudo -S resize2fs /dev/ubuntu-vg/ubuntu-lv"
+      ]
+    },{
       "type": "file",
       "source": "bpf-next-patches/",
       "destination": "/tmp"
