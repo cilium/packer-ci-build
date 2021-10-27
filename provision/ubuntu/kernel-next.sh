@@ -32,7 +32,7 @@ git am /tmp/*.patch
 
 # Build kernel
 cp /boot/config-`uname -r` .config
-make olddefconfig && make prepare
+yes "" | make localyesconfig && make prepare
 
 ./scripts/config --enable CONFIG_LOCALVERSION_AUTO
 ./scripts/config --disable CONFIG_WERROR
@@ -63,6 +63,24 @@ make olddefconfig && make prepare
 ./scripts/config --enable CONFIG_DEBUG_INFO_BTF_MODULES
 ./scripts/config --disable CONFIG_SYSTEM_TRUSTED_KEYS
 ./scripts/config --disable CONFIG_SYSTEM_REVOCATION_KEYS
+# Needed by VirtualBox to load the Guest Additions.
+./scripts/config --enable CONFIG_ISO9660_FS
+# Needed for Docker.
+./scripts/config --enable CONFIG_VETH
+./scripts/config --enable CONFIG_BRIDGE
+./scripts/config --module CONFIG_BRIDGE_NETFILTER
+./scripts/config --module CONFIG_IP_NF_FILTER
+./scripts/config --module CONFIG_IP_NF_TARGET_MASQUERADE
+./scripts/config --module CONFIG_NETFILTER_XT_MATCH_ADDRTYPE
+./scripts/config --module CONFIG_NETFILTER_XT_MATCH_CONNTRACK
+./scripts/config --module CONFIG_NETFILTER_XT_MATCH_IPVS
+./scripts/config --module CONFIG_NETFILTER_ADVANCED
+./scripts/config --enable CONFIG_NF_CONNTRACK
+./scripts/config --enable CONFIG_IP_VS
+./scripts/config --module CONFIG_NETFILTER_XT_MARK
+./scripts/config --module CONFIG_IP_NF_NAT
+./scripts/config --module CONFIG_NF_NAT
+./scripts/config --enable CONFIG_DM_THIN_PROVISIONING
 
 make -j$(nproc) deb-pkg
 cd ..
