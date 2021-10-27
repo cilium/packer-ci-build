@@ -82,6 +82,12 @@
   "provisioners": [
     {
       "type": "shell",
+      "inline": [
+        "echo 'vagrant' | sudo -S lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv",
+        "echo 'vagrant' | sudo -S resize2fs /dev/ubuntu-vg/ubuntu-lv"
+      ]
+    },{
+      "type": "shell",
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
       "scripts": [
