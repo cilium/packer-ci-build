@@ -38,7 +38,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/istio/examples-bookinfo-reviews-v2:1.6.0 \
         docker.io/library/alpine:3.12.7 \
         docker.io/library/cassandra:3.11.3 \
-        docker.io/library/golang:1.17.0 \
+        docker.io/library/golang:1.17.3 \
         docker.io/library/memcached:1.6.6-alpine \
         docker.io/library/redis:6.0.5 \
         docker.io/tgraf/netperf:v1.0 \
