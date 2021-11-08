@@ -101,28 +101,6 @@ rm -fr util-linux-2.30.1/ util-linux-2.30.1.tar.gz
 
 sudo apt-get install -y conntrack
 
-# Install clang/llvm
-# This should always converge to use the same LLVM version as in
-# https://github.com/cilium/image-tools/blob/master/images/llvm/checkout-llvm.sh.
-cd /tmp
-git clone -b llvmorg-10.0.0 https://github.com/llvm/llvm-project.git llvm
-cd llvm
-git config --global user.email "maintainer@cilium.io"
-git config --global user.name  "Cilium Maintainers"
-git cherry-pick 29bc5dd19407c4d7cad1c059dea26ee216ddc7ca
-git cherry-pick 13f6c81c5d9a7a34a684363bcaad8eb7c65356fd
-mkdir -p llvm/build/install
-cd llvm/build
-cmake .. -G "Ninja" -DLLVM_TARGETS_TO_BUILD="BPF;X86" -DLLVM_ENABLE_PROJECTS="clang" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DLLVM_BUILD_RUNTIME=OFF
-ninja clang llc
-strip bin/clang
-strip bin/llc
-cp bin/clang /usr/bin/clang
-cp bin/llc /usr/bin/llc
-cp -n lib/clang/10.0.0/include/*.h /usr/include/
-cd ../../..
-rm -fr llvm/
-
 # Documentation dependencies
 sudo -H pip3 install -r https://raw.githubusercontent.com/cilium/cilium/master/Documentation/requirements.txt
 
@@ -172,6 +150,14 @@ EOF
 sudo apt-get update
 sudo apt-get install -y docker-ce
 sudo usermod -aG docker vagrant
+
+# Install clang/llvm
+# This should always converge to use the same LLVM version as in
+# https://github.com/cilium/image-tools/blob/master/images/llvm/checkout-llvm.sh.
+docker run --rm --name cilium-llvm -d quay.io/cilium/cilium-llvm:0147a23fdada32bd51b4f313c645bcb5fbe188d6 sleep 1000
+docker cp cilium-llvm:/usr/local/bin/clang /usr/bin/clang
+docker cp cilium-llvm:/usr/local/bin/llc /usr/bin/llc
+docker stop cilium-llvm
 
 #Install Golang
 cd /tmp/
