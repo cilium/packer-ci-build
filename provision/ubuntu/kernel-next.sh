@@ -84,6 +84,7 @@ yes "" | make localyesconfig && make prepare
 ./scripts/config --module CONFIG_NF_NAT
 ./scripts/config --enable CONFIG_DM_THIN_PROVISIONING
 
+yes "" | make config
 make -j$(nproc) deb-pkg
 cd ..
 # remove repo before installation to avoid "no space left on device" errors
