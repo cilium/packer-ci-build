@@ -65,6 +65,7 @@ yes "" | make localyesconfig && make prepare
 ./scripts/config --enable CONFIG_DEBUG_INFO_BTF_MODULES
 ./scripts/config --disable CONFIG_SYSTEM_TRUSTED_KEYS
 ./scripts/config --disable CONFIG_SYSTEM_REVOCATION_KEYS
+./scripts/config --enable CONFIG_VIRTIO_NET
 # Needed by VirtualBox to load the Guest Additions.
 ./scripts/config --enable CONFIG_ISO9660_FS
 # Needed for Docker.
@@ -83,6 +84,61 @@ yes "" | make localyesconfig && make prepare
 ./scripts/config --module CONFIG_IP_NF_NAT
 ./scripts/config --module CONFIG_NF_NAT
 ./scripts/config --enable CONFIG_DM_THIN_PROVISIONING
+# Needed for Kubernetes.
+./scripts/config --module CONFIG_IP_NF_TARGET_REDIRECT
+./scripts/config --module CONFIG_NETFILTER_XT_MATCH_COMMENT
+# Needed for Cilium.
+./scripts/config --enable CONFIG_IP_NF_MANGLE
+./scripts/config --enable CONFIG_IP_NF_RAW
+./scripts/config --enable CONFIG_IP6_NF_IPTABLES
+./scripts/config --enable CONFIG_IP6_NF_FILTER
+./scripts/config --enable CONFIG_IP6_NF_MANGLE
+./scripts/config --enable CONFIG_IP6_NF_RAW
+./scripts/config --enable CONFIG_IP6_NF_NAT
+./scripts/config --enable CONFIG_IP6_NF_TARGET_MASQUERADE
+./scripts/config --module CONFIG_NETFILTER_XT_TARGET_TPROXY
+./scripts/config --module CONFIG_NETFILTER_XT_MATCH_MARK
+./scripts/config --module CONFIG_NETFILTER_XT_MATCH_SOCKET
+./scripts/config --module CONFIG_NETFILTER_XT_TARGET_CT
+./scripts/config --module CONFIG_IP_SET
+./scripts/config --module CONFIG_IP_SET_HASH_IP
+./scripts/config --module CONFIG_NETFILTER_XT_SET
+./scripts/config --module CONFIG_VXLAN
+./scripts/config --module CONFIG_GENEVE
+./scripts/config --module CONFIG_NET_SCH_FQ
+# Needed for Cilium's IPsec implementation.
+./scripts/config --enable CONFIG_XFRM
+./scripts/config --enable CONFIG_XFRM_OFFLOAD
+./scripts/config --enable CONFIG_XFRM_STATISTICS
+./scripts/config --module CONFIG_XFRM_ALGO
+./scripts/config --module CONFIG_XFRM_USER
+./scripts/config --module CONFIG_INET_ESP
+./scripts/config --module CONFIG_INET_IPCOMP
+./scripts/config --module CONFIG_INET_XFRM_TUNNEL
+./scripts/config --module CONFIG_INET_TUNNEL
+./scripts/config --module CONFIG_INET6_ESP
+./scripts/config --module CONFIG_INET6_IPCOMP
+./scripts/config --module CONFIG_INET6_XFRM_TUNNEL
+./scripts/config --module CONFIG_INET6_TUNNEL
+./scripts/config --module CONFIG_INET_XFRM_MODE_TUNNEL
+./scripts/config --module CONFIG_CRYPTO_AEAD
+./scripts/config --module CONFIG_CRYPTO_AEAD2
+./scripts/config --module CONFIG_CRYPTO_GCM
+./scripts/config --module CONFIG_CRYPTO_SEQIV
+./scripts/config --module CONFIG_CRYPTO_CBC
+./scripts/config --module CONFIG_CRYPTO_HMAC
+./scripts/config --module CONFIG_CRYPTO_SHA256
+./scripts/config --module CONFIG_CRYPTO_AES
+# Needed for Cilium's tests.
+./scripts/config --module CONFIG_NF_CT_NETLINK
+./scripts/config --module CONFIG_DUMMY
+./scripts/config --module CONFIG_BONDING
+./scripts/config --module CONFIG_VLAN_8021Q
+# Needed for NFS shared folders.
+./scripts/config --module CONFIG_NFS_FS
+./scripts/config --module CONFIG_NFS_V3
+./scripts/config --module CONFIG_NFSD
+./scripts/config --enable CONFIG_NFSD_V3
 
 yes "" | make config
 make -j$(nproc) deb-pkg
