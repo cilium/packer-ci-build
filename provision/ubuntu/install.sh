@@ -7,7 +7,7 @@ export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"libbpf-static-data"}
 export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
 export 'LIBBPF_GIT'=${LIBBPF_GIT:-https://github.com/cilium/libbpf}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
-NETNEXT="${NETNEXT:-false}"
+export 'NETNEXT'="${NETNEXT:-false}"
 
 ARCH="amd64"
 
@@ -25,9 +25,7 @@ fi
 
 mkdir -p /tmp/vbox;
 mount -o loop ${HOME_DIR}/$ISO /tmp/vbox;
-sh /tmp/vbox/VBoxLinuxAdditions.run \
-    || echo "VBoxLinuxAdditions.run exited $? and is suppressed." \
-    "For more read https://www.virtualbox.org/ticket/12479";
+sh /tmp/vbox/VBoxLinuxAdditions.run
 umount /tmp/vbox;
 rm -rf /tmp/vbox;
 rm -f ${HOME_DIR}/*.iso;
