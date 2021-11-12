@@ -37,8 +37,8 @@
       "ssh_password": "vagrant",
       "ssh_username": "vagrant",
       "ssh_wait_timeout": "10000s",
-      "ssh_timeout": "20m",
-      "ssh_handshake_attempts": "200",
+      "ssh_timeout": "15m",
+      "ssh_handshake_attempts": "100",
       "type": "virtualbox-iso",
       "vboxmanage": [
         [
