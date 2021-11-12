@@ -76,7 +76,7 @@ yes "" | make localyesconfig && make prepare
 ./scripts/config --module CONFIG_NETFILTER_XT_MATCH_ADDRTYPE
 ./scripts/config --module CONFIG_NETFILTER_XT_MATCH_CONNTRACK
 ./scripts/config --module CONFIG_NETFILTER_XT_MATCH_IPVS
-./scripts/config --module CONFIG_NETFILTER_ADVANCED
+./scripts/config --enable CONFIG_NETFILTER_ADVANCED
 ./scripts/config --enable CONFIG_NF_CONNTRACK
 ./scripts/config --enable CONFIG_IP_VS
 ./scripts/config --module CONFIG_NETFILTER_XT_MARK
