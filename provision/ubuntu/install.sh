@@ -25,6 +25,7 @@ fi
 
 mkdir -p /tmp/vbox;
 mount -o loop ${HOME_DIR}/$ISO /tmp/vbox;
+modprobe -r vboxguest || [[ "$NETNEXT" == "false" ]]
 sh /tmp/vbox/VBoxLinuxAdditions.run
 umount /tmp/vbox;
 rm -rf /tmp/vbox;
