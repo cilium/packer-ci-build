@@ -66,10 +66,6 @@
         "echo 'vagrant' | sudo -S resize2fs /dev/ubuntu-vg/ubuntu-lv"
       ]
     },{
-      "type": "file",
-      "source": "bpf-next-patches/",
-      "destination": "/tmp"
-    },{
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
