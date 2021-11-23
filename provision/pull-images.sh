@@ -50,7 +50,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         k8s.gcr.io/coredns:1.7.0 \
         k8s.gcr.io/coredns/coredns:v1.8.0 \
         quay.io/cilium/alpine-curl:v1.3.0 \
-        quay.io/cilium/cilium-builder:e1d9538b22cafeec22068e1483bd5ff51276fadc \
+        quay.io/cilium/cilium-builder:796040ab4012e021232a8197b277e578da3df9f4 \
         quay.io/cilium/cilium-envoy:9b1701da9cc035a1696f3e492ee2526101262e56 \
         quay.io/cilium/istio_pilot:1.10.4 \
         quay.io/cilium/istio_proxy:1.10.4 \
