@@ -115,7 +115,7 @@
     }, {
       "type": "shell-local",
       "inline": [
-        "/usr/bin/aws s3 cp cilium-ginkgo-ubuntu-4-19-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box s3://ciliumvagrantbaseboxes/ --debug"
+        "/usr/bin/aws s3 cp cilium-ginkgo-ubuntu-4-19-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box s3://ciliumvagrantbaseboxes/"
       ]
     }],[{
       "output": "cilium-ginkgo-ubuntu-4-19-{{user `NAME_PREFIX`}}{{user `BUILD_ID`}}.box",
