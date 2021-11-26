@@ -45,10 +45,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/wurstmeister/kafka:2.11-0.11.0.3 \
         gcr.io/google-samples/gb-frontend:v6 \
         gcr.io/google_samples/gb-redis-follower:v2 \
-        k8s.gcr.io/coredns:1.6.2 \
-        k8s.gcr.io/coredns:1.6.5 \
-        k8s.gcr.io/coredns:1.7.0 \
-        k8s.gcr.io/coredns/coredns:v1.8.0 \
+        k8s.gcr.io/coredns/coredns:v1.8.3 \
         quay.io/cilium/alpine-curl:v1.3.0 \
         quay.io/cilium/cilium-builder:796040ab4012e021232a8197b277e578da3df9f4 \
         quay.io/cilium/cilium-envoy:9b1701da9cc035a1696f3e492ee2526101262e56 \
