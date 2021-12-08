@@ -186,7 +186,7 @@ sudo curl -Sslk -o go.tar.gz \
     "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
 sudo tar -C /usr/local -xzf go.tar.gz
 sudo rm go.tar.gz
-sudo ln -s /usr/local/go/bin/* /usr/local/bin/
+sudo ln -sf /usr/local/go/bin/* /usr/local/bin/
 go version
 
 #ETCD installation
