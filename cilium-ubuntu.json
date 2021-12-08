@@ -92,6 +92,7 @@
       "type": "shell",
       "environment_vars": [
           "VM_ARCH=amd64",
+          "USERNAME=vagrant",
           "ENV_FILEPATH=/tmp/env.bash",
           "CILIUM_BRANCH={{ user `CILIUM_BRANCH` }}",
           "NAME_PREFIX={{ user `NAME_PREFIX` }}"
