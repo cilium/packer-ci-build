@@ -10,7 +10,7 @@ CERTS_DIR=/certs/
 
 sudo mkdir -p $CERTS_DIR
 sudo chmod 777 $CERTS_DIR
-cd $HOME
+cd $HOME_DIR
 rm -rfv certs
 mkdir certs
 
