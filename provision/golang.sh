@@ -4,6 +4,7 @@ source "${ENV_FILEPATH}"
 
 set -e
 
+sudo -E chown ${USERNAME}:${USERNAME} ${HOME_DIR}
 sudo -u ${USERNAME} -E bash -c "mkdir -p ${GOPATH} && \
   go install github.com/google/gops@latest && \
   go install github.com/subfuzion/envtpl/cmd/envtpl@latest"
