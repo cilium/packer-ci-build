@@ -2,5 +2,5 @@
 
 set -xe
 
-rm -r $HOME/k
+rm -rf $HOME/k || true
 rm $HOME/linux-* || true
