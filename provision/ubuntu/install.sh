@@ -10,8 +10,6 @@ export 'BPFTOOL_GIT'=${BPFTOOL_GIT:-https://github.com/libbpf/bpftool}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 export 'NETNEXT'="${NETNEXT:-false}"
 
-ARCH="amd64"
-
 # VBoxguestAdditions installation
 
 VER="`cat /home/vagrant/.vbox_version`";
@@ -62,7 +60,7 @@ sudo apt-get install -y --allow-downgrades \
     zip g++ zlib1g-dev unzip python \
     libtool cmake coreutils m4 automake \
     libprotobuf-dev libyaml-cpp-dev \
-    socat pv tmux bc gcc-multilib binutils-dev \
+    socat pv tmux bc binutils-dev \
     binutils wget rsync ifupdown \
     python3-sphinx python3-pip \
     libncurses5-dev libslang2-dev gettext \
@@ -75,19 +73,24 @@ sudo apt-get install -y --allow-downgrades \
 # Install nodejs and npm, needed for the cilium rtd sphinx theme
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
 sudo add-apt-repository \
-   "deb [arch=${ARCH}] https://deb.nodesource.com/node_12.x \
+   "deb [arch=${VM_ARCH}] https://deb.nodesource.com/node_12.x \
    $(lsb_release -cs) \
    main"
 sudo apt-get update
 sudo apt-get install -y nodejs
 
 # Install protoc from github release, as protobuf-compiler version in apt is quite old (e.g 3.0.0-9.1ubuntu1)
+PROTOC_ARCH="x86_64"
+if [ "${VM_ARCH}" == "arm64" ]; then
+    PROTOC_ARCH="aarch_64"
+fi
+
 cd /tmp
-wget -nv https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip
-unzip -p protoc-${PROTOC_VERSION}-linux-x86_64.zip bin/protoc > protoc
+wget -nv https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-${PROTOC_ARCH}.zip
+unzip -p protoc-${PROTOC_VERSION}-linux-${PROTOC_ARCH}.zip bin/protoc > protoc
 sudo chmod +x protoc
 sudo cp protoc /usr/bin
-rm -rf protoc-${PROTOC_VERSION}-linux-x86_64.zip protoc
+rm -rf protoc-${PROTOC_VERSION}-linux-${PROTOC_ARCH}.zip protoc
 
 # Install nsenter for kubernetes
 cd /tmp
@@ -109,6 +112,11 @@ sudo apt-get install -y conntrack
 sudo -H pip3 install -r https://raw.githubusercontent.com/cilium/cilium/master/Documentation/requirements.txt
 
 # libbpf, bpftool, and iproute2
+LINUX_ARCH="x86_64"
+if [ "${VM_ARCH}" == "arm64" ]; then
+    LINUX_ARCH="aarch64"
+fi
+
 cd /tmp
 git clone --depth=1 ${LIBBPF_GIT}
 cd /tmp/libbpf/src
@@ -116,8 +124,9 @@ make -j "$(getconf _NPROCESSORS_ONLN)"
 # By default, libbpf.so is installed to /usr/lib64 which isn't in LD_LIBRARY_PATH on Ubuntu.
 # Overriding LIBDIR in addition to setting PREFIX seems to be needed due to the structure of
 # libbpf's Makefile.
-sudo PREFIX="/usr" LIBDIR="/usr/lib/x86_64-linux-gnu" make install
+sudo PREFIX="/usr" LIBDIR="/usr/lib/${LINUX_ARCH}-linux-gnu" make install
 sudo ldconfig
+rm -rf /tmp/libbpf
 
 sudo apt-get install -y libbfd-dev libcap-dev libelf-dev
 cd /tmp
@@ -147,7 +156,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
 sudo add-apt-repository \
-   "deb [arch=${ARCH}] https://download.docker.com/linux/ubuntu \
+   "deb [arch=${VM_ARCH}] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
 
@@ -174,16 +183,18 @@ docker stop cilium-llvm
 #Install Golang
 cd /tmp/
 sudo curl -Sslk -o go.tar.gz \
-    "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
+    "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-${VM_ARCH}.tar.gz"
 sudo tar -C /usr/local -xzf go.tar.gz
 sudo rm go.tar.gz
 sudo ln -s /usr/local/go/bin/* /usr/local/bin/
 go version
 
 #ETCD installation
-wget -nv "https://github.com/coreos/etcd/releases/download/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-${ARCH}.tar.gz"
-tar -xf "etcd-${ETCD_VERSION}-linux-${ARCH}.tar.gz"
-sudo mv "etcd-${ETCD_VERSION}-linux-${ARCH}/etcd"* /usr/bin/
+ETCD=etcd-${ETCD_VERSION}-linux-${VM_ARCH}
+wget -nv "https://github.com/coreos/etcd/releases/download/${ETCD_VERSION}/${ETCD}.tar.gz"
+tar -xf "${ETCD}.tar.gz"
+sudo mv "${ETCD}/etcd"* /usr/bin/
+rm -rf "${ETCD}"*
 
 sudo tee /etc/systemd/system/etcd.service <<EOF
 [Unit]
@@ -204,25 +215,30 @@ sudo systemctl start etcd
 
 # Install sonobuoy
 cd /tmp
-wget "https://github.com/heptio/sonobuoy/releases/download/v${SONOBUOY_VERSION}/sonobuoy_${SONOBUOY_VERSION}_linux_amd64.tar.gz"
-tar -xf "sonobuoy_${SONOBUOY_VERSION}_linux_amd64.tar.gz"
+SONOBUOY=sonobuoy_${SONOBUOY_VERSION}_linux_${VM_ARCH}.tar.gz
+wget "https://github.com/heptio/sonobuoy/releases/download/v${SONOBUOY_VERSION}/${SONOBUOY}"
+tar -xf "${SONOBUOY}"
 sudo mv sonobuoy /usr/bin
+rm -f "${SONOBUOY}"*
 
 # Install hubble
 cd /tmp
-wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz"
-wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz.sha256sum"
-sha256sum --check hubble-linux-amd64.tar.gz.sha256sum || exit 1
-sudo tar -xf "hubble-linux-amd64.tar.gz" -C /usr/bin hubble
+HUBBLE=hubble-linux-${VM_ARCH}.tar.gz
+wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/${HUBBLE}"
+wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/${HUBBLE}.sha256sum"
+sha256sum --check "${HUBBLE}".sha256sum || exit 1
+sudo tar -xf "${HUBBLE}" -C /usr/bin hubble
+rm -f "${HUBBLE}"*
 sudo bash -c "echo 'HUBBLE_SERVER=unix:///var/run/cilium/hubble.sock' >> /etc/environment"
 
 # Install Cilium's CLI
+CLI_ARCH=${VM_ARCH/arm64/arm}
 cd /tmp/
-curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-${ARCH}.tar.gz{,.sha256sum}
-sha256sum --check --strict cilium-linux-${ARCH}.tar.gz.sha256sum
-sudo tar xzfC cilium-linux-${ARCH}.tar.gz /tmp
+curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
+sha256sum --check --strict cilium-linux-${CLI_ARCH}.tar.gz.sha256sum
+sudo tar xzfC cilium-linux-${CLI_ARCH}.tar.gz /tmp
 mv /tmp/cilium /usr/local/bin/cilium-cli
-rm cilium-linux-${ARCH}.tar.gz{,.sha256sum}
+rm cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
 
 # Clean all downloaded packages
 sudo apt-get -y clean
