@@ -169,10 +169,12 @@ EOF
 # wget https://packages.cloud.google.com/apt/doc/apt-key.gpg
 # apt-key add apt-key.gpg
 
-#Install packages
-sudo apt-get update
-sudo apt-get install -y docker-ce
-sudo usermod -aG docker ${USERNAME}
+# Install docker if not already installed
+if ! which docker > /dev/null; then
+    sudo apt-get update
+    sudo apt-get install -y docker-ce
+    sudo usermod -aG docker ${USERNAME}
+fi
 
 # Install clang/llvm
 # This should always converge to use the same LLVM version as in
