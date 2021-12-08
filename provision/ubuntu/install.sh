@@ -12,28 +12,30 @@ export 'NETNEXT'="${NETNEXT:-false}"
 
 # VBoxguestAdditions installation
 
-VER="`cat ${HOME_DIR}/.vbox_version`";
-ISO="VBoxGuestAdditions_$VER.iso";
+if [ -f ${HOME_DIR}/.vbox_version ]; then
+    VER="`cat ${HOME_DIR}/.vbox_version`";
+    ISO="VBoxGuestAdditions_$VER.iso";
 
-# Validate that custom GuestAdditions are needed
-if [[ -n "${GUESTADDITIONS}" ]]; then
-    cd ${HOME_DIR}
-    ISO="VBoxGuestAdditions.iso"
-    wget $GUESTADDITIONS  -O $ISO
-fi
+    # Validate if custom GuestAdditions are needed
+    if [[ -n "${GUESTADDITIONS}" ]]; then
+        cd ${HOME_DIR}
+	ISO="VBoxGuestAdditions.iso"
+	wget $GUESTADDITIONS  -O $ISO
+    fi
 
-mkdir -p /tmp/vbox;
-mount -o loop ${HOME_DIR}/$ISO /tmp/vbox;
-modprobe -r vboxguest || [[ "$NETNEXT" == "false" ]]
-sh /tmp/vbox/VBoxLinuxAdditions.run
-umount /tmp/vbox;
-rm -rf /tmp/vbox;
-rm -f ${HOME_DIR}/*.iso;
+    mkdir -p /tmp/vbox;
+    mount -o loop ${HOME_DIR}/$ISO /tmp/vbox;
+    modprobe -r vboxguest || [[ "$NETNEXT" == "false" ]]
+    sh /tmp/vbox/VBoxLinuxAdditions.run
+    umount /tmp/vbox;
+    rm -rf /tmp/vbox;
+    rm -f ${HOME_DIR}/*.iso;
 
-if [ "${NETNEXT}" == "true" ]; then
-    # Remove the binary from GuestAdditions to avoid clashing with the vboxsf
-    # kernel module
-    sudo rm $(which mount.vboxsf)
+    if [ "${NETNEXT}" == "true" ]; then
+	# Remove the binary from GuestAdditions to avoid clashing with the vboxsf
+	# kernel module
+	sudo rm $(which mount.vboxsf)
+    fi
 fi
 
 # Remove unattended-upgrades to prevent it from holding the dpkg frontend lock
