@@ -11,6 +11,6 @@ sudo -u ${USERNAME} -E bash -c "mkdir -p ${GOPATH} && \
 
 curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sudo sh -s -- -b ${GOPATH}/bin/ v1.42.1
 
-sudo -E ln -s "${GOPATH}/bin/"* /usr/bin
+sudo -E ln -sf "${GOPATH}/bin/"* /usr/bin
 
 if ! grep "export GOPATH=" ${HOME_DIR}/.profile ; then echo "export GOPATH=${GOPATH}" >>${HOME_DIR}/.profile; fi
