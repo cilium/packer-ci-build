@@ -67,6 +67,9 @@
       ]
     },{
       "type": "shell",
+      "environment_vars": [
+          "VM_ARCH=amd64"
+      ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
       "scripts": [
@@ -74,6 +77,9 @@
       ]
     },{
       "type": "shell",
+      "environment_vars": [
+          "VM_ARCH=amd64"
+      ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}' 0504220 202210261259",
       "expect_disconnect": true,
       "scripts": [
@@ -86,9 +92,10 @@
     },{
       "type": "shell",
       "environment_vars": [
-        "ENV_FILEPATH=/tmp/env.bash",
-        "CILIUM_BRANCH={{ user `CILIUM_BRANCH` }}",
-        "NAME_PREFIX={{ user `NAME_PREFIX` }}"
+          "VM_ARCH=amd64",
+          "ENV_FILEPATH=/tmp/env.bash",
+          "CILIUM_BRANCH={{ user `CILIUM_BRANCH` }}",
+          "NAME_PREFIX={{ user `NAME_PREFIX` }}"
       ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
