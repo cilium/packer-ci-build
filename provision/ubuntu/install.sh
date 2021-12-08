@@ -70,7 +70,7 @@ sudo apt-get install -y --allow-downgrades \
 # Install nodejs and npm, needed for the cilium rtd sphinx theme
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
 sudo add-apt-repository \
-   "deb [arch=${ARCH}] https://deb.nodesource.com/node_12.x \
+   "deb [arch=${VM_ARCH}] https://deb.nodesource.com/node_12.x \
    $(lsb_release -cs) \
    main"
 sudo apt-get update
@@ -78,7 +78,7 @@ sudo apt-get install -y nodejs
 
 # Install protoc from github release, as protobuf-compiler version in apt is quite old (e.g 3.0.0-9.1ubuntu1)
 PROTOC_ARCH="x86_64"
-if [ "${ARCH}" == "arm64" ]; then
+if [ "${VM_ARCH}" == "arm64" ]; then
     PROTOC_ARCH="aarch_64"
 fi
 
@@ -110,7 +110,7 @@ sudo -H pip3 install -r https://raw.githubusercontent.com/cilium/cilium/master/D
 
 # libbpf and iproute2
 LINUX_ARCH="x86_64"
-if [ "${ARCH}" == "arm64" ]; then
+if [ "${VM_ARCH}" == "arm64" ]; then
     LINUX_ARCH="aarch64"
 fi
 
@@ -136,28 +136,29 @@ make -j `getconf _NPROCESSORS_ONLN`
 make install
 rm -rf /tmp/iproute2
 
-#clean
-sudo apt-get remove docker docker.io
+# Install docker if not already installed
+if ! which docker > /dev/null; then
 
-#Add repos
+    #clean
+    sudo apt-get remove docker docker.io
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+    #Add repos
 
-sudo add-apt-repository \
-   "deb [arch=${ARCH}] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
-cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
+    sudo add-apt-repository \
+	 "deb [arch=${VM_ARCH}] https://download.docker.com/linux/ubuntu \
+	    $(lsb_release -cs) \
+	       stable"
+
+    cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
 deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
-# wget https://packages.cloud.google.com/apt/doc/apt-key.gpg
-# apt-key add apt-key.gpg
+    # wget https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    # apt-key add apt-key.gpg
 
-# Install docker if not already installed
-if ! which docker > /dev/null; then
     sudo apt-get update
     sudo apt-get install -y docker-ce
     sudo usermod -aG docker ${USERNAME}
@@ -174,14 +175,14 @@ docker stop cilium-llvm
 #Install Golang
 cd /tmp/
 sudo curl -Sslk -o go.tar.gz \
-    "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
+    "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-${VM_ARCH}.tar.gz"
 sudo tar -C /usr/local -xzf go.tar.gz
 sudo rm go.tar.gz
 sudo ln -sf /usr/local/go/bin/* /usr/local/bin/
 go version
 
 #ETCD installation
-ETCD=etcd-${ETCD_VERSION}-linux-${ARCH}
+ETCD=etcd-${ETCD_VERSION}-linux-${VM_ARCH}
 wget -nv "https://github.com/coreos/etcd/releases/download/${ETCD_VERSION}/${ETCD}.tar.gz"
 tar -xf "${ETCD}.tar.gz"
 sudo mv "${ETCD}/etcd"* /usr/bin/
@@ -206,7 +207,7 @@ sudo systemctl start etcd
 
 # Install sonobuoy
 cd /tmp
-SONOBUOY=sonobuoy_${SONOBUOY_VERSION}_linux_${ARCH}.tar.gz
+SONOBUOY=sonobuoy_${SONOBUOY_VERSION}_linux_${VM_ARCH}.tar.gz
 wget "https://github.com/heptio/sonobuoy/releases/download/v${SONOBUOY_VERSION}/${SONOBUOY}"
 tar -xf "${SONOBUOY}"
 sudo mv sonobuoy /usr/bin
@@ -214,7 +215,7 @@ rm -f "${SONOBUOY}"*
 
 # Install hubble
 cd /tmp
-HUBBLE=hubble-linux-${ARCH}.tar.gz
+HUBBLE=hubble-linux-${VM_ARCH}.tar.gz
 wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/${HUBBLE}"
 wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/${HUBBLE}.sha256sum"
 sha256sum --check "${HUBBLE}".sha256sum || exit 1

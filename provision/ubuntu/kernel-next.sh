@@ -146,6 +146,15 @@ yes "" | make localyesconfig && make prepare
 ./scripts/config --module CONFIG_NFS_V3
 ./scripts/config --module CONFIG_NFSD
 ./scripts/config --enable CONFIG_NFSD_V3
+# Needed for kube-proxy (at least the version 1.19.11, the default with Kind 0.11.1)
+./scripts/config --module CONFIG_NF_REJECT_IPV4
+./scripts/config --module CONFIG_IP_NF_TARGET_REJECT
+./scripts/config --module CONFIG_NF_REJECT_IPV6
+./scripts/config --module CONFIG_IP6_NF_TARGET_REJECT
+./scripts/config --enable CONFIG_IP_VS_RR
+./scripts/config --enable CONFIG_IP_VS_WRR
+./scripts/config --enable CONFIG_IP_VS_SH
+./scripts/config --enable CONFIG_NETFILTER_XT_MATCH_STATISTIC
 
 yes "" | make config
 make -j$(nproc) deb-pkg
