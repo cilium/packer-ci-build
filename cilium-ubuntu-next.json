@@ -104,6 +104,7 @@
       "type": "shell",
       "environment_vars": [
           "VM_ARCH=amd64",
+          "USERNAME=vagrant",
           "ENV_FILEPATH=/tmp/env.bash",
           "NETNEXT=true"
       ],
