@@ -9,8 +9,6 @@ export 'LIBBPF_GIT'=${LIBBPF_GIT:-https://github.com/cilium/libbpf}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 export 'NETNEXT'="${NETNEXT:-false}"
 
-ARCH="amd64"
-
 # VBoxguestAdditions installation
 
 VER="`cat /home/vagrant/.vbox_version`";
@@ -57,7 +55,7 @@ sudo apt-get install -y --allow-downgrades \
     zip g++ zlib1g-dev unzip python \
     libtool cmake coreutils m4 automake \
     libprotobuf-dev libyaml-cpp-dev \
-    socat pv tmux bc gcc-multilib binutils-dev \
+    socat pv tmux bc binutils-dev \
     binutils wget rsync ifupdown \
     python3-sphinx python3-pip \
     libncurses5-dev libslang2-dev gettext \
@@ -77,12 +75,17 @@ sudo apt-get update
 sudo apt-get install -y nodejs
 
 # Install protoc from github release, as protobuf-compiler version in apt is quite old (e.g 3.0.0-9.1ubuntu1)
+PROTOC_ARCH="x86_64"
+if [ "${ARCH}" == "arm64" ]; then
+    PROTOC_ARCH="aarch_64"
+fi
+
 cd /tmp
-wget -nv https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip
-unzip -p protoc-${PROTOC_VERSION}-linux-x86_64.zip bin/protoc > protoc
+wget -nv https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-${PROTOC_ARCH}.zip
+unzip -p protoc-${PROTOC_VERSION}-linux-${PROTOC_ARCH}.zip bin/protoc > protoc
 sudo chmod +x protoc
 sudo cp protoc /usr/bin
-rm -rf protoc-${PROTOC_VERSION}-linux-x86_64.zip protoc
+rm -rf protoc-${PROTOC_VERSION}-linux-${PROTOC_ARCH}.zip protoc
 
 # Install nsenter for kubernetes
 cd /tmp
@@ -104,6 +107,11 @@ sudo apt-get install -y conntrack
 sudo -H pip3 install -r https://raw.githubusercontent.com/cilium/cilium/master/Documentation/requirements.txt
 
 # libbpf and iproute2
+LINUX_ARCH="x86_64"
+if [ "${ARCH}" == "arm64" ]; then
+    LINUX_ARCH="aarch64"
+fi
+
 cd /tmp
 git clone --depth=1 ${LIBBPF_GIT}
 cd /tmp/libbpf/src
@@ -111,8 +119,9 @@ make -j "$(getconf _NPROCESSORS_ONLN)"
 # By default, libbpf.so is installed to /usr/lib64 which isn't in LD_LIBRARY_PATH on Ubuntu.
 # Overriding LIBDIR in addition to setting PREFIX seems to be needed due to the structure of
 # libbpf's Makefile.
-sudo PREFIX="/usr" LIBDIR="/usr/lib/x86_64-linux-gnu" make install
+sudo PREFIX="/usr" LIBDIR="/usr/lib/${LINUX_ARCH}-linux-gnu" make install
 sudo ldconfig
+rm -rf /tmp/libbpf
 
 cd /tmp
 git clone -b ${IPROUTE_BRANCH} ${IPROUTE_GIT}
@@ -168,9 +177,11 @@ sudo ln -s /usr/local/go/bin/* /usr/local/bin/
 go version
 
 #ETCD installation
-wget -nv "https://github.com/coreos/etcd/releases/download/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-${ARCH}.tar.gz"
-tar -xf "etcd-${ETCD_VERSION}-linux-${ARCH}.tar.gz"
-sudo mv "etcd-${ETCD_VERSION}-linux-${ARCH}/etcd"* /usr/bin/
+ETCD=etcd-${ETCD_VERSION}-linux-${ARCH}
+wget -nv "https://github.com/coreos/etcd/releases/download/${ETCD_VERSION}/${ETCD}.tar.gz"
+tar -xf "${ETCD}.tar.gz"
+sudo mv "${ETCD}/etcd"* /usr/bin/
+rm -rf "${ETCD}"*
 
 sudo tee /etc/systemd/system/etcd.service <<EOF
 [Unit]
@@ -191,16 +202,20 @@ sudo systemctl start etcd
 
 # Install sonobuoy
 cd /tmp
-wget "https://github.com/heptio/sonobuoy/releases/download/v${SONOBUOY_VERSION}/sonobuoy_${SONOBUOY_VERSION}_linux_amd64.tar.gz"
-tar -xf "sonobuoy_${SONOBUOY_VERSION}_linux_amd64.tar.gz"
+SONOBUOY=sonobuoy_${SONOBUOY_VERSION}_linux_${ARCH}.tar.gz
+wget "https://github.com/heptio/sonobuoy/releases/download/v${SONOBUOY_VERSION}/${SONOBUOY}"
+tar -xf "${SONOBUOY}"
 sudo mv sonobuoy /usr/bin
+rm -f "${SONOBUOY}"*
 
 # Install hubble
 cd /tmp
-wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz"
-wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz.sha256sum"
-sha256sum --check hubble-linux-amd64.tar.gz.sha256sum || exit 1
-sudo tar -xf "hubble-linux-amd64.tar.gz" -C /usr/bin hubble
+HUBBLE=hubble-linux-${ARCH}.tar.gz
+wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/${HUBBLE}"
+wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/${HUBBLE}.sha256sum"
+sha256sum --check "${HUBBLE}".sha256sum || exit 1
+sudo tar -xf "${HUBBLE}" -C /usr/bin hubble
+rm -f "${HUBBLE}"*
 
 # Clean all downloaded packages
 sudo apt-get -y clean
