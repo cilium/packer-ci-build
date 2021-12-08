@@ -12,12 +12,12 @@ export 'NETNEXT'="${NETNEXT:-false}"
 
 # VBoxguestAdditions installation
 
-VER="`cat /home/vagrant/.vbox_version`";
+VER="`cat ${HOME_DIR}/.vbox_version`";
 ISO="VBoxGuestAdditions_$VER.iso";
 
 # Validate that custom GuestAdditions are needed
 if [[ -n "${GUESTADDITIONS}" ]]; then
-    cd $HOME_DIR
+    cd ${HOME_DIR}
     ISO="VBoxGuestAdditions.iso"
     wget $GUESTADDITIONS  -O $ISO
 fi
@@ -170,7 +170,7 @@ EOF
 #Install packages
 sudo apt-get update
 sudo apt-get install -y docker-ce
-sudo usermod -aG docker vagrant
+sudo usermod -aG docker ${USERNAME}
 
 # Install clang/llvm
 # This should always converge to use the same LLVM version as in
@@ -262,4 +262,4 @@ sudo sh -c 'echo "kernel.randomize_va_space=0" > /etc/sysctl.d/67-randomize_va_s
 # Add an exception for the cilium repo for the root user to fix the
 # "fatal: unsafe repository ('/home/vagrant/go/src/github.com/cilium/cilium' is owned by someone else)"
 # error condition when running `sudo make install`
-sudo git config --global --add safe.directory /home/vagrant/go/src/github.com/cilium/cilium
+sudo git config --global --add safe.directory ${HOME_DIR}/go/src/github.com/cilium/cilium
