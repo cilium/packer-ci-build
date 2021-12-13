@@ -134,6 +134,9 @@ yes "" | make localyesconfig && make prepare
 ./scripts/config --module CONFIG_DUMMY
 ./scripts/config --module CONFIG_BONDING
 ./scripts/config --module CONFIG_VLAN_8021Q
+# Needed for Istio.
+./scripts/config --module CONFIG_NETFILTER_XT_MATCH_OWNER
+./scripts/config --module CONFIG_NETFILTER_XT_TARGET_CONNMARK
 # Needed for NFS shared folders.
 ./scripts/config --module CONFIG_NFS_FS
 ./scripts/config --module CONFIG_NFS_V3
