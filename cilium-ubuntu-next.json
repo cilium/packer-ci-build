@@ -67,8 +67,8 @@
       ]
     },{
       "type": "file",
-      "source": "kernel-patches/",
-      "destination": "/tmp"
+      "source": "provision/kernel-patches",
+      "destination": "/tmp/provision"
     },{
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",

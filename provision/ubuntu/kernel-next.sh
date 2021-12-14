@@ -30,7 +30,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 # Apply local patches
 git config --global user.email "maintainer@cilium.io"
 git config --global user.name  "Cilium Maintainers"
-git am /tmp/*.patch
+git am /tmp/provision/kernel-patches/*.patch
 
 # Build kernel
 cp /boot/config-`uname -r` .config
