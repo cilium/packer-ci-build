@@ -90,4 +90,5 @@ echo "Default grub entry is '$grub_entry'"
 grub-set-default "$grub_entry"
 sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=saved/g' /etc/default/grub
 update-grub
+echo "Rebooting kernel"
 reboot

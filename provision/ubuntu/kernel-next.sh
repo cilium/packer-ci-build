@@ -170,4 +170,5 @@ rm linux-*.deb
 rm $HOME/linux-*
 sudo ln -sf /boot/System.map-$(uname -r) /boot/System.map
 
+echo "Rebooting kernel"
 sudo reboot
