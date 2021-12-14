@@ -20,6 +20,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/dummylb:0.0.1 \
         docker.io/cilium/echoserver:1.10.1 \
         docker.io/cilium/echoserver-udp:v2020.01.30 \
+        docker.io/cilium/graceful-termination-test-apps:1.0.0 \
         docker.io/cilium/json-mock:1.2 \
         docker.io/cilium/kafkaclient2:1.0 \
         docker.io/cilium/kafkaclient:1.0 \
@@ -51,7 +52,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         quay.io/cilium/cilium-envoy:9b1701da9cc035a1696f3e492ee2526101262e56 \
         quay.io/cilium/istio_pilot:1.10.4 \
         quay.io/cilium/istio_proxy:1.10.4 \
-        quay.io/cilium/test-verifier:0f6647c542b71e89f310e437570b6d05dd9351bb \
+        quay.io/cilium/test-verifier:110522f9cb32ac55b68db668433c85268945be5f \
         quay.io/cilium/kube-wireguarder:0.0.4 \
         quay.io/cilium/net-test:v1.0.0 \
         quay.io/coreos/etcd:v3.4.7 \
