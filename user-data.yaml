@@ -1,0 +1,7 @@
+#cloud-config
+packages:
+  - nfs-common
+
+runcmd:
+  - '\curl -fsSL https://get.docker.com | sh'
+  - '\sudo usermod -a -G docker ubuntu'

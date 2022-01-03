@@ -27,10 +27,14 @@ rm -rf pahole
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
-# Apply local patches
+# Apply local patches, if any
 git config --global user.email "maintainer@cilium.io"
 git config --global user.name  "Cilium Maintainers"
-git am /tmp/*.patch
+if [ -d /tmp/provision/kernel-patches ]; then
+	for patch in /tmp/provision/kernel-patches/*.patch; do
+		git am $patch
+	done
+fi
 
 # Build kernel
 cp /boot/config-`uname -r` .config
@@ -142,6 +146,20 @@ yes "" | make localyesconfig && make prepare
 ./scripts/config --module CONFIG_NFS_V3
 ./scripts/config --module CONFIG_NFSD
 ./scripts/config --enable CONFIG_NFSD_V3
+# Needed for kube-proxy (not sure if all of them are needed).
+./scripts/config --module CONFIG_NFT_REJECT
+./scripts/config --module CONFIG_NFT_REJECT_INET
+./scripts/config --module CONFIG_NFT_REJECT_IPV4
+./scripts/config --module CONFIG_NF_REJECT_IPV4
+./scripts/config --module CONFIG_IP_NF_TARGET_REJECT
+./scripts/config --module CONFIG_NFT_REJECT_IPV6
+./scripts/config --module CONFIG_NF_REJECT_IPV6
+./scripts/config --module CONFIG_IP6_NF_TARGET_REJECT
+./scripts/config --module CONFIG_NFT_BRIDGE_REJECT
+./scripts/config --module CONFIG_NF_LOG_SYSLOG
+./scripts/config --module CONFIG_NF_CT_NETLINK_TIMEOUT
+./scripts/config --module CONFIG_NF_TABLES
+./scripts/config --module CONFIG_NF_LOG_IPV4
 
 yes "" | make config
 make -j$(nproc) deb-pkg

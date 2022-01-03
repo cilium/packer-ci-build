@@ -66,11 +66,10 @@
         "echo 'vagrant' | sudo -S resize2fs /dev/ubuntu-vg/ubuntu-lv"
       ]
     },{
-      "type": "file",
-      "source": "kernel-patches/",
-      "destination": "/tmp"
-    },{
       "type": "shell",
+      "environment_vars": [
+          "VM_ARCH=amd64"
+      ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
       "scripts": [
@@ -79,6 +78,9 @@
       ]
     },{
       "type": "shell",
+      "environment_vars": [
+          "VM_ARCH=amd64"
+      ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
       "scripts": [
@@ -86,6 +88,9 @@
       ]
     },{
       "type": "shell",
+      "environment_vars": [
+          "VM_ARCH=amd64"
+      ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
       "scripts": [
@@ -98,8 +103,10 @@
     },{
       "type": "shell",
       "environment_vars": [
-        "ENV_FILEPATH=/tmp/env.bash",
-        "NETNEXT=true"
+          "VM_ARCH=amd64",
+          "USERNAME=vagrant",
+          "ENV_FILEPATH=/tmp/env.bash",
+          "NETNEXT=true"
       ],
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
