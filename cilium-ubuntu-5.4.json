@@ -70,9 +70,7 @@
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "expect_disconnect": true,
       "scripts": [
-          "provision/ubuntu/netperf.sh",
-          "provision/ubuntu/kernel-next-bpftool.sh",
-          "provision/ubuntu/kernel-next-clean.sh"
+          "provision/ubuntu/netperf.sh"
       ]
     },{
       "type": "shell",
