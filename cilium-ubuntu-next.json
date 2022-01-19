@@ -71,13 +71,7 @@
       "expect_disconnect": true,
       "scripts": [
           "provision/ubuntu/netperf.sh",
-          "provision/ubuntu/kernel-next-bpftool.sh"
-      ]
-    },{
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-      "expect_disconnect": true,
-      "scripts": [
+          "provision/ubuntu/kernel-next-download.sh",
           "provision/ubuntu/kernel-next-tools.sh"
       ]
     },{

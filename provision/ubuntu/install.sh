@@ -6,6 +6,7 @@ source "${ENV_FILEPATH}"
 export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"libbpf-static-data"}
 export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
 export 'LIBBPF_GIT'=${LIBBPF_GIT:-https://github.com/cilium/libbpf}
+export 'BPFTOOL_GIT'=${BPFTOOL_GIT:-https://github.com/libbpf/bpftool}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 export 'NETNEXT'="${NETNEXT:-false}"
 
@@ -103,7 +104,7 @@ sudo apt-get install -y conntrack
 # Documentation dependencies
 sudo -H pip3 install -r https://raw.githubusercontent.com/cilium/cilium/master/Documentation/requirements.txt
 
-# libbpf and iproute2
+# libbpf, bpftool, and iproute2
 cd /tmp
 git clone --depth=1 ${LIBBPF_GIT}
 cd /tmp/libbpf/src
@@ -113,6 +114,13 @@ make -j "$(getconf _NPROCESSORS_ONLN)"
 # libbpf's Makefile.
 sudo PREFIX="/usr" LIBDIR="/usr/lib/x86_64-linux-gnu" make install
 sudo ldconfig
+
+sudo apt-get install -y libbfd-dev libcap-dev libelf-dev
+cd /tmp
+git clone --depth=1 --recurse-submodules ${BPFTOOL_GIT}
+cd /tmp/bpftool/src
+make -j "$(getconf _NPROCESSORS_ONLN)"
+sudo make install
 
 cd /tmp
 git clone -b ${IPROUTE_BRANCH} ${IPROUTE_GIT}
