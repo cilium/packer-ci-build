@@ -38,9 +38,8 @@ if [ "${NETNEXT}" == "true" ]; then
     sudo rm $(which mount.vboxsf)
 fi
 
-# Disable unattended-upgrades to prevent it from holding the dpkg frontend lock
-sudo systemctl disable unattended-upgrades.service
-sudo systemctl stop unattended-upgrades.service
+# Remove unattended-upgrades to prevent it from holding the dpkg frontend lock
+sudo apt-get remove --purge -y unattended-upgrades
 
 echo "Provision a new server"
 sudo apt-get update
