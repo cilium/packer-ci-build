@@ -48,8 +48,8 @@ if [ -z "${NAME_PREFIX}" ]; then
         gcr.io/google_samples/gb-redis-follower:v2 \
         k8s.gcr.io/coredns/coredns:v1.8.3 \
         quay.io/cilium/alpine-curl:v1.3.0 \
-        quay.io/cilium/cilium-builder:796040ab4012e021232a8197b277e578da3df9f4 \
-        quay.io/cilium/cilium-envoy:9b1701da9cc035a1696f3e492ee2526101262e56 \
+        quay.io/cilium/cilium-builder:134f18bc4fc7c627e933308398451122be64df62 \
+        quay.io/cilium/cilium-envoy:9c0d933166ba192713f9e2fc3901f788557286ee \
         quay.io/cilium/istio_pilot:1.10.4 \
         quay.io/cilium/istio_proxy:1.10.4 \
         quay.io/cilium/test-verifier:110522f9cb32ac55b68db668433c85268945be5f \
