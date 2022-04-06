@@ -6,10 +6,6 @@ export 'KCONFIG'=${KCONFIG:-"config-`uname -r`"}
 
 cd $HOME/k
 
-sudo apt-get update
-sudo apt-get install -y --allow-downgrades \
-	cmake libdw-dev git
-
 # Build pahole
 PaholeVer="1.20"
 git clone git://git.kernel.org/pub/scm/devel/pahole/pahole.git
