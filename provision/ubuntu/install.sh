@@ -40,6 +40,8 @@ fi
 
 # Remove unattended-upgrades to prevent it from holding the dpkg frontend lock
 sudo apt-get remove --purge -y unattended-upgrades
+# and change the configuration to not even check for potential updates.
+sed -i 's/Update-Package-Lists "1"/Update-Package-Lists "0"/' /etc/apt/apt.conf.d/10periodic
 
 echo "Provision a new server"
 sudo apt-get update
