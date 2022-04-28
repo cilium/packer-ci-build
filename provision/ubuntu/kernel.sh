@@ -18,6 +18,12 @@ micro=$(echo ${canonicalString:4} | sed 's/^0*//')
 
 echo $major.$minor.$micro
 
+if [[ "$major" == "4" && "$minor" == "9" ]] || [[ "$major" == "5" && "$minor" == "4" ]]; then
+	# libssl1.1 is needed for the 4.9 and 5.4 kernels.
+	wget http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1n-1_amd64.deb
+	dpkg -i libssl1.1_1.1.1n-1_amd64.deb
+fi
+
 if [[ "$major" == "5" && "$minor" == "4" ]]; then
 	# Packages for this kernel are kept in the root directory
 	subdir=""
