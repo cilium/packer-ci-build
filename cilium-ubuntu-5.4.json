@@ -68,13 +68,6 @@
       ]
     },{
       "type": "shell",
-      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-      "expect_disconnect": true,
-      "scripts": [
-          "provision/ubuntu/netperf.sh"
-      ]
-    },{
-      "type": "shell",
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}' 050410 202001091038",
       "expect_disconnect": true,
       "scripts": [
