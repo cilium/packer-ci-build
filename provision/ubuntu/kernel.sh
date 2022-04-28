@@ -18,6 +18,17 @@ micro=$(echo ${canonicalString:4} | sed 's/^0*//')
 
 echo $major.$minor.$micro
 
+if [[ "$major" == "4" ]] || [[ "$major" == "5" && "$minor" == "4" ]]; then
+	# libssl1.1 is needed for the 4.9, 4.19 and 5.4 kernels.
+	wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+	dpkg -i libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+fi
+
+if [[ "$major" == "5" && "$minor" == "4" ]]; then
+	# Packages for this kernel are kept in the root directory
+	subdir=""
+fi
+
 if [[ "$major" == "4" && "$minor" == "19" ]] || [[ "$major" == "5" && "$minor" == "4" ]] ; then
 	# kernel debs have the -unsigned suffix
 	imgsuffix="-unsigned"
