@@ -12,7 +12,6 @@ done
 
 if [ -z "${NAME_PREFIX}" ]; then
     for img in \
-        busybox:1.31.1 \
         docker.io/cilium/demo-client:1.0 \
         docker.io/cilium/demo-httpd:1.0 \
         docker.io/cilium/dnssec-client:v0.2 \
@@ -38,6 +37,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/istio/examples-bookinfo-reviews-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-reviews-v2:1.6.0 \
         docker.io/library/alpine:3.12.7 \
+        docker.io/library/busybox:1.31.1 \
         docker.io/library/cassandra:3.11.3 \
         docker.io/library/golang:${GOLANG_VERSION} \
         docker.io/library/memcached:1.6.6-alpine \
@@ -59,10 +59,16 @@ if [ -z "${NAME_PREFIX}" ]; then
 
     do
           echo "pulling image: $img"
-          sudo docker pull "${img}" --quiet &
+          if [ -z "$NETNEXT" ]; then
+             sudo docker pull "${img}" --quiet &
+          else
+             sudo sudo ctr images pull "${img}" >/dev/null &
+          fi
     done
 fi
 
 for p in `jobs -p`; do
   wait $p
 done
+
+echo "Done pulling images"
