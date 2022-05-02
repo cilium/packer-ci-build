@@ -99,6 +99,7 @@
           "provision/golang.sh",
           "provision/swap.sh",
           "provision/registry.sh",
+          "provision/ubuntu/containerd.sh",
           "provision/pull-images.sh",
           "provision/fix-home-ownership.sh"
       ]
