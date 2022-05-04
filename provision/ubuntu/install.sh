@@ -241,3 +241,8 @@ sudo systemctl restart systemd-journald
 
 # Kernel parameters
 sudo sh -c 'echo "kernel.randomize_va_space=0" > /etc/sysctl.d/67-randomize_va_space.conf'
+
+# Add an exception for the cilium repo for the root user to fix the
+# "fatal: unsafe repository ('/home/vagrant/go/src/github.com/cilium/cilium' is owned by someone else)"
+# error condition when running `sudo make install`
+sudo git config --global --add safe.directory /home/vagrant/go/src/github.com/cilium/cilium
