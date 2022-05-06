@@ -133,6 +133,8 @@ yes "" | make localyesconfig && make prepare
 ./scripts/config --module CONFIG_NFS_V3
 ./scripts/config --module CONFIG_NFSD
 ./scripts/config --enable CONFIG_NFSD_V3
+# Needed for container runtimes that are not docker
+./scripts/config --module CONFIG_OVERLAY_FS
 
 yes "" | make config
 make -j$(nproc) deb-pkg
