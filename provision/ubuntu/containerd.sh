@@ -25,9 +25,6 @@ oom_score = 0
   max_recv_message_size = 16777216
   max_send_message_size = 16777216
 
-[plugins.cri.containerd]
-  snapshotter = "native"
-
 [debug]
   address = ""
   uid = 0
