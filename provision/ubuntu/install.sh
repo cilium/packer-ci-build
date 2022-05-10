@@ -134,6 +134,7 @@ PKG_CONFIG_PATH="/usr/lib64/pkgconfig"  \
 PKG_CONFIG="pkg-config --define-prefix" \
 ./configure
 make -j `getconf _NPROCESSORS_ONLN`
+rm -r /usr/bin/ip
 make install
 rm -rf /tmp/iproute2
 
