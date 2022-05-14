@@ -74,7 +74,7 @@
       ]
     },{
       "type": "shell",
-      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}' 050410 202001091038",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}' 0504190 202204200839",
       "expect_disconnect": true,
       "scripts": [
           "provision/ubuntu/kernel.sh"
