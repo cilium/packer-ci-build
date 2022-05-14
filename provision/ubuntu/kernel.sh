@@ -18,11 +18,6 @@ micro=$(echo ${canonicalString:4} | sed 's/^0*//')
 
 echo $major.$minor.$micro
 
-if [[ "$major" == "5" && "$minor" == "4" ]]; then
-	# Packages for this kernel are kept in the root directory
-	subdir=""
-fi
-
 if [[ "$major" == "4" && "$minor" == "19" ]] || [[ "$major" == "5" && "$minor" == "4" ]] ; then
 	# kernel debs have the -unsigned suffix
 	imgsuffix="-unsigned"
