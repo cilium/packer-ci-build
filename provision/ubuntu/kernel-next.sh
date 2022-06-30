@@ -125,6 +125,11 @@ yes "" | make localyesconfig && make prepare
 ./scripts/config --module CONFIG_DUMMY
 ./scripts/config --module CONFIG_BONDING
 ./scripts/config --module CONFIG_VLAN_8021Q
+# Needed for Cilium's SCTP Tests
+./scripts/config --module CONFIG_IP_SCTP
+./scripts/config --enable CONFIG_SCTP_DEFAULT_COOKIE_HMAC_SHA1
+./scripts/config --enable CONFIG_SCTP_COOKIE_HMAC_MD5
+./scripts/config --enable CONFIG_SCTP_COOKIE_HMAC_SHA1
 # Needed for Istio.
 ./scripts/config --module CONFIG_NETFILTER_XT_MATCH_OWNER
 ./scripts/config --module CONFIG_NETFILTER_XT_TARGET_CONNMARK
