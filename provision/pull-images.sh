@@ -27,7 +27,6 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/cilium/log-gatherer:v1.1 \
         docker.io/cilium/migrate-svc-test:v0.0.2 \
         docker.io/cilium/netperf:2.0 \
-        docker.io/cilium/python-bmemcached:v0.0.2 \
         docker.io/cilium/starwars:v1.0 \
         docker.io/cilium/zookeeper:1.0 \
         docker.io/frrouting/frr:v7.5.1 \
@@ -36,11 +35,9 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/istio/examples-bookinfo-ratings-v1:1.16.2 \
         docker.io/istio/examples-bookinfo-reviews-v1:1.6.0 \
         docker.io/istio/examples-bookinfo-reviews-v2:1.6.0 \
-        docker.io/library/alpine:3.12.7 \
         docker.io/library/busybox:1.31.1 \
         docker.io/library/cassandra:3.11.3 \
         docker.io/library/golang:${GOLANG_VERSION} \
-        docker.io/library/memcached:1.6.6-alpine \
         docker.io/library/redis:6.0.5 \
         docker.io/tgraf/netperf:v1.0 \
         docker.io/wurstmeister/kafka:2.11-0.11.0.3 \
