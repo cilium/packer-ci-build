@@ -214,6 +214,7 @@ wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/hubb
 wget "https://github.com/cilium/hubble/releases/download/v${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz.sha256sum"
 sha256sum --check hubble-linux-amd64.tar.gz.sha256sum || exit 1
 sudo tar -xf "hubble-linux-amd64.tar.gz" -C /usr/bin hubble
+sudo bash -c "echo 'HUBBLE_SERVER=unix:///var/run/cilium/hubble.sock' >> /etc/environment"
 
 # Clean all downloaded packages
 sudo apt-get -y clean
