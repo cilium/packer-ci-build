@@ -39,6 +39,7 @@ if [ -z "${NAME_PREFIX}" ]; then
         docker.io/library/cassandra:3.11.3 \
         docker.io/library/golang:${GOLANG_VERSION} \
         docker.io/library/redis:6.0.5 \
+        docker.io/networkstatic/iperf3@sha256:e9bbc8312edff13e2ecccad0907db4b35119139e133719138108955cf07f0683 \
         docker.io/tgraf/netperf:v1.0 \
         docker.io/wurstmeister/kafka:2.11-0.11.0.3 \
         gcr.io/google-samples/gb-frontend:v6 \
