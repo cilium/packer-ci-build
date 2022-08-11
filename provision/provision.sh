@@ -18,6 +18,7 @@ sudo -E ${dir}/swap.sh
 sudo -E ${dir}/registry.sh
 sudo -E ${dir}/ubuntu/crio.sh
 sudo -E ${dir}/ubuntu/containerd.sh
+sudo -E ${dir}/kind.sh
 if [ -n "$PULL_IMAGES" ]; then
     sudo -E ${dir}/pull-images.sh
 fi
