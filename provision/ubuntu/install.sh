@@ -56,10 +56,10 @@ sudo apt-get install -y --allow-downgrades \
     dh-golang devscripts fakeroot \
     dh-make libmnl-dev git \
     libdistro-info-perl libssl-dev \
-    dh-systemd build-essential \
+    build-essential \
     gcc make git-buildpackage \
     pkg-config bison flex \
-    zip g++ zlib1g-dev unzip python \
+    zip g++ zlib1g-dev unzip python3 \
     libtool cmake coreutils m4 automake \
     libprotobuf-dev libyaml-cpp-dev \
     socat pv tmux bc gcc-multilib binutils-dev \
@@ -68,14 +68,14 @@ sudo apt-get install -y --allow-downgrades \
     libncurses5-dev libslang2-dev gettext \
     libselinux1-dev debhelper lsb-release \
     po-debconf autoconf autopoint moreutils \
-    libseccomp2 libenchant1c2a ninja-build \
+    libseccomp2 libenchant-2-dev ninja-build \
     golang-cfssl ntp \
     wireguard ipset
 
 # Install nodejs and npm, needed for the cilium rtd sphinx theme
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
 sudo add-apt-repository \
-   "deb [arch=${ARCH}] https://deb.nodesource.com/node_12.x \
+   "deb [arch=${ARCH}] https://deb.nodesource.com/node_14.x \
    $(lsb_release -cs) \
    main"
 sudo apt-get update
