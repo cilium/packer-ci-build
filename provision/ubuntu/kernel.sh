@@ -2,13 +2,13 @@
 
 set -e
 
-# This script installs kernel 4.9.258 and when it finished sets the installed
+# This script installs kernel 4.9.326 and when it finished sets the installed
 # kernel as default in the grub.
 
 mkdir /tmp/deb
 cd /tmp/deb
 
-canonicalString=${1:-0409270}
+canonicalString=${1:-0409326}
 timestamp=${2:-202105261032}
 subdir="amd64/"
 
