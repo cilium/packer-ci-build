@@ -2,6 +2,7 @@
 
 set -xe
 
+sudo apt-get update
 sudo apt-get install -y --allow-downgrades \
     automake build-essential gcc
 
