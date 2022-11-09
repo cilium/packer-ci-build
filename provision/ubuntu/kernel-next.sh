@@ -140,6 +140,8 @@ yes "" | make localyesconfig && make prepare
 ./scripts/config --enable CONFIG_NFSD_V3
 # Needed for container runtimes that are not docker
 ./scripts/config --module CONFIG_OVERLAY_FS
+# Needed for debugging
+./scripts/config --module CONFIG_NETFILTER_XT_TARGET_LOG
 
 yes "" | make config
 make -j$(nproc) deb-pkg
