@@ -97,6 +97,13 @@ yes "" | make localyesconfig && make prepare
 ./scripts/config --module CONFIG_VXLAN
 ./scripts/config --module CONFIG_GENEVE
 ./scripts/config --module CONFIG_NET_SCH_FQ
+# Needed by kube-proxy
+./scripts/config --enable CONFIG_IP_NF_TARGET_REJECT
+./scripts/config --enable CONFIG_IP6_NF_TARGET_REJECT
+./scripts/config --module CONFIG_NETFILTER_XT_MATCH_STATISTIC
+./scripts/config --module CONFIG_IP_VS_RR
+./scripts/config --module CONFIG_IP_VS_WRR
+./scripts/config --module CONFIG_IP_VS_SH
 # Needed for Cilium's IPsec implementation.
 ./scripts/config --enable CONFIG_XFRM
 ./scripts/config --enable CONFIG_XFRM_OFFLOAD
