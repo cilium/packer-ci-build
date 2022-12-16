@@ -6,7 +6,7 @@ sudo apt-get update
 sudo apt-get install -y --allow-downgrades \
     automake build-essential gcc
 
-git clone --depth 1 https://github.com/HewlettPackard/netperf.git $HOME/n
+git clone --depth 1 https://github.com/sayboras/netperf.git $HOME/n
 cd $HOME/n/
 ./autogen.sh
 ./configure --prefix=/usr
