@@ -19,7 +19,7 @@ micro=$(echo ${canonicalString:4} | sed 's/^0*//')
 
 echo $major.$minor.$micro
 
-if [[ "$major" == "4" && "$minor" == "19" ]] || [[ "$major" == "5" && "$minor" == "4" ]] ; then
+if [[ "$major" == "4" && "$minor" == "19" ]] || [[ "$major" > "4" ]] ; then
 	# kernel debs have the -unsigned suffix
 	imgsuffix="-unsigned"
 
