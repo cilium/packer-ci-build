@@ -22,13 +22,14 @@ fi
 VM_NAME=$1
 
 # Mount using NFS by default since it is the fastest mount option on macOS,
-# other options is 'default' (sshfs)
+# other options are 'native' (p9 on multipass 1.11 on macOS) and 'default' (sshfs)
 MOUNT=${MOUNT:-NFS}
 case "$MOUNT" in
     NFS) ;;
+    native) ;;
     default) ;;
     *)
-	echo "unsupported MOUNT type, use NFS, or default"
+	echo "unsupported MOUNT type, use NFS, native, or default"
 	exit 1
 	;;
 esac
@@ -65,9 +66,7 @@ else
 fi
 
 function copy_provision {
-    multipass exec $VM_NAME -- mkdir -p /tmp/provision/ubuntu
-    multipass transfer provision/*.sh provision/env.bash $VM_NAME:/tmp/provision
-    multipass transfer provision/ubuntu/*.sh $VM_NAME:/tmp/provision/ubuntu
+    multipass transfer --recursive --parents provision $VM_NAME:/tmp/provision
     multipass exec $VM_NAME -- bash -c "chmod +x /tmp/provision/*.sh /tmp/provision/ubuntu/*.sh"
 }
 
@@ -98,7 +97,7 @@ if ! multipass info $VM_NAME 2>&1 >/dev/null; then
 	printf "\nssh_authorized_keys:\n  - " >> /tmp/user-data.yaml
 	cat ~/.ssh/id_rsa.pub >> /tmp/user-data.yaml
     fi
-    multipass launch -vvvv --disk $VM_DISK --cloud-init /tmp/user-data.yaml --cpus $VM_CPUS --mem $VM_MEMORY --name $VM_NAME $UBUNTU
+    multipass launch -vvvv --disk $VM_DISK --cloud-init /tmp/user-data.yaml --cpus $VM_CPUS --memory $VM_MEMORY --name $VM_NAME $UBUNTU
     echo "Launched multipass VM \"$VM_NAME\", use \"multipass delete $VM_NAME --purge\" to delete it."
 elif [ $continue == "false" ]; then
     echo "$VM_NAME already exists, specify -c to use it or -f to delete it."
@@ -142,6 +141,10 @@ if [ "$MOUNT" = "NFS" ]; then
     nfs_export
     multipass exec $VM_NAME -- mkdir -p $SHARE_TARGET
     multipass exec $VM_NAME -- sudo bash -c "echo \"$HOST_IP:$SHARE_SOURCE	$SHARE_TARGET	nfs	defaults	0	0\" >>/etc/fstab && mount -a"
+elif [ "$MOUNT" = "native" ]; then
+    multipass stop $VM_NAME
+    multipass mount -t native $SHARE_SOURCE $VM_NAME:$SHARE_TARGET
+    multipass start $VM_NAME
 else # the default case
     multipass mount $SHARE_SOURCE $VM_NAME:$SHARE_TARGET
 fi
