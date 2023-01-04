@@ -267,3 +267,8 @@ sudo sh -c 'echo "kernel.randomize_va_space=0" > /etc/sysctl.d/67-randomize_va_s
 # "fatal: unsafe repository ('/home/vagrant/go/src/github.com/cilium/cilium' is owned by someone else)"
 # error condition when running `sudo make install`
 sudo git config --global --add safe.directory ${HOME_DIR}/go/src/github.com/cilium/cilium
+
+# Add an exception for the cilium repo for to fix the
+# "fatal: detected dubious ownership in repository at '/home/ubuntu/go/src/github.com/cilium/packer-ci-build'"
+# error condition when using the repo via an NFS mount as a normal user
+git config --global --add safe.directory ${HOME_DIR}/go/src/github.com/cilium/cilium
