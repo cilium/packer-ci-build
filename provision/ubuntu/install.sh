@@ -136,6 +136,7 @@ git clone --depth=1 --recurse-submodules ${BPFTOOL_GIT}
 cd /tmp/bpftool/src
 make -j "$(getconf _NPROCESSORS_ONLN)"
 sudo make install
+rm -rf /tmp/bpftool
 
 cd /tmp
 git clone -b ${IPROUTE_BRANCH} ${IPROUTE_GIT}
@@ -145,7 +146,7 @@ PKG_CONFIG_PATH="/usr/lib64/pkgconfig"  \
 PKG_CONFIG="pkg-config --define-prefix" \
 ./configure
 make -j `getconf _NPROCESSORS_ONLN`
-rm -r /usr/bin/ip
+rm -r /usr/bin/ip || true
 make install
 rm -rf /tmp/iproute2
 
