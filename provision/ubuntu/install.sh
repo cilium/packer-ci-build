@@ -47,8 +47,23 @@ sudo systemctl disable apt-daily-upgrade.timer
 sudo systemctl disable apt-daily.timer
 
 echo "Provision a new server"
+if [ "`lsb_release --short --release | cut -d. -f1`" = "22" ]; then
+    VERSION_SPECIFIC_PACKAGES="python3 python-is-python3 libenchant-2-dev"
+else
+    VERSION_SPECIFIC_PACKAGES="dh-systemd python libenchant1c2a"
+    # assume older release, e.g., 20.04
+    # Ubuntu 20.04 has too old nodejs, add repo for a newer one
+    # Install nodejs and npm, needed for the cilium rtd sphinx theme
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
+    sudo add-apt-repository \
+	 "deb [arch=${VM_ARCH}] https://deb.nodesource.com/node_12.x \
+	 $(lsb_release -cs) \
+	 main"
+fi
+
 sudo apt-get update
 sudo apt-get install -y --allow-downgrades \
+    ${VERSION_SPECIFIC_PACKAGES} \
     curl jq apt-transport-https htop bmon \
     linux-tools-common linux-tools-generic \
     ca-certificates libelf-dev \
@@ -56,10 +71,10 @@ sudo apt-get install -y --allow-downgrades \
     dh-golang devscripts fakeroot \
     dh-make libmnl-dev git \
     libdistro-info-perl libssl-dev \
-    dh-systemd build-essential \
+    build-essential \
     gcc make git-buildpackage \
     pkg-config bison flex \
-    zip g++ zlib1g-dev unzip python \
+    zip g++ zlib1g-dev unzip \
     libtool cmake coreutils m4 automake \
     libprotobuf-dev libyaml-cpp-dev \
     socat pv tmux bc binutils-dev \
@@ -68,18 +83,10 @@ sudo apt-get install -y --allow-downgrades \
     libncurses5-dev libslang2-dev gettext \
     libselinux1-dev debhelper lsb-release \
     po-debconf autoconf autopoint moreutils \
-    libseccomp2 libenchant1c2a ninja-build \
+    libseccomp2 ninja-build \
     golang-cfssl ntp \
-    wireguard ipset
-
-# Install nodejs and npm, needed for the cilium rtd sphinx theme
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
-sudo add-apt-repository \
-   "deb [arch=${VM_ARCH}] https://deb.nodesource.com/node_12.x \
-   $(lsb_release -cs) \
-   main"
-sudo apt-get update
-sudo apt-get install -y nodejs
+    wireguard ipset \
+    nodejs
 
 # Install protoc from github release, as protobuf-compiler version in apt is quite old (e.g 3.0.0-9.1ubuntu1)
 PROTOC_ARCH="x86_64"
