@@ -10,7 +10,8 @@ cd /tmp/deb
 
 canonicalString=${1:-0409330}
 timestamp=${2:-202209280940}
-subdir="amd64/"
+subdir="${VM_ARCH}/"
+headers_all_subdir="amd64/"
 
 major=$(echo ${canonicalString:0:2} | sed 's/^0*//')
 minor=$(echo ${canonicalString:2:2} | sed 's/^0*//')
@@ -18,18 +19,19 @@ micro=$(echo ${canonicalString:4} | sed 's/^0*//')
 
 echo $major.$minor.$micro
 
-if [[ "$major" == "4" && "$minor" == "19" ]] || [[ "$major" == "5" && "$minor" == "4" ]] ; then
+if [[ "$major" == "4" && "$minor" == "19" ]] || [[ "$major" > "4" ]] ; then
 	# kernel debs have the -unsigned suffix
 	imgsuffix="-unsigned"
 
 	# module deb is provided for those kernels
-	wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-modules-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+	wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-modules-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_${VM_ARCH}.deb
 	dpkg -i *modules*.deb
 fi
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-headers-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-headers-$major.$minor.$micro-${canonicalString}_$major.$minor.$micro-${canonicalString}.${timestamp}_all.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-image${imgsuffix}-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-headers-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_${VM_ARCH}.deb
+# _all.deb is only available in amd64
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${headers_all_subdir}linux-headers-$major.$minor.$micro-${canonicalString}_$major.$minor.$micro-${canonicalString}.${timestamp}_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v$major.$minor.$micro/${subdir}linux-image${imgsuffix}-$major.$minor.$micro-$canonicalString-generic_$major.$minor.$micro-$canonicalString.${timestamp}_${VM_ARCH}.deb
 
 dpkg -i *.deb
 
@@ -88,4 +90,5 @@ echo "Default grub entry is '$grub_entry'"
 grub-set-default "$grub_entry"
 sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=saved/g' /etc/default/grub
 update-grub
+echo "Rebooting kernel"
 reboot

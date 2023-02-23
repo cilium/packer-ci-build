@@ -23,6 +23,15 @@ rm -rf pahole
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
+# Apply local patches, if any
+git config --global user.email "maintainer@cilium.io"
+git config --global user.name  "Cilium Maintainers"
+if [ -d /tmp/provision/kernel-patches ]; then
+	for patch in /tmp/provision/kernel-patches/*.patch; do
+		git am $patch
+	done
+fi
+
 # Build kernel
 cp /boot/config-`uname -r` .config
 yes "" | make localyesconfig && make prepare
@@ -161,4 +170,5 @@ rm linux-*.deb
 rm $HOME/linux-*
 sudo ln -sf /boot/System.map-$(uname -r) /boot/System.map
 
+echo "Rebooting kernel"
 sudo reboot

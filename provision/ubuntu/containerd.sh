@@ -4,7 +4,7 @@ source "${ENV_FILEPATH}"
 
 set -e
 
-CONTAINERD_TARGZ=cri-containerd-cni-${CONTAINERD_VERSION}-linux-amd64.tar.gz
+CONTAINERD_TARGZ=cri-containerd-cni-${CONTAINERD_VERSION}-linux-${VM_ARCH}.tar.gz
 
 wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/${CONTAINERD_TARGZ}
 sudo tar -C / -xzf ${CONTAINERD_TARGZ}
