@@ -19,10 +19,7 @@
   "builders": [
   {
       "boot_command": [
-        "<esc>c<wait>",
-        "linux /casper/vmlinuz --- autoinstall ds=\"nocloud-net;seedfrom=http://{{ .HTTPIP }}:{{ .HTTPPort }}/\"<enter><wait>",
-        "initrd /casper/initrd<enter><wait>",
-        "boot<enter>"
+        "<wait>c<enter><wait>linux /casper/vmlinuz quiet autoinstall ds=nocloud-net\\;s=http://{{.HTTPIP}}:{{.HTTPPort}}/ ---<enter><wait>initrd /casper/initrd<wait><enter><wait>boot<enter><wait>"
       ],
       "boot_wait": "5s",
       "disk_size": "{{user `disk_size`}}",
@@ -52,6 +49,14 @@
           "{{.Name}}",
           "--cpus",
           "{{ user `cpus` }}"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--audio",
+          "none",
+          "--nat-localhostreachable1",
+          "on"
         ]
       ],
       "virtualbox_version_file": ".vbox_version",
