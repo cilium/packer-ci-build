@@ -24,11 +24,6 @@ if [[ "$major" == "4" ]] || [[ "$major" == "5" && "$minor" == "4" ]]; then
 	dpkg -i libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
 fi
 
-if [[ "$major" == "5" && "$minor" == "4" ]]; then
-	# Packages for this kernel are kept in the root directory
-	subdir=""
-fi
-
 if [[ "$major" == "4" && "$minor" == "19" ]] || [[ "$major" == "5" && "$minor" == "4" ]] ; then
 	# kernel debs have the -unsigned suffix
 	imgsuffix="-unsigned"
