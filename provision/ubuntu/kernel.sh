@@ -93,5 +93,9 @@ grub_entry=$(get_grub_config | grep $KERNEL | grep -v "recovery" | awk '{ print 
 echo "Default grub entry is '$grub_entry'"
 grub-set-default "$grub_entry"
 sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=saved/g' /etc/default/grub
+# The default COMPRESS option is zstd, which is not supported by the older kernel.
+# So we need to change it to gzip or anything else.
+sed -i 's/COMPRESS=zstd/COMPRESS=gzip/g' /etc/initramfs-tools/initramfs.conf
+update-initramfs -u -k all
 update-grub
 reboot
