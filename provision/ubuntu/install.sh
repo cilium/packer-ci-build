@@ -157,8 +157,12 @@ cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
 deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
-# wget https://packages.cloud.google.com/apt/doc/apt-key.gpg
-# apt-key add apt-key.gpg
+if [ "${NETNEXT}" == "true" ]; then
+    # Workaround for docker issue with iptables 1.8.7 in newer kernel versions
+    # https://github.com/docker/for-linux/issues/1437
+    update-alternatives --set iptables /usr/sbin/iptables-legacy
+    update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+fi
 
 #Install packages
 sudo apt-get update
