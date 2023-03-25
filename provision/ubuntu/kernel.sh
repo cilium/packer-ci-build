@@ -93,6 +93,12 @@ grub_entry=$(get_grub_config | grep $KERNEL | grep -v "recovery" | awk '{ print 
 echo "Default grub entry is '$grub_entry'"
 grub-set-default "$grub_entry"
 sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=saved/g' /etc/default/grub
+
+# cgroupv2 is not supported till k8s 1.18, so we need to disable it for k8s 1.16 CI.
+if [[ "$major" == "4" && "$minor" == "19" ]]; then
+  sudo sed -i 's/GRUB_CMDLINE_LINUX.*/GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=0"/' /etc/default/grub
+fi
+
 # The default COMPRESS option is zstd, which is not supported by the older kernel.
 # So we need to change it to gzip or anything else.
 sed -i 's/COMPRESS=zstd/COMPRESS=gzip/g' /etc/initramfs-tools/initramfs.conf
