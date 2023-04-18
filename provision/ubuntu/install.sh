@@ -216,6 +216,14 @@ sha256sum --check hubble-linux-amd64.tar.gz.sha256sum || exit 1
 sudo tar -xf "hubble-linux-amd64.tar.gz" -C /usr/bin hubble
 sudo bash -c "echo 'HUBBLE_SERVER=unix:///var/run/cilium/hubble.sock' >> /etc/environment"
 
+# Install Cilium's CLI
+cd /tmp/
+curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-${ARCH}.tar.gz{,.sha256sum}
+sha256sum --check --strict cilium-linux-${ARCH}.tar.gz.sha256sum
+sudo tar xzfC cilium-linux-${ARCH}.tar.gz /tmp
+mv /tmp/cilium /usr/local/bin/cilium-cli
+rm cilium-linux-${ARCH}.tar.gz{,.sha256sum}
+
 # Clean all downloaded packages
 sudo apt-get -y clean
 sudo apt-get -y autoclean
