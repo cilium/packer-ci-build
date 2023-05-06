@@ -149,28 +149,29 @@ rm -r /usr/bin/ip
 make install
 rm -rf /tmp/iproute2
 
-#clean
-sudo apt-get remove docker docker.io
+# Install docker if not already installed
+if ! which docker > /dev/null; then
 
-#Add repos
+    #clean
+    sudo apt-get remove docker docker.io
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+    #Add repos
 
-sudo add-apt-repository \
-   "deb [arch=${VM_ARCH}] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
-cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
+    sudo add-apt-repository \
+	 "deb [arch=${VM_ARCH}] https://download.docker.com/linux/ubuntu \
+	    $(lsb_release -cs) \
+	       stable"
+
+    cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
 deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
-# wget https://packages.cloud.google.com/apt/doc/apt-key.gpg
-# apt-key add apt-key.gpg
+    # wget https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    # apt-key add apt-key.gpg
 
-# Install docker if not already installed
-if ! which docker > /dev/null; then
     sudo apt-get update
     sudo apt-get install -y docker-ce
     sudo usermod -aG docker ${USERNAME}
