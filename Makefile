@@ -32,4 +32,26 @@ clean:
 install:
 	vagrant box add --force cilium/$(DISTRIBUTION) $(BOX_FILE)
 
-.PHONY = build validate clean install
+# Sane defaults for a VM used for development
+VM_CPUS ?= 8
+VM_MEMORY ?= 24G
+VM_DISK ?= 120G
+VM_NAME ?= dev
+
+multipass:
+	VM_CPUS=$(VM_CPUS) VM_MEMORY=$(VM_MEMORY) VM_DISK=$(VM_DISK) provision/multipass.sh ${VM_NAME}
+
+multipass-continue:
+	VM_CPUS=$(VM_CPUS) VM_MEMORY=$(VM_MEMORY) VM_DISK=$(VM_DISK) provision/multipass.sh -c ${VM_NAME}
+
+# VM_NAME must exists as an env variable
+multipass-reinstall:
+	VM_CPUS=$(VM_CPUS) VM_MEMORY=$(VM_MEMORY) VM_DISK=$(VM_DISK) provision/multipass.sh -f ${VM_NAME}
+
+multipass-netnext:
+	NETNEXT=true VM_CPUS=$(VM_CPUS) VM_MEMORY=$(VM_MEMORY) VM_DISK=$(VM_DISK) provision/multipass.sh netnext
+
+multipass-netnext-reinstall:
+	NETNEXT=true VM_CPUS=$(VM_CPUS) VM_MEMORY=$(VM_MEMORY) VM_DISK=$(VM_DISK) provision/multipass.sh -f netnext
+
+.PHONY = build validate clean install multipass multipass-reinstall multipass-netnext multipass-netnext-reinstall
