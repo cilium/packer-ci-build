@@ -166,7 +166,7 @@ sudo usermod -aG docker vagrant
 # Install clang/llvm
 # This should always converge to use the same LLVM version as in
 # https://github.com/cilium/image-tools/blob/master/images/llvm/checkout-llvm.sh.
-docker run --rm --name cilium-llvm -d quay.io/cilium/cilium-llvm:0147a23fdada32bd51b4f313c645bcb5fbe188d6 sleep 1000
+docker run --rm --name cilium-llvm -d quay.io/cilium/cilium-llvm:a8c542efc076b62ba683e7699c0013adb6955f0f sleep 1000
 docker cp cilium-llvm:/usr/local/bin/clang /usr/bin/clang
 docker cp cilium-llvm:/usr/local/bin/llc /usr/bin/llc
 docker stop cilium-llvm
