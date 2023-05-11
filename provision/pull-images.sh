@@ -39,11 +39,11 @@ if [ -z "${NAME_PREFIX}" ]; then
         registry.k8s.io/coredns/coredns:v1.8.3 \
         quay.io/cilium/alpine-curl:v1.3.0 \
         quay.io/cilium/cilium-bpftool:78448c1a37ff2b790d5e25c3d8b8ec3e96e6405f \
-        quay.io/cilium/cilium-builder:6284fc1a4c7206b8bee0d9309e0b6e331f564618 \
+        quay.io/cilium/cilium-builder:0d4ba8c6f0820d9069ad0e4f97f98e0753e80473 \
         quay.io/cilium/cilium-envoy:e90612180b82d07c124bbf8e1ffe94a8d603f8ae \
         quay.io/cilium/cilium-iproute2:02c29c971c01f0b9a7b916327f0caedd83820c18 \
-        quay.io/cilium/cilium-llvm:547db7ec9a750b8f888a506709adb41f135b952e \
-        quay.io/cilium/cilium-runtime:05ac87c6a2ef4f24e6ba9acf8b06e8c2362cab2f \
+        quay.io/cilium/cilium-llvm:a8c542efc076b62ba683e7699c0013adb6955f0f \
+        quay.io/cilium/cilium-runtime:63b8f55b1ee5ca82766065d9278062b89c6d1766 \
         quay.io/cilium/image-compilers:e847f4176cb42ae27fa459a10df6721c43702b64 \
         quay.io/cilium/image-tester:c37f768323abfba87c90cd9c82d37136183457bc \
         quay.io/cilium/cilium-envoy:9c0d933166ba192713f9e2fc3901f788557286ee \
