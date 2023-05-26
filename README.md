@@ -1,3 +1,5 @@
+foo
+
 # cilium/packer-ci-build
 
 This repo contains [packer](https://packer.io) templates and Jenkinsfiles to
