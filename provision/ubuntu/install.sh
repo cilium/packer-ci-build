@@ -3,9 +3,6 @@
 set -eu
 
 source "${ENV_FILEPATH}"
-export 'IPROUTE_BRANCH'=${IPROUTE_BRANCH:-"libbpf-static-data"}
-export 'IPROUTE_GIT'=${IPROUTE_GIT:-https://github.com/cilium/iproute2}
-export 'LIBBPF_GIT'=${LIBBPF_GIT:-https://github.com/cilium/libbpf}
 export 'BPFTOOL_GIT'=${BPFTOOL_GIT:-https://github.com/libbpf/bpftool}
 export 'GUESTADDITIONS'=${GUESTADDITIONS:-""}
 export 'NETNEXT'="${NETNEXT:-false}"
@@ -70,7 +67,7 @@ sudo apt-get install -y --allow-downgrades \
     po-debconf autoconf autopoint moreutils \
     libseccomp2 libenchant1c2a ninja-build \
     golang-cfssl ntp \
-    wireguard ipset
+    wireguard ipset iproute2
 
 # Install nodejs and npm, needed for the cilium rtd sphinx theme
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
@@ -108,35 +105,13 @@ sudo apt-get install -y conntrack
 # Documentation dependencies
 sudo -H pip3 install -r https://raw.githubusercontent.com/cilium/cilium/master/Documentation/requirements.txt
 
-# libbpf, bpftool, and iproute2
-cd /tmp
-git clone --depth=1 ${LIBBPF_GIT}
-cd /tmp/libbpf/src
-make -j "$(getconf _NPROCESSORS_ONLN)"
-# By default, libbpf.so is installed to /usr/lib64 which isn't in LD_LIBRARY_PATH on Ubuntu.
-# Overriding LIBDIR in addition to setting PREFIX seems to be needed due to the structure of
-# libbpf's Makefile.
-sudo PREFIX="/usr" LIBDIR="/usr/lib/x86_64-linux-gnu" make install
-sudo ldconfig
-
+# bpftool
 sudo apt-get install -y libbfd-dev libcap-dev libelf-dev
 cd /tmp
 git clone --depth=1 --recurse-submodules ${BPFTOOL_GIT}
 cd /tmp/bpftool/src
 make -j "$(getconf _NPROCESSORS_ONLN)"
 sudo make install
-
-cd /tmp
-git clone -b ${IPROUTE_BRANCH} ${IPROUTE_GIT}
-cd /tmp/iproute2
-LIBBPF_FORCE="on" \
-PKG_CONFIG_PATH="/usr/lib64/pkgconfig"  \
-PKG_CONFIG="pkg-config --define-prefix" \
-./configure
-make -j `getconf _NPROCESSORS_ONLN`
-rm -r /usr/bin/ip
-make install
-rm -rf /tmp/iproute2
 
 #clean
 sudo apt-get remove docker docker.io
