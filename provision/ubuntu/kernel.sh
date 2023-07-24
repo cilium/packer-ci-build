@@ -20,8 +20,10 @@ echo $major.$minor.$micro
 
 if [[ "$major" == "4" ]] || [[ "$major" == "5" && "$minor" == "4" ]]; then
 	# libssl1.1 is needed for the 4.9, 4.19 and 5.4 kernels.
-	wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
-	dpkg -i libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+	echo "deb http://us.archive.ubuntu.com/ubuntu focal-security main" | sudo tee /etc/apt/sources.list.d/focal-security.list
+	sudo apt-get update
+	sudo apt-get install -y libssl1.1
+	sudo rm /etc/apt/sources.list.d/focal-security.list
 fi
 
 if [[ "$major" == "4" && "$minor" == "19" ]] || [[ "$major" == "5" && "$minor" == "4" ]] ; then
@@ -96,7 +98,7 @@ sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=saved/g' /etc/default/grub
 
 # cgroupv2 is not supported till k8s 1.18, so we need to disable it for k8s 1.16 CI.
 if [[ "$major" == "4" && "$minor" == "19" ]]; then
-  sudo sed -i 's/GRUB_CMDLINE_LINUX.*/GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=0"/' /etc/default/grub
+  sudo sed -i 's/GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=0"/' /etc/default/grub
 fi
 
 # The default COMPRESS option is zstd, which is not supported by the older kernel.
