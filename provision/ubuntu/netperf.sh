@@ -3,7 +3,7 @@
 set -xe
 
 sudo apt-get update
-sudo apt-get update && apt-get install -y --allow-downgrades \
+sudo apt-get install -y --allow-downgrades \
     automake build-essential gcc
 
 # Till https://github.com/HewlettPackard/netperf/pull/46 merged

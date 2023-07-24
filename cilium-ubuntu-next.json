@@ -17,7 +17,8 @@
     "NAME_SUFFIX": "{{ env `NAME_SUFFIX` }}",
     "CILIUM_BRANCH": "{{ env `CILIUM_BRANCH` }}"
   },
-  "builders": [{
+  "builders": [
+    {
       "boot_command": [
         "<esc>c<wait>",
         "linux /casper/vmlinuz --- autoinstall ds=\"nocloud-net;seedfrom=http://{{ .HTTPIP }}:{{ .HTTPPort }}/\"<enter><wait>",
