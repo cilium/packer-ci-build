@@ -97,7 +97,7 @@ grub-set-default "$grub_entry"
 sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=saved/g' /etc/default/grub
 
 # cgroupv2 is not supported till k8s 1.18, so we need to disable it for k8s 1.16 CI.
-if [[ "$major" == "4" && "$minor" == "19" ]]; then
+if [[ "$major" == "4" ]]; then
   sudo sed -i 's/GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=0"/' /etc/default/grub
 fi
 
